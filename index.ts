@@ -7,6 +7,10 @@ dotenv.config();
 
 const app: Express = express();
 
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+});
+
 app.use(express.json());
 
 app.use('/', (req: Request, res: Response) => {
