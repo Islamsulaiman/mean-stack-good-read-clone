@@ -19,7 +19,11 @@ export const categorySchema = new Schema(
     },
   },
 );
-
-const Category = mongoose.model('Category', categorySchema);
+categorySchema.plugin(paginate);
+interface CategoryType extends mongoose.Document {}
+const Category = mongoose.model<
+CategoryType,
+mongoose.PaginateModel<CategoryType>
+>('categories', categorySchema, 'categories');
 
 export default Category;
