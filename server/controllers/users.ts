@@ -9,6 +9,14 @@ type NewUser = {
   userName: String
 };
 
+type UpdteUserData = {
+  firstName?: String;
+  lastName?: String;
+  password?: String
+  email?: String,
+  userName?: String
+};
+
 // 1. create new user
 const create = (data: NewUser) => User.create(data);
 
@@ -27,6 +35,9 @@ const login = (email:string) => {
   return student;
 };
 
+// 6. update user
+const updateUser = (id: string, data: UpdteUserData) => User.updateOne({ _id: id }, data);
+
 export {
-  create, getAllUsers, getOneUser, deleteUser, login,
+  create, getAllUsers, getOneUser, deleteUser, updateUser, login,
 };

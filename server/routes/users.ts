@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {
-  createUser, getAllUsersFunc, getOneUserFunc, deleteUserFunc,
+  createUser, getAllUsersFunc, getOneUserFunc, deleteUserFunc, updateUserFunc,
 } from '../middlewares/users';
 
 const router = Router();
@@ -16,5 +16,8 @@ router.get('/:id', getOneUserFunc);
 
 // 4. delete user
 router.delete('/:id', deleteUserFunc);
+
+// 5. update user
+router.patch('/:id', updateUserFunc);
 
 export const studentRoute: Router = router;

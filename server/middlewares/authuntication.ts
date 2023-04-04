@@ -18,4 +18,5 @@ type IokenPayload = {
 // eslint-disable-next-line max-len
 const generateJWT = (payload: IokenPayload):String => jwt.sign(payload, process.env.JWT_SECRET as string);
 
-export { compareUserData, generateJWT };
+const hashPassword = (password: String): String => bcrypt.hashSync(password as string, 10);
+export { compareUserData, generateJWT, hashPassword };
