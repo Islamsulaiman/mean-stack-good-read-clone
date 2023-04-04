@@ -31,6 +31,8 @@ const createUser = async (req: Request, res: Response) => {
     firstName, lastName, email, password, userName,
   });
 
+  if (!user) throw new Error('Error: user is not created');
+
   return res.status(200).json(user);
 };
 
