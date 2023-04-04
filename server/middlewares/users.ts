@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
-import { create, getAllUsers } from '../controllers/users';
+import { create, getAllUsers, getOneUser } from '../controllers/users';
 
 dotenv.config();
 
@@ -24,4 +24,12 @@ const getAllUsersFunc = async (req: Request, res: Response) => {
   return res.status(200).json(users);
 };
 
-export { createUser, getAllUsersFunc };
+const getOneUserFunc = async (req: Request, res: Response): Promise<Response> => {
+  const { id } = req.params;
+
+  const oneUser = await getOneUser(id);
+
+  return res.status(200).json(oneUser);
+};
+
+export { createUser, getAllUsersFunc, getOneUserFunc };
