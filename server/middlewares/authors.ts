@@ -6,8 +6,12 @@ import {
 
 const createAuthor = async (req: Request, res: Response) => {
   const {
-    firstName, lastName, DOB, image,
+    firstName, lastName, DOB,
   } = req.body;
+
+  // Image handling
+  let image = '';
+  image = !req.file ? 'server\\uploadedImages\\default_avatar_41894.png' : req.file.path;
   const author = await create({
     firstName, lastName, DOB: new Date(DOB), image,
   });

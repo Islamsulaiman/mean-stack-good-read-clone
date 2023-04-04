@@ -16,6 +16,7 @@ mongoose.connect(mongoUrl)
 const app: Express = express();
 app.use(express.json());
 
+app.use(express.static('server/uploadedImages'));
 app.use(routes);
 
 const PORT: number = process.env.PORT as unknown as number;

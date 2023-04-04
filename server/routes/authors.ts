@@ -4,11 +4,11 @@ import {
   createAuthor, getAuthors, editAuthorById, deleteAuthorById,
 } from '../middlewares/authors';
 
-// import { authorUpload } from '../middlewares/imagesUpload';
+import { authorUpload } from '../middlewares/imagesUpload';
 // authorUpload.single('image')
 const router = Router();
 // Create author
-router.post('/', createAuthor);
+router.post('/', authorUpload.single('image'), createAuthor);
 
 // Get authors
 router.get('/', getAuthors);
