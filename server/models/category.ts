@@ -1,9 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import mongoose from 'mongoose';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import paginate from 'mongoose-paginate-v2';
 
 const { Schema } = mongoose;
 
-const categorySchema = new Schema(
+export const categorySchema = new Schema(
   {
     name: {
       type: String,
