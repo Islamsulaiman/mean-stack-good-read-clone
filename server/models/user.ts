@@ -5,13 +5,13 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
-    first_name: {
+    firstName: {
       type: String,
       required: true,
       minLength: 3,
       maxLength: 30,
     },
-    last_name: {
+    lastName: {
       type: String,
       required: true,
       minLength: 3,
@@ -24,7 +24,7 @@ const userSchema = new Schema(
       minLength: 5,
       maxLength: 100,
     },
-    username: {
+    userName: {
       type: String,
       required: true,
       unique: true,

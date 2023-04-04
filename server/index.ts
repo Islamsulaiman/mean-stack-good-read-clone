@@ -1,6 +1,7 @@
 import express, { Express } from 'express';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import { indexRouter } from './routes';
 
 // Read the content inside dotenv
 dotenv.config();
@@ -15,6 +16,9 @@ mongoose.connect(mongoUrl)
 const app: Express = express();
 
 app.use(express.json());
+
+// main rote
+app.use(indexRouter);
 
 const PORT: number = process.env.PORT as unknown as number;
 app.listen(PORT, () => {
