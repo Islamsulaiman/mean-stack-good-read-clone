@@ -12,4 +12,7 @@ type NewUser = {
 // 1. create new user
 const create = (data: NewUser) => User.create(data);
 
-export { create };
+// 2. get all users
+const getAllUsers = () => User.find().exec();
+
+export { create, getAllUsers };

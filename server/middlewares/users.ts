@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
-import { create } from '../controllers/users';
+import { create, getAllUsers } from '../controllers/users';
 
 dotenv.config();
 
+// : Promise<Response>
 const createUser = async (req: Request, res: Response) => {
   const {
     firstName, lastName, email, userName,
@@ -17,4 +18,10 @@ const createUser = async (req: Request, res: Response) => {
   return res.status(200).json(user);
 };
 
-export { createUser };
+const getAllUsersFunc = async (req: Request, res: Response) => {
+  const users = await getAllUsers();
+
+  return res.status(200).json(users);
+};
+
+export { createUser, getAllUsersFunc };
