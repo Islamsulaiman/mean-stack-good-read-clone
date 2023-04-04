@@ -5,7 +5,13 @@ const { Schema } = mongoose;
 
 const authorSchema = new Schema(
   {
-    name: {
+    firstName: {
+      type: String,
+      required: true,
+      minLength: 3,
+      maxLength: 255,
+    },
+    lastName: {
       type: String,
       required: true,
       minLength: 3,
@@ -15,7 +21,10 @@ const authorSchema = new Schema(
       type: Date,
       required: true,
     },
-
+    image: {
+      type: String,
+      required: true,
+    },
     book_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Book',

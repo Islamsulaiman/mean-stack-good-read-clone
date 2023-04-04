@@ -1,6 +1,7 @@
 import express, { Express } from 'express';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import { routes } from './routes';
 
 // Read the content inside dotenv
 dotenv.config();
@@ -13,8 +14,9 @@ mongoose.connect(mongoUrl)
 
 // creating express server
 const app: Express = express();
-
 app.use(express.json());
+
+app.use(routes);
 
 const PORT: number = process.env.PORT as unknown as number;
 app.listen(PORT, () => {
