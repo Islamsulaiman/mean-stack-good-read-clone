@@ -18,9 +18,15 @@ const getAllUsers = () => User.find().exec();
 // 3. get one user
 const getOneUser = (data: string) => User.findOne({ _id: data });
 
-// 5. delete student
+// 4. delete user
 const deleteUser = (data: string) => User.deleteOne({ _id: data });
 
+// 5 login, return hashed password
+const login = (email:string) => {
+  const student = User.findOne({ email });
+  return student;
+};
+
 export {
-  create, getAllUsers, getOneUser, deleteUser,
+  create, getAllUsers, getOneUser, deleteUser, login,
 };

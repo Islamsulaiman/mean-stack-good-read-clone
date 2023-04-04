@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
 import {
   create, getAllUsers, getOneUser, deleteUser,
 } from '../controllers/users';
@@ -11,7 +12,9 @@ const createUser = async (req: Request, res: Response) => {
   const {
     firstName, lastName, email, userName,
   } = req.body;
-  const { password } = req.body;
+  let { password } = req.body;
+
+  password = bcrypt.hashSync(password, 10);
 
   const user = await create({
     firstName, lastName, email, password, userName,
