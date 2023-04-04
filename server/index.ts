@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import { routes } from './routes';
+import { indexRouter } from './routes';
 
 // Read the content inside dotenv
 dotenv.config();
@@ -17,7 +17,7 @@ const app: Express = express();
 app.use(express.json());
 
 app.use(express.static('server/uploadedImages'));
-app.use(routes);
+app.use(indexRouter);
 
 const PORT: number = process.env.PORT as unknown as number;
 app.listen(PORT, () => {
