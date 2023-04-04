@@ -18,4 +18,9 @@ const getAllUsers = () => User.find().exec();
 // 3. get one user
 const getOneUser = (data: string) => User.findOne({ _id: data });
 
-export { create, getAllUsers, getOneUser };
+// 5. delete student
+const deleteUser = (data: string) => User.deleteOne({ _id: data });
+
+export {
+  create, getAllUsers, getOneUser, deleteUser,
+};

@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
-import { create, getAllUsers, getOneUser } from '../controllers/users';
+import {
+  create, getAllUsers, getOneUser, deleteUser,
+} from '../controllers/users';
 
 dotenv.config();
 
@@ -32,4 +34,13 @@ const getOneUserFunc = async (req: Request, res: Response): Promise<Response> =>
   return res.status(200).json(oneUser);
 };
 
-export { createUser, getAllUsersFunc, getOneUserFunc };
+const deleteUserFunc = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const student = await deleteUser(id);
+
+  return res.status(200).json({ 'User deleted': student });
+};
+
+export {
+  createUser, getAllUsersFunc, getOneUserFunc, deleteUser, deleteUserFunc,
+};
