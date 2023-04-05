@@ -40,7 +40,7 @@ const userSchema = new Schema(
 
     image: {
       type: String,
-      required: true,
+      // required: true,
       unique: true,
       minLength: 5,
       maxLength: 1024,

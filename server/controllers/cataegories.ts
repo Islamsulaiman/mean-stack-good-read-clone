@@ -11,12 +11,16 @@ const create = (data:NewCategory) => Category.create(data);
 // 2.get all categories
 const getAll = async (limit:any, page:any) => {
   const categories = await Category.paginate({}, {
+    limit: limit > 0 && limit < 10 ? limit : 5,
     page: page || 1,
-    limit: limit > 0 && limit < 10 ? limit : 10,
   });
   return categories;
 };
-
+// 3.get One Category
+const getOne = async (id:string) => {
+  const category = await Category.findById({ id });
+  return category;
+};
 export {
-  create, getAll,
+  create, getAll, getOne,
 };
