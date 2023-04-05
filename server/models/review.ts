@@ -9,13 +9,13 @@ const reviewSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Book',
     },
-    review: {
+    content: {
       type: String,
       required: true,
       minLength: 3,
       maxLength: 255,
     },
-    publish_date: {
+    publishDate: {
       type: Date,
       default: Date.now,
     },
