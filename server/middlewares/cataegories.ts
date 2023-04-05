@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import * as dotenve from 'dotenv';
 import {
-  create, getAll, getOne,
+  create, getAll, getOne, update,
 } from '../controllers/cataegories';
 
 dotenve.config();
@@ -32,7 +32,21 @@ const getOneCategory = async (req:Request, res:Response) => {
   if (!category) throw new Error('Error: Category not found');
   res.status(200).json(category);
 };
-
+// 4.update Category
+const updateCategory = async (req:Request, res:Response) => {
+  const { id } = req.params;
+  const {
+    name,
+  } = req.body;
+  const category = await getOne(id);
+  if (!category) throw new Error('Error: Category not found');
+  const updatedCategory = await update(
+    { _id: id },
+    { name },
+  );
+  if (!updatedCategory) throw new Error('Error: Category not updated');
+  res.status(200).json(updatedCategory);
+};
 export {
-  createCategory, getAllCategories, getOneCategory,
+  createCategory, getAllCategories, getOneCategory, updateCategory,
 };

@@ -21,6 +21,12 @@ const getOne = async (id:string) => {
   const category = await Category.findById({ id });
   return category;
 };
+// 4.update
+const update = async (id:any, data:NewCategory) => {
+  const category = await Category.findByIdAndUpdate({ id }, data, { new: true });
+  return category;
+};
+
 export {
-  create, getAll, getOne,
+  create, getAll, getOne, update,
 };

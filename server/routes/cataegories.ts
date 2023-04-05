@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {
-  createCategory, getAllCategories, getOneCategory,
+  createCategory, getAllCategories, getOneCategory, updateCategory,
 } from '../middlewares/cataegories';
 
 import { errorHandling } from '../middlewares/errorHandling';
@@ -13,5 +13,6 @@ router.post('/', errorHandling(createCategory));
 router.get('/', getAllCategories);
 // 3.get one category
 router.get('/:id', getOneCategory);
-
+// 4.update one category
+router.patch('/:id', updateCategory);
 export const categoryRoute : Router = router;
