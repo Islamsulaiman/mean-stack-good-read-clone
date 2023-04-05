@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {
-  createCategory, getAllCategories, getOneCategory, updateCategory,
+  createCategory, getAllCategories, getOneCategory, updateCategory, deleteCategory,
 } from '../middlewares/cataegories';
 
 import { errorHandling } from '../middlewares/errorHandling';
@@ -15,4 +15,6 @@ router.get('/', getAllCategories);
 router.get('/:id', getOneCategory);
 // 4.update one category
 router.patch('/:id', updateCategory);
+// 5.delete  category
+router.delete('/:id', errorHandling(deleteCategory));
 export const categoryRoute : Router = router;

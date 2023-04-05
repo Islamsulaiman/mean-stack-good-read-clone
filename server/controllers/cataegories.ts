@@ -26,7 +26,11 @@ const update = async (id:any, data:NewCategory) => {
   const category = await Category.findByIdAndUpdate({ id }, data, { new: true });
   return category;
 };
-
+// 5.delete
+const deleteOne = async (id:any) => {
+  const category = await Category.findByIdAndDelete({ id });
+  return category;
+};
 export {
-  create, getAll, getOne, update,
+  create, getAll, getOne, update, deleteOne,
 };

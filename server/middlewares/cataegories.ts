@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import * as dotenve from 'dotenv';
 import {
-  create, getAll, getOne, update,
+  create, getAll, getOne, update, deleteOne,
 } from '../controllers/cataegories';
 
 dotenve.config();
@@ -47,6 +47,16 @@ const updateCategory = async (req:Request, res:Response) => {
   if (!updatedCategory) throw new Error('Error: Category not updated');
   res.status(200).json(updatedCategory);
 };
+
+// 5.deleteCategory
+const deleteCategory = async (req:Request, res:Response) => {
+  const { id } = req.params;
+  const category = await getOne(id);
+  if (!category) throw new Error('Error: Category not found');
+  const deletedCategory = await deleteOne(id);
+  if (!deletedCategory) throw new Error('Error: Category not deleted');
+  res.status(200).json({ 'Category deleted': deletedCategory });
+};
 export {
-  createCategory, getAllCategories, getOneCategory, updateCategory,
+  createCategory, getAllCategories, getOneCategory, updateCategory, deleteCategory,
 };
