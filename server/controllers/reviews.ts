@@ -2,21 +2,28 @@
 import { Review } from '../models';
 
 type Reviewdata = {
+  bookId: any,
   content : string,
-  publishDate: Date
+  publishDate?: Date
+};
+
+type ReviewEdit = {
+  bookId?: any,
+  content: string,
+  publishDate?: Date
 };
 
 // Create review
-const create = (data: string) => Review.create(data);
+const create = (data: Reviewdata) => Review.create(data);
 
-// Get reviews
-const get = () => Review.find();
+// Get reviews for specific book
+const get = (id: any) => Review.find({ bookId: id });
 
 // Get review
-const getById = (id: any) => Review.find(id);
+const getById = (id: any) => Review.findOne({ _id: id });
 
 // edit review by id
-const edit = (id: any, data: Reviewdata) => {
+const edit = (id: any, data: ReviewEdit) => {
   Review.findById(id);
   return Review.findByIdAndUpdate(id, data, { new: true });
 };

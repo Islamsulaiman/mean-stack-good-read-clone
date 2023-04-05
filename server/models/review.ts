@@ -5,9 +5,10 @@ const { Schema } = mongoose;
 
 const reviewSchema = new Schema(
   {
-    Book_Id: {
+    bookId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Book',
+      required: true,
     },
     content: {
       type: String,
@@ -19,7 +20,8 @@ const reviewSchema = new Schema(
       type: Date,
       default: Date.now,
     },
-    user: [{
+    userId: [{
+      // required: true,
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },

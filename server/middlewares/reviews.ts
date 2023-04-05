@@ -5,13 +5,14 @@ import {
 
 const addReview = async (req: Request, res: Response) => {
   const { content } = req.body;
-
-  const review = await create(content);
+  const bookId = '642ca9cd340e07f65ed05a07'; // we will get it from front
+  const review = await create({ bookId, content });
   return res.status(200).json(review);
 };
 
 const getReviews = async (req: Request, res: Response) => {
-  const reviews = await get();
+  const { bookId } = req.query;
+  const reviews = await get(bookId);
   return res.status(200).json(reviews);
 };
 

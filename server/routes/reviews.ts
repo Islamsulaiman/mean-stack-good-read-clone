@@ -1,20 +1,23 @@
 import { Router } from 'express';
 // import { errorHandling } from '../middelwares/errorFunction';
 import {
-  addReview, getReviewById, editReviewById, deleteReview,
+  addReview, getReviews, getReviewById, editReviewById, deleteReview,
 } from '../middlewares/reviews';
 
 const router = Router();
 // Add review
 router.post('/', addReview);
 
+// Get reivews for a specific book
+router.get('/', getReviews);
+
 // Get reivew
 router.get('/:id', getReviewById);
 
-// Modify author
+// Modify reviw
 router.patch('/:id', editReviewById);
 
-// Delete author
+// Delete review
 router.delete('/:id', deleteReview);
 
 export const reviews: Router = router;

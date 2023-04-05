@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { userRoute } from './users';
 import { authors } from './authors';
+import { reviews } from './reviews';
 import { userLogin, adminLogin } from '../middlewares/login';
 
 const router = Router();
@@ -15,6 +16,6 @@ router.use('/users', userRoute);
 router.use('/authors', authors);
 
 // 3. review route
-router.use('/reviews', authors);
+router.use('/reviews', reviews);
 
 export const indexRouter:Router = router;
