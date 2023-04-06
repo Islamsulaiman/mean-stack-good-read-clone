@@ -2,39 +2,34 @@
 import { Review } from '../models';
 
 type Reviewdata = {
-  bookId: any,
   content : string,
-  publishDate?: Date
-};
-
-type ReviewEdit = {
-  bookId?: any,
-  content: string,
-  publishDate?: Date
+  userId: any,
 };
 
 // Create review
-const create = (data: Reviewdata) => Review.create(data);
+const create = (id: any, data: Reviewdata) => Review.create({ bookId: id, data });
 
 // Get reviews for specific book
 const get = (id: any) => Review.find({ bookId: id });
 
-// Get review
-const getById = (id: any) => Review.findOne({ _id: id });
-
-// edit review by id
-const edit = (id: any, data: ReviewEdit) => {
-  Review.findById(id);
-  return Review.findByIdAndUpdate(id, data, { new: true });
-};
+// edit review
+const edit = (id: any, content: string, userId: any) => Review.findOneAndUpdate(
+  {
+    bookId: id,
+    userId,
+  },
+  { $set: { content } },
+);
 
 // delete review by id
-const deleteRev = (id: any) => Review.findByIdAndDelete(id);
+const deleteRev = (id: any, userId: any) => Review.findOneAndDelete({
+  bookId: id,
+  userId,
+});
 
 export {
   create,
   get,
-  getById,
   edit,
   deleteRev,
 };

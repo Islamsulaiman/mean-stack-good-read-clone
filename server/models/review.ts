@@ -16,15 +16,14 @@ const reviewSchema = new Schema(
       minLength: 3,
       maxLength: 255,
     },
-    publishDate: {
-      type: Date,
-      default: Date.now,
-    },
     userId: {
-      // required: true,
       type: mongoose.Schema.Types.ObjectId,
+      required: true,
       ref: 'User',
     },
+  },
+  {
+    timestamps: true,
   },
 );
 

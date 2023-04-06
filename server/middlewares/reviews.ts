@@ -1,45 +1,40 @@
 import { Request, Response } from 'express';
 import {
-  create, get, getById, edit, deleteRev,
+  create, get, edit, deleteRev,
 } from '../controllers/reviews';
 
 const addReview = async (req: Request, res: Response) => {
   const { content } = req.body;
-  const bookId = '642ca9cd340e07f65ed05a07'; // we will get it from front
-  const review = await create({ bookId, content });
+  const { id } = req.params;
+  const userId = '642ca9cd340e07f65ed05a07'; // we will get it from front
+  const review = await create(id, { content, userId });
   return res.status(200).json(review);
 };
 
 const getReviews = async (req: Request, res: Response) => {
-  const { bookId } = req.query;
-  const reviews = await get(bookId);
+  const { id } = req.query;
+  const reviews = await get(id);
   return res.status(200).json(reviews);
 };
 
-const getReviewById = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const review = await getById(id);
-  return res.status(200).json(review);
-};
-
-const editReviewById = async (req: Request, res: Response) => {
+const editReview = async (req: Request, res: Response) => {
   const { content } = req.body;
-  const { id } = req.params;
-  const review = await edit(id, { content, publishDate: new Date() });
+  const { id } = req.params; // book id
+  const userId = '642ca9cd340e07f65ed05a07'; // we will get it from front
+  const review = await edit(id, content, userId);
   return res.status(200).json(review);
 };
 
 const deleteReview = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const deletedReview = await deleteRev(id);
-  console.log(deleteReview);
+  const userId = '642ca9cd340e07f65ed05a07'; // we will get it from front
+  const deletedReview = await deleteRev(id, userId);
   if (!deletedReview) throw new Error("Review doens't exist");
   return res.status(200).json('Review has been deleted successfully');
 };
 export {
   addReview,
   getReviews,
-  getReviewById,
-  editReviewById,
+  editReview,
   deleteReview,
 };
