@@ -20,20 +20,20 @@ const createCategory = async (req:Request, res:Response) => {
   });
   if (!category) throw new Error('Error: Category not created');
 
-  return res.status(200).json(category);
+  return res.status(200).json({ message: 'Category Created Successfully', category });
 };
 // 2.getAllCategories
 const getAllCategories = async (req:Request, res:Response) => {
   const { limit, page } = req.query;
   const category = await getAll(limit, page);
-  return res.status(200).json(category);
+  return res.status(200).json({ message: 'Categories : ', category });
 };
 // 3.get One Category
 const getOneCategory = async (req:Request, res:Response) => {
   const { id } = req.params;
   const category = await getOne(id);
   if (!category) throw new Error('Error: Category not found');
-  res.status(200).json(category);
+  res.status(200).json({ message: 'Category Found Successfully: ', category });
 };
 // 4.update Category
 const updateCategory = async (req:Request, res:Response) => {
@@ -45,8 +45,8 @@ const updateCategory = async (req:Request, res:Response) => {
   if (!category) throw new Error('Error: Category not found');
   const updatedCategory : UpdateCategory = { name };
   if (!updatedCategory) throw new Error('Error: Category not updated');
-  const upcategory = await update(id, updatedCategory);
-  res.status(200).json({ 'Category Updated': upcategory });
+  const oldCategory = await update(id, updatedCategory);
+  res.status(200).json({ 'Category Updated': oldCategory });
 };
 
 // 5.deleteCategory
@@ -56,7 +56,7 @@ const deleteCategory = async (req:Request, res:Response) => {
   if (!category) throw new Error('Error: Category not found');
   const deletedCategory = await deleteOne(id);
   if (!deletedCategory) throw new Error('Error: Category not deleted');
-  res.status(200).json({ 'Category deleted': deletedCategory });
+  res.status(200).json({ 'Category deleted Successfully': deletedCategory });
 };
 export {
   createCategory, getAllCategories, getOneCategory, updateCategory, deleteCategory,
