@@ -17,13 +17,13 @@ const bookSchema = new Schema(
       minLength: 3,
       maxLength: 1024,
     },
-    image: {
-      type: String,
-      required: true,
-      unique: true,
-      minLength: 5,
-      maxLength: 1024,
-    },
+    // image: {
+    //   type: String,
+    //   required: true,
+    //   unique: true,
+    //   minLength: 5,
+    //   maxLength: 1024,
+    // },
     category: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -39,7 +39,7 @@ const bookSchema = new Schema(
     ],
     rating: {
       type: Number,
-      required: true,
+      // required: true,
       min: 0.0,
       max: 5.0,
     },
