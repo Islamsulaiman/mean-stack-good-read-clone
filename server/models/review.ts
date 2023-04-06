@@ -5,26 +5,26 @@ const { Schema } = mongoose;
 
 const reviewSchema = new Schema(
   {
-    Book_Id: {
+    bookId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Book',
+      required: true,
     },
-    review: {
+    content: {
       type: String,
       required: true,
       minLength: 3,
       maxLength: 255,
     },
-    publish_date: {
+    publishDate: {
       type: Date,
       default: Date.now,
     },
-    user: [{
+    userId: {
+      // required: true,
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
-    ],
-
   },
 );
 

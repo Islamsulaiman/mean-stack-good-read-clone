@@ -1,12 +1,14 @@
 import { Request, Response } from 'express';
-import { compareUserData, generateJWT } from './authuntication';
+import { comparePasswd, generateJWT } from './authuntication';
 
-import { login } from '../controllers/users';
+import { getUser } from '../controllers/users';
+// import { getAdmin } from '../controllers/admins';
 
+/* User login */
 const userLogin = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  const userDataFromDB: any = await login(email);
+  const userDataFromDB: any = await getUser(email);
 
   // Email or password dosnt match!, try again
   if (!userDataFromDB) {
@@ -14,7 +16,7 @@ const userLogin = async (req: Request, res: Response) => {
   }
 
   // compare user input data with db data
-  const compare = await compareUserData(password, userDataFromDB.password);
+  const compare = await comparePasswd(password, userDataFromDB.password);
   if (!compare) throw new Error('Login error 2');
   else {
   // send user a token
@@ -23,4 +25,27 @@ const userLogin = async (req: Request, res: Response) => {
   }
 };
 
-export { userLogin };
+/* Admin login */
+const adminLogin = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  const adminDataFromDB: any = await getUser(email);
+
+  // Email or password dosnt match!, try again
+  if (!adminDataFromDB) {
+    throw new Error('Login error 1');
+  }
+
+  // compare admin input data with db data
+  const compare = await comparePasswd(password, adminDataFromDB.password);
+  if (!compare) throw new Error('Login error 2');
+  else {
+    // send admin a token
+    const token = generateJWT({ id: adminDataFromDB.id });
+    res.status(200).json({ 'admin token': token });
+  }
+};
+
+export {
+  userLogin,
+  adminLogin,
+};

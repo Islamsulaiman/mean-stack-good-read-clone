@@ -14,10 +14,9 @@ mongoose.connect(mongoUrl)
 
 // creating express server
 const app: Express = express();
-
 app.use(express.json());
 
-// main rote
+app.use(express.static('server/uploadedImages'));
 app.use(indexRouter);
 
 const PORT: number = process.env.PORT as unknown as number;

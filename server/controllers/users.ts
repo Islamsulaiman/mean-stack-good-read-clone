@@ -30,14 +30,14 @@ const getOneUser = (data: string) => User.findOne({ _id: data });
 const deleteUser = (data: string) => User.deleteOne({ _id: data });
 
 // 5 login, return hashed password
-const login = (email:string) => {
-  const student = User.findOne({ email });
-  return student;
+const getUser = (email:string) => {
+  const user = User.findOne({ email });
+  return user;
 };
 
 // 6. update user
 const updateUser = (id: string, data: UpdteUserData) => User.updateOne({ _id: id }, data);
 
 export {
-  create, getAllUsers, getOneUser, deleteUser, updateUser, login,
+  create, getAllUsers, getOneUser, deleteUser, updateUser, getUser,
 };

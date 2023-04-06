@@ -22,4 +22,4 @@ router.delete('/:id', deleteUserFunc);
 // 5. update user
 router.patch('/:id', errorHandling(updateUserFunc));
 
-export const studentRoute: Router = router;
+export const userRoute: Router = router;
