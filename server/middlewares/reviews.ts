@@ -12,8 +12,9 @@ const addReview = async (req: Request, res: Response) => {
 };
 
 const getReviews = async (req: Request, res: Response) => {
+  const { limit, page } = req.query;
   const { id } = req.params;
-  const reviews = await get(id);
+  const reviews = await get(id, limit, page);
   return res.status(200).json(reviews);
 };
 
