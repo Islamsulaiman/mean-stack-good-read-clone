@@ -6,13 +6,13 @@ import {
 
 const createAuthor = async (req: Request, res: Response) => {
   const {
-    firstName, lastName, DOB,
+    fullName, DOB,
   } = req.body;
   // Image handling
   let image = '';
   image = !req.file ? 'server\\uploadedImages\\default_avatar_41894.png' : req.file.path;
   const author = await create({
-    firstName, lastName, DOB: new Date(DOB), image,
+    fullName, DOB: new Date(DOB), image,
   });
   return res.status(200).json(author);
 };
@@ -24,12 +24,12 @@ const getAuthors = async (req: Request, res: Response) => {
 
 const editAuthorById = async (req: Request, res: Response) => {
   const {
-    firstName, lastName, DOB,
+    fullName, DOB,
   } = req.body;
 
   const { id } = req.params;
   const author = await edit(id, {
-    firstName, lastName, DOB: new Date(DOB),
+    fullName, DOB: new Date(DOB),
   });
 
   return res.status(200).json(author);

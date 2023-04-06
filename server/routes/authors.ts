@@ -11,23 +11,21 @@ const router = Router();
 // Create author
 router.post(
   '/',
-  validation.checkFirstName,
-  validation.checkLastName,
+  validation.fullName,
   validation.checkDate,
   validation.validateInput,
   authorUpload.single('image'),
-
   errorHandling(createAuthor),
 );
 
 // Get authors
-router.get('/', getAuthors);
+router.get('/', errorHandling(getAuthors));
 
 // Modify author
 router.patch(
   '/:id',
-  validation.checkFirstName,
-  validation.checkLastName,
+  validation.fullName,
+  validation.checkDate,
   validation.validateInput,
   authorUpload.single('image'),
   errorHandling(editAuthorById),

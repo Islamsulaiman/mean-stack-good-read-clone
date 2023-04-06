@@ -5,14 +5,9 @@ const { Schema } = mongoose;
 
 const authorSchema = new Schema(
   {
-    firstName: {
+    fullName: {
       type: String,
-      required: true,
-      minLength: 3,
-      maxLength: 255,
-    },
-    lastName: {
-      type: String,
+      unique: true,
       required: true,
       minLength: 3,
       maxLength: 255,

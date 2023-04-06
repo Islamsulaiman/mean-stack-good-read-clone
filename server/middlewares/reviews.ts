@@ -31,7 +31,9 @@ const editReviewById = async (req: Request, res: Response) => {
 
 const deleteReview = async (req: Request, res: Response) => {
   const { id } = req.params;
-  await deleteRev(id);
+  const deletedReview = await deleteRev(id);
+  console.log(deleteReview);
+  if (!deletedReview) throw new Error("Review doens't exist");
   return res.status(200).json('Review has been deleted successfully');
 };
 export {

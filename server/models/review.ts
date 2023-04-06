@@ -20,13 +20,11 @@ const reviewSchema = new Schema(
       type: Date,
       default: Date.now,
     },
-    userId: [{
+    userId: {
       // required: true,
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
-    ],
-
   },
 );
 

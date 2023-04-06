@@ -42,6 +42,12 @@ const checkPassowrd = body('password')
   .isLength({ min: 8, max: 1024 })
   .withMessage('Password: must be at least 8 chars longs');
 // author validation
+const fullName = body('fullName')
+  .isString()
+  .exists({ checkFalsy: true })
+  .withMessage('Full-name is required')
+  .isLength({ min: 3, max: 255 })
+  .withMessage('Full-name: must be at least 3 chars long & maximum 30 chars');
 
 const checkDate = body('DOB')
   .isDate()
@@ -119,6 +125,7 @@ export {
   checkEmail,
   checkUserName,
   checkPassowrd,
+  fullName,
   checkDate,
   checkTitle,
   checkDescription,

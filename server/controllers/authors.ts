@@ -2,15 +2,13 @@
 import { Author } from '../models';
 
 type CreateAuthor = {
-  firstName: string,
-  lastName: string,
+  fullName: string
   DOB: Date,
   image: string
 };
 
 type EditAuthor = {
-  firstName?: string,
-  lastName?: string,
+  fullName?: string
   DOB?: Date,
   image?: string
 };
