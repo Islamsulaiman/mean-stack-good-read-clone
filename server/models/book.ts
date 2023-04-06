@@ -19,13 +19,13 @@ export const bookSchema = new Schema(
       minLength: 3,
       maxLength: 1024,
     },
-    // image: {
-    //   type: String,
-    //   required: true,
-    //   unique: true,
-    //   minLength: 5,
-    //   maxLength: 1024,
-    // },
+    image: {
+      type: String,
+      required: true,
+      unique: true,
+      minLength: 5,
+      maxLength: 1024,
+    },
     category: [
       {
         type: mongoose.Schema.Types.ObjectId,
