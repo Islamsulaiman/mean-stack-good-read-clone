@@ -20,10 +20,10 @@ const authorSchema = new Schema(
       type: String,
       required: true,
     },
-    bookId: {
+    bookId: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Book',
-    },
+    }],
   },
 
 );

@@ -3,6 +3,7 @@ import { Book } from '../models';
 type NewBook = {
   title:string,
   description:string
+  image?: string,
 };
 
 // 1.createBook
