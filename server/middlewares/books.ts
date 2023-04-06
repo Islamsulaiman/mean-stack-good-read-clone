@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import {
-  create, getAll, getOne,
+  create, getAll, getOne, update,
 } from '../controllers/books';
 
 dotenv.config();
@@ -34,6 +34,19 @@ const getOneBook = async (req:Request, res:Response) => {
 
   return res.status(200).json({ message: 'Book Found Successfully', book });
 };
+// 4.updateBook
+const updateBook = async (req:Request, res:Response) => {
+  const { id } = req.params;
+  const {
+    title,
+    description,
+  } = req.body;
+  const book = await getOne(id);
+  if (!book) throw new Error('Error: Book not found');
+  const updatedBook = await update(id, { title, description });
+
+  return res.status(200).json({ message: 'Book updated successfully', updatedBook });
+};
 export {
-  createBook, getAllBooks, getOneBook,
+  createBook, getAllBooks, getOneBook, updateBook,
 };

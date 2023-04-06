@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {
-  createBook, getAllBooks, getOneBook,
+  createBook, getAllBooks, getOneBook, updateBook,
 } from '../middlewares/books';
 
 import { errorHandling } from '../middlewares/errorHandling';
@@ -12,4 +12,7 @@ router.post('/', errorHandling(createBook));
 router.get('/', getAllBooks);
 // 3.get one book
 router.get('/:id', getOneBook);
+// 4.update one book
+router.patch('/:id', errorHandling(updateBook));
+
 export const bookRouter : Router = router;
