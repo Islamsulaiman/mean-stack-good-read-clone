@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import {
-  create,
+  create, getAll,
 } from '../controllers/books';
 
 dotenv.config();
@@ -20,7 +20,12 @@ const createBook = async (req:Request, res:Response) => {
 
   return res.status(200).json({ message: 'Book created successfully', book });
 };
-
+// 2.getAllbooks
+const getAllBooks = async (req:Request, res:Response) => {
+  const { limit, page } = req.query;
+  const book = await getAll(limit, page);
+  return res.status(200).json({ message: 'Books', book });
+};
 export {
-  createBook,
+  createBook, getAllBooks,
 };
