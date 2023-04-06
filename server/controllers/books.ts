@@ -25,6 +25,11 @@ const update = async (id:string, data:NewBook) => {
   const book = await Book.findByIdAndUpdate({ _id: id }, data, { new: true });
   return book;
 };
+// 5.deleteBook
+const deleteOne = async (id:string) => {
+  const book = await Book.findByIdAndDelete({ _id: id });
+  return book;
+};
 export {
-  create, getAll, getOne, update,
+  create, getAll, getOne, update, deleteOne,
 };
