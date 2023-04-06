@@ -8,6 +8,13 @@ type CreateAuthor = {
   image: string
 };
 
+type EditAuthor = {
+  firstName?: string,
+  lastName?: string,
+  DOB?: Date,
+  image?: string
+};
+
 // Create author
 const create = (data: CreateAuthor) => Author.create(data);
 
@@ -15,7 +22,7 @@ const create = (data: CreateAuthor) => Author.create(data);
 const get = () => Author.find();
 
 // edit author by id
-const edit = (id: any, data: CreateAuthor) => {
+const edit = (id: any, data: EditAuthor) => {
   Author.findById(id);
   return Author.findByIdAndUpdate(id, data, { new: true });
 };

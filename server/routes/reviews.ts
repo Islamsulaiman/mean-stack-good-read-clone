@@ -4,9 +4,12 @@ import {
   addReview, getReviews, getReviewById, editReviewById, deleteReview,
 } from '../middlewares/reviews';
 
+import * as validator from '../middlewares/validateInput';
+import { errorHandling } from '../middlewares/errorHandling';
+
 const router = Router();
 // Add review
-router.post('/', addReview);
+router.post('/', validator.checkReview, validator.validateInput, errorHandling(addReview));
 
 // Get reivews for a specific book
 router.get('/', getReviews);
