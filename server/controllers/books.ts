@@ -4,10 +4,6 @@ type NewBook = {
   title:string,
   description:string
 };
-type UpdatedBook = {
-  title?:string,
-  description?:string
-};
 
 // 1.createBook
 const create = (data:NewBook) => Book.create(data);
@@ -25,7 +21,7 @@ const getOne = async (data:string) => {
   return book;
 };
 // 4.updateBook
-const update = async (id:string, data:UpdatedBook) => {
+const update = async (id:string, data:NewBook) => {
   const book = await Book.findByIdAndUpdate({ _id: id }, data, { new: true });
   return book;
 };

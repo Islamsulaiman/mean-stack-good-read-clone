@@ -5,9 +5,6 @@ type NewCategory = {
   name: string
 };
 
-type UpdateCategory = {
-  name?: string
-};
 // 1.create new category
 const create = (data:NewCategory) => Category.create(data);
 
@@ -25,8 +22,8 @@ const getOne = async (data:string) => {
   return category;
 };
 // 4.update
-const update = async (id: string, data:UpdateCategory) => {
-  const category = await Category.findOneAndUpdate({ _id: id }, data);
+const update = async (id: string, data:NewCategory) => {
+  const category = await Category.findByIdAndUpdate({ _id: id }, data, { new: true });
   return category;
 };
 // 5.delete

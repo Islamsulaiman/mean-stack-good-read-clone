@@ -44,7 +44,7 @@ const updateBook = async (req:Request, res:Response) => {
   const book = await getOne(id);
   if (!book) throw new Error('Error: Book not found');
   const updatedBook = await update(id, { title, description });
-
+  if (!updatedBook) throw new Error('Error: Book not updated');
   return res.status(200).json({ message: 'Book updated successfully', updatedBook });
 };
 export {

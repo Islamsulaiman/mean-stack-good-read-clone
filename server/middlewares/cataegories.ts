@@ -7,9 +7,6 @@ import {
 
 dotenve.config();
 
-type UpdateCategory = {
-  name?: string
-};
 // 1.createCategory
 const createCategory = async (req:Request, res:Response) => {
   const {
@@ -43,10 +40,9 @@ const updateCategory = async (req:Request, res:Response) => {
   } = req.body;
   const category = await getOne(id);
   if (!category) throw new Error('Error: Category not found');
-  const updatedCategory : UpdateCategory = { name };
+  const updatedCategory = await update(id, { name });
   if (!updatedCategory) throw new Error('Error: Category not updated');
-  const oldCategory = await update(id, updatedCategory);
-  res.status(200).json({ 'Category Updated': oldCategory });
+  res.status(200).json({ 'Category Updated Successfully': updatedCategory });
 };
 
 // 5.deleteCategory
