@@ -5,6 +5,9 @@ type NewCategory = {
   name: string
 };
 
+type UpdateCategory = {
+  name?: string
+};
 // 1.create new category
 const create = (data:NewCategory) => Category.create(data);
 
@@ -17,18 +20,18 @@ const getAll = async (limit:any, page:any) => {
   return categories;
 };
 // 3.get One Category
-const getOne = async (id:string) => {
-  const category = await Category.findById({ id });
+const getOne = async (data:string) => {
+  const category = await Category.findOne({ _id: data });
   return category;
 };
 // 4.update
-const update = async (id:any, data:NewCategory) => {
-  const category = await Category.findByIdAndUpdate({ id }, data, { new: true });
+const update = async (id: string, data:UpdateCategory) => {
+  const category = await Category.findOneAndUpdate({ _id: id }, data);
   return category;
 };
 // 5.delete
-const deleteOne = async (id:any) => {
-  const category = await Category.findByIdAndDelete({ id });
+const deleteOne = async (id:string) => {
+  const category = await Category.findByIdAndDelete({ _id: id });
   return category;
 };
 export {

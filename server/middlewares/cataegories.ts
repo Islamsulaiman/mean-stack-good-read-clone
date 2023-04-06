@@ -6,6 +6,10 @@ import {
 } from '../controllers/cataegories';
 
 dotenve.config();
+
+type UpdateCategory = {
+  name?: string
+};
 // 1.createCategory
 const createCategory = async (req:Request, res:Response) => {
   const {
@@ -20,8 +24,7 @@ const createCategory = async (req:Request, res:Response) => {
 };
 // 2.getAllCategories
 const getAllCategories = async (req:Request, res:Response) => {
-  const { limit } = req.query;
-  const { page } = req.query;
+  const { limit, page } = req.query;
   const category = await getAll(limit, page);
   return res.status(200).json(category);
 };
@@ -40,12 +43,10 @@ const updateCategory = async (req:Request, res:Response) => {
   } = req.body;
   const category = await getOne(id);
   if (!category) throw new Error('Error: Category not found');
-  const updatedCategory = await update(
-    { _id: id },
-    { name },
-  );
+  const updatedCategory : UpdateCategory = { name };
   if (!updatedCategory) throw new Error('Error: Category not updated');
-  res.status(200).json(updatedCategory);
+  const upcategory = await update(id, updatedCategory);
+  res.status(200).json({ 'Category Updated': upcategory });
 };
 
 // 5.deleteCategory
