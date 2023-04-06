@@ -15,6 +15,11 @@ const getAll = async (limit:any, page:any) => {
   });
   return books;
 };
+// 3.getOneBook
+const getOne = async (data:string) => {
+  const book = await Book.findById({ _id: data });
+  return book;
+};
 export {
-  create, getAll,
+  create, getAll, getOne,
 };
