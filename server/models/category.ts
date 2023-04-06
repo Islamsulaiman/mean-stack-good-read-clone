@@ -1,9 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import mongoose from 'mongoose';
+import mongoose, {
+  Schema,
+} from 'mongoose';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import mongoosePaginate from 'mongoose-paginate-v2';
 
-const { Schema } = mongoose;
-
-const categorySchema = new Schema(
+export const categorySchema = new Schema(
   {
     name: {
       type: String,
@@ -17,7 +19,10 @@ const categorySchema = new Schema(
     },
   },
 );
-
-const Category = mongoose.model('Category', categorySchema);
-
+categorySchema.plugin(mongoosePaginate);
+interface CategoryType extends mongoose.Document {}
+const Category = mongoose.model<
+CategoryType,
+mongoose.PaginateModel<CategoryType>
+>('categories', categorySchema, 'categories');
 export default Category;
