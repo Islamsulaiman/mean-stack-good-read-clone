@@ -38,6 +38,19 @@ const getUser = (email:string) => {
 // 6. update user
 const updateUser = (id: string, data: UpdteUserData) => User.updateOne({ _id: id }, data);
 
+// 7. Add book to user
+// eslint-disable-next-line max-len, max-len
+const addBookToUser = (id: string, bookId: string) => User.updateOne({ _id: id }, { $push: { books: { bookId } } });
+
+// 8. update user rating
+const adduserRating = (id: string, bookId: string, rating: number) => {
+  const user = User.updateOne(
+    { _id: id, 'books.bookId': bookId },
+    { $set: { 'books.$.currentRating': rating } },
+  );
+  return user;
+};
+
 export {
-  create, getAllUsers, getOneUser, deleteUser, updateUser, getUser,
+  create, getAllUsers, getOneUser, deleteUser, updateUser, getUser, addBookToUser, adduserRating,
 };

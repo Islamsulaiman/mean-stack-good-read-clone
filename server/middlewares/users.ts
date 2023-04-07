@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import {
-  create, getAllUsers, getOneUser, deleteUser, updateUser,
+  create, getAllUsers, getOneUser, deleteUser, updateUser, addBookToUser, adduserRating,
 } from '../controllers/users';
 
 import { hashPassword } from './authuntication';
@@ -17,8 +17,7 @@ type UpdteUserData = {
 
 dotenv.config();
 
-// : Promise<Response>
-const createUser = async (req: Request, res: Response) => {
+const createUser = async (req: Request, res: Response) : Promise<Response> => {
   const {
     firstName, lastName, email, userName,
   } = req.body;
@@ -36,14 +35,16 @@ const createUser = async (req: Request, res: Response) => {
   return res.status(200).json(user);
 };
 
-const getAllUsersFunc = async (req: Request, res: Response) => {
+const getAllUsersFunc = async (req: Request, res: Response): Promise<Response> => {
   const users = await getAllUsers();
 
   return res.status(200).json(users);
 };
 
 const getOneUserFunc = async (req: Request, res: Response): Promise<Response> => {
-  const { id } = req.params;
+  // const { id } = req.params;
+
+  const id = '642f615500d8ccde87da9688';
 
   const oneUser = await getOneUser(id);
 
@@ -86,6 +87,34 @@ const updateUserFunc = async (req: Request, res: Response) => {
   return res.status(200).json(student);
 };
 
+const addBookToUserFunc = async (req: Request, res: Response) : Promise<Response> => {
+  // const { id } = req.body;
+  // const { bookId } = req.params;
+
+  const id = '642f615500d8ccde87da9688';
+  const bookId = '642f5e3ed1bb6c49e3746057';
+
+  const book = await addBookToUser(id, bookId);
+
+  return res.status(200).json(book);
+};
+
+const adduserRatingFunc = async (req: Request, res: Response) : Promise<Response> => {
+  // const { id, rating } = req.body;
+  // const { bookId } = req.params;
+
+  const id = '642f615500d8ccde87da9688';
+  const bookId = '642f5e3ed1bb6c49e3746057';
+  const rating = 1;
+
+  // update the user rating for this book
+  const userRating = await adduserRating(id, bookId, rating);
+  // update the rating for the book
+
+  return res.status(200).json(userRating);
+};
+
 export {
-  createUser, getAllUsersFunc, getOneUserFunc, deleteUser, deleteUserFunc, updateUserFunc,
+  createUser, getAllUsersFunc, getOneUserFunc, deleteUser, deleteUserFunc,
+  updateUserFunc, addBookToUserFunc, adduserRatingFunc,
 };

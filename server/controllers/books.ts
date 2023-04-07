@@ -2,7 +2,9 @@ import { Book } from '../models';
 
 type NewBook = {
   title:string,
-  description:string
+  description:string,
+  author?: string,
+  category?:string
 };
 
 // 1.createBook

@@ -11,10 +11,14 @@ const createBook = async (req:Request, res:Response) => {
   const {
     title,
     description,
+    author,
+    category,
   } = req.body;
   const book = await create({
     title,
     description,
+    author,
+    category,
   });
   if (!book) throw new Error('Error: Book not created');
 

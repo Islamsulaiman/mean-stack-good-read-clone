@@ -21,8 +21,8 @@ export const bookSchema = new Schema(
     },
     image: {
       type: String,
-      required: true,
-      unique: true,
+      // required: true,
+      // unique: true,
       minLength: 5,
       maxLength: 1024,
     },
@@ -39,11 +39,21 @@ export const bookSchema = new Schema(
       ref: 'Author',
     },
     ],
+    // rating: {
+    //   type: Number,
+    //   // required: true,
+    //   min: 0.0,
+    //   max: 5.0,
+    // },
     rating: {
-      type: Number,
-      // required: true,
-      min: 0.0,
-      max: 5.0,
+      type: Object,
+      default: {
+        one: 0,
+        two: 0,
+        three: 0,
+        four: 0,
+        five: 0,
+      },
     },
     published_date: {
       type: Date,

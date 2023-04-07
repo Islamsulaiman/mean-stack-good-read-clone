@@ -40,19 +40,26 @@ const userSchema = new Schema(
 
     image: {
       type: String,
-      required: true,
-      unique: true,
+      // required: true,
+      // unique: true,
       minLength: 5,
       maxLength: 1024,
     },
     books: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Book',
+        bookId: String,
         book_status: {
           type: String,
           enum: ['read', 'to_read', 'reading'],
           default: 'to_read',
+        },
+        previousRating: {
+          type: Number,
+          default: 0,
+        },
+        currentRating: {
+          type: Number,
+          default: 0,
         },
       },
     ],
