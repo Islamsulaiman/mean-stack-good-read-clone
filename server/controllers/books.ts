@@ -2,11 +2,15 @@ import { Book } from '../models';
 
 type NewBook = {
   title:string,
-  description:string
+  description:string,
+  image:string,
 };
-
+type UpdatedBook = {
+  title?:string,
+  description?:string,
+};
 // 1.createBook
-const create = (data:NewBook) => Book.create(data);
+const create = async (data:NewBook) => Book.create(data);
 // 2.get All books
 const getAll = async (limit:any, page:any) => {
   const books = await Book.paginate({}, {
@@ -21,7 +25,7 @@ const getOne = async (data:string) => {
   return book;
 };
 // 4.updateBook
-const update = async (id:string, data:NewBook) => {
+const update = async (id:string, data:UpdatedBook) => {
   const book = await Book.findByIdAndUpdate({ _id: id }, data, { new: true });
   return book;
 };
