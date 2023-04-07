@@ -1,9 +1,15 @@
+import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import * as jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { Admin } from '../models';
+
+const { promisify } = require('util');
+
+const verify = promisify(jwt.verify);
 
 dotenv.config();
-
+const JWTSecret = process.env.JWT_SECRET;
 const comparePasswd = async (enteredPassword: string, DB_password: any) :
 Promise<boolean> => {
   // check if password match Db password
@@ -16,7 +22,21 @@ type IokenPayload = {
 };
 
 // eslint-disable-next-line max-len
-const generateJWT = (payload: IokenPayload):String => jwt.sign(payload, process.env.JWT_SECRET as string);
+const generateJWT = (payload: IokenPayload):String => jwt.sign(payload, JWTSecret as string, { expiresIn: '7d' });
 
 const hashPassword = (password: String): String => bcrypt.hashSync(password as string, 10);
-export { comparePasswd, generateJWT, hashPassword };
+
+// Check if admin
+const auth = async (req: Request, res: Response, next: any) => {
+  const token = req.cookies.access_token;
+  const payload = verify(token, JWTSecret as string);
+  const admin = await Admin.findById(payload.id);
+
+  if (!admin) { throw new Error('User not found'); }
+
+  return next();
+};
+
+export {
+  comparePasswd, generateJWT, hashPassword, auth,
+};

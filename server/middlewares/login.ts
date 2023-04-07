@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { comparePasswd, generateJWT } from './authuntication';
 
 import { getUser } from '../controllers/users';
-// import { getAdmin } from '../controllers/admins';
+import { getAdmin } from '../controllers/admins';
 
 /* User login */
 const userLogin = async (req: Request, res: Response) => {
@@ -28,7 +28,7 @@ const userLogin = async (req: Request, res: Response) => {
 /* Admin login */
 const adminLogin = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  const adminDataFromDB: any = await getUser(email);
+  const adminDataFromDB: any = await getAdmin(email);
 
   // Email or password dosnt match!, try again
   if (!adminDataFromDB) {
@@ -41,7 +41,7 @@ const adminLogin = async (req: Request, res: Response) => {
   else {
     // send admin a token
     const token = generateJWT({ id: adminDataFromDB.id });
-    res.status(200).json({ 'admin token': token });
+    res.cookie('access_token', token, { httpOnly: true, secure: true });
   }
 };
 

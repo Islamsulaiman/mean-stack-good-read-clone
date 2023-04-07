@@ -1,6 +1,7 @@
 import express, { Express } from 'express';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import * as cookieParser from 'cookie-parser';
 import { indexRouter } from './routes';
 
 // Read the content inside dotenv
@@ -15,7 +16,7 @@ mongoose.connect(mongoUrl)
 // creating express server
 const app: Express = express();
 app.use(express.json());
-
+app.use(cookieParser());
 app.use(express.static('server/uploadedImages'));
 app.use(indexRouter);
 
