@@ -10,13 +10,13 @@ export const categorySchema = new Schema(
     name: {
       type: String,
       required: true,
+      unique: true,
       minLength: 3,
       maxLength: 255,
     },
-    book_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Book',
-    },
+  },
+  {
+    timestamps: true,
   },
 );
 categorySchema.plugin(mongoosePaginate);
