@@ -44,9 +44,10 @@ const addBookToUser = (id: string, bookId: string) => User.updateOne({ _id: id }
 
 // 8. update user rating
 const adduserRating = (id: string, bookId: string, rating: number) => {
-  const user = User.updateOne(
+  const user = User.findOneAndUpdate(
     { _id: id, 'books.bookId': bookId },
     { $set: { 'books.$.currentRating': rating } },
+    { projection: { 'books.$': 1, _id: 0 } },
   );
   return user;
 };

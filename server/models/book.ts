@@ -39,12 +39,6 @@ export const bookSchema = new Schema(
       ref: 'Author',
     },
     ],
-    // rating: {
-    //   type: Number,
-    //   // required: true,
-    //   min: 0.0,
-    //   max: 5.0,
-    // },
     rating: {
       type: Object,
       default: {

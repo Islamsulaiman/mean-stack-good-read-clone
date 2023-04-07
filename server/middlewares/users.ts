@@ -105,13 +105,19 @@ const adduserRatingFunc = async (req: Request, res: Response) : Promise<Response
 
   const id = '642f615500d8ccde87da9688';
   const bookId = '642f5e3ed1bb6c49e3746057';
-  const rating = 1;
+  const rating = 4.7;
 
   // update the user rating for this book
-  const userRating = await adduserRating(id, bookId, rating);
+  const oldUserRatingObject = await adduserRating(id, bookId, rating);
+
+  const oldUserRatingNumber = oldUserRatingObject?.books[0].currentRating;
+  const updatedBookId = oldUserRatingObject?.books[0].bookId;
+
+  // console.log(updatedBookId);
+
   // update the rating for the book
 
-  return res.status(200).json(userRating);
+  return res.status(200).json(oldUserRatingNumber);
 };
 
 export {
