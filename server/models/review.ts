@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
-
+import mongoosePaginate from 'mongoose-paginate-v2';
 const reviewSchema = new Schema(
   {
     bookId: {
@@ -16,18 +16,22 @@ const reviewSchema = new Schema(
       minLength: 3,
       maxLength: 255,
     },
-    publishDate: {
-      type: Date,
-      default: Date.now,
-    },
     userId: {
-      // required: true,
       type: mongoose.Schema.Types.ObjectId,
+      required: true,
       ref: 'User',
     },
   },
+  {
+    timestamps: true,
+  },
 );
 
-const Review = mongoose.model('Review', reviewSchema);
+// const Review = mongoose.model('Review', reviewSchema);
+
+reviewSchema.plugin(mongoosePaginate);
+interface ReviewType extends mongoose.Document {}
+
+const Review = mongoose.model<ReviewType, mongoose.PaginateModel<ReviewType>>('reviews', reviewSchema, 'reviews');
 
 export default Review;

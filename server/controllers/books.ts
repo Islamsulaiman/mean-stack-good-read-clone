@@ -8,6 +8,7 @@ type NewBook = {
 type UpdatedBook = {
   title?:string,
   description?:string,
+  image?: string,
 };
 // 1.createBook
 const create = async (data:NewBook) => Book.create(data);

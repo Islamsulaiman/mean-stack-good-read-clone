@@ -12,6 +12,7 @@ const createBook = async (req:Request, res:Response) => {
     title,
     description,
   } = req.body;
+    // Image handling
   let image = '';
   image = !req.file ? 'server\\uploadedImages\\default_avatar_41894.png' : req.file.path;
   const book = await create({
