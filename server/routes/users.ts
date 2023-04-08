@@ -9,10 +9,10 @@ import { errorHandling } from '../middlewares/errorHandling';
 const router = Router();
 
 // add rating to a specific book inside one user with it's bookId
-router.patch('/rating', adduserRatingFunc);
+router.patch('/rating/:bookId', adduserRatingFunc);
 
 // add book to user with it's bookId
-router.patch('/', addBookToUserFunc);
+router.patch('/:bookId', addBookToUserFunc);
 
 // 1)create user
 router.post('/', errorHandling(createUser));

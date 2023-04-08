@@ -60,6 +60,7 @@ const deleteBook = async (req:Request, res:Response) => {
   if (!deletedBook) throw new Error('Error: Book not deleted');
   return res.status(200).json({ message: 'Book deleted successfully', deletedBook });
 };
+
 export {
   createBook, getAllBooks, getOneBook, updateBook, deleteBook,
 };

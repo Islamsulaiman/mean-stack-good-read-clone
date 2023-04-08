@@ -42,11 +42,11 @@ export const bookSchema = new Schema(
     rating: {
       type: Object,
       default: {
-        one: 0,
-        two: 0,
-        three: 0,
-        four: 0,
-        five: 0,
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
       },
     },
     published_date: {

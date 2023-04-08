@@ -53,11 +53,7 @@ const userSchema = new Schema(
           enum: ['read', 'to_read', 'reading'],
           default: 'to_read',
         },
-        // previousRating: {
-        //   type: Number,
-        //   default: 0,
-        // },
-        currentRating: {
+        rating: {
           type: Number,
           default: 0,
         },

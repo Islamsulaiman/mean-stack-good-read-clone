@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import {
   create, getAllUsers, getOneUser, deleteUser, updateUser, addBookToUser, adduserRating,
 } from '../controllers/users';
+import { updateBookRating } from '../controllers/books';
 
 import { hashPassword } from './authuntication';
 
@@ -88,11 +89,8 @@ const updateUserFunc = async (req: Request, res: Response) => {
 };
 
 const addBookToUserFunc = async (req: Request, res: Response) : Promise<Response> => {
-  // const { id } = req.body;
-  // const { bookId } = req.params;
-
-  const id = '642f615500d8ccde87da9688';
-  const bookId = '642f5e3ed1bb6c49e3746057';
+  const { id } = req.body;
+  const { bookId } = req.params;
 
   const book = await addBookToUser(id, bookId);
 
@@ -100,24 +98,22 @@ const addBookToUserFunc = async (req: Request, res: Response) : Promise<Response
 };
 
 const adduserRatingFunc = async (req: Request, res: Response) : Promise<Response> => {
-  // const { id, rating } = req.body;
-  // const { bookId } = req.params;
-
-  const id = '642f615500d8ccde87da9688';
-  const bookId = '642f5e3ed1bb6c49e3746057';
-  const rating = 4.7;
+  const { id, rating } = req.body;
+  const { bookId } = req.params;
 
   // update the user rating for this book
   const oldUserRatingObject = await adduserRating(id, bookId, rating);
 
-  const oldUserRatingNumber = oldUserRatingObject?.books[0].currentRating;
-  const updatedBookId = oldUserRatingObject?.books[0].bookId;
+  const oldUserRating : any = oldUserRatingObject?.books[0].rating;
+  const updatedBookId :any = oldUserRatingObject?.books[0].bookId;
 
-  // console.log(updatedBookId);
+  console.log(updatedBookId);
 
   // update the rating for the book
+  const bookUpdated = await updateBookRating(updatedBookId, oldUserRating, rating);
+  console.log(bookUpdated);
 
-  return res.status(200).json(oldUserRatingNumber);
+  return res.status(200).json(oldUserRating);
 };
 
 export {

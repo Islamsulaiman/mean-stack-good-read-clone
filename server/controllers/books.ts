@@ -1,3 +1,4 @@
+// import { toWords } from 'num-to-words';
 import { Book } from '../models';
 
 type NewBook = {
@@ -32,6 +33,19 @@ const deleteOne = async (id:string) => {
   const book = await Book.findByIdAndDelete({ _id: id });
   return book;
 };
+
+// update book rating
+const updateBookRating = async (bookId:string, oldRating:number, newRating:number) => {
+  const oldRatingField = `rating.${oldRating.toString()}`;
+  const newRatingField = `rating.${newRating.toString()}`;
+
+  const book = await Book.findByIdAndUpdate(
+    { _id: bookId },
+    { $inc: { [oldRatingField]: -1, [newRatingField]: 1 } },
+  );
+  return book;
+};
+
 export {
-  create, getAll, getOne, update, deleteOne,
+  create, getAll, getOne, update, deleteOne, updateBookRating,
 };
