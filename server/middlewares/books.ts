@@ -14,11 +14,15 @@ const createBook = async (req:Request, res:Response) => {
     author,
     category,
   } = req.body;
+    // Image handling
+  let image = '';
+  image = !req.file ? 'server\\uploadedImages\\default_avatar_41894.png' : req.file.path;
   const book = await create({
     title,
     description,
     author,
     category,
+    image,
   });
   if (!book) throw new Error('Error: Book not created');
 
