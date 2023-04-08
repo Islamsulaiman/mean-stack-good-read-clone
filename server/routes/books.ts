@@ -1,11 +1,14 @@
 import { Router } from 'express';
 import {
-  createBook, getAllBooks, getOneBook, updateBook, deleteBook,
+  createBook, getAllBooks, getOneBook, updateBook, deleteBook, bookAvarageRatingFunc,
 } from '../middlewares/books';
 
 import { errorHandling } from '../middlewares/errorHandling';
 
 const router = Router();
+
+// book avarage rating
+router.get('/bookAvarageRating/:id', bookAvarageRatingFunc);
 // 1.create Book
 router.post('/', errorHandling(createBook));
 // 2.get all books

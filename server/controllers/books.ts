@@ -46,6 +46,13 @@ const updateBookRating = async (bookId:string, oldRating:number, newRating:numbe
   return book;
 };
 
+// get book avarage rating
+const bookAvarageRating = async (bookId:string) => {
+  const rating : any = await Book.findOne({ _id: bookId }, { rating: 1, _id: 0 });
+  const returnBook = rating.rating;
+  return returnBook;
+};
+
 export {
-  create, getAll, getOne, update, deleteOne, updateBookRating,
+  create, getAll, getOne, update, deleteOne, updateBookRating, bookAvarageRating,
 };

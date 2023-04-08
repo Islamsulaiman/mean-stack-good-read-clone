@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import {
-  create, getAll, getOne, update, deleteOne,
+  create, getAll, getOne, update, deleteOne, bookAvarageRating,
 } from '../controllers/books';
 
 dotenv.config();
@@ -61,6 +61,34 @@ const deleteBook = async (req:Request, res:Response) => {
   return res.status(200).json({ message: 'Book deleted successfully', deletedBook });
 };
 
+// 6. book avarage rating
+const bookAvarageRatingFunc = async (req:Request, res:Response) => {
+  const { id } = req.params;
+
+  const book = await bookAvarageRating(id);
+  if (!book) throw new Error('Error: Book avarage not found');
+
+  // get total people voting
+  let totalVoters : number = 0;
+
+  // eslint-disable-next-line no-restricted-syntax, guard-for-in
+  for (const key in book) {
+    totalVoters += book[key];
+  }
+
+  // get total votes
+  let totalStarsSum : number = 0;
+
+  // eslint-disable-next-line no-restricted-syntax, guard-for-in
+  for (const key in book) {
+    totalStarsSum += book[key] * Number(key);
+  }
+
+  // the avarage rating
+  const avarageRating = (totalStarsSum / totalVoters).toFixed(1);
+  return res.status(200).json(avarageRating);
+};
+
 export {
-  createBook, getAllBooks, getOneBook, updateBook, deleteBook,
+  createBook, getAllBooks, getOneBook, updateBook, deleteBook, bookAvarageRatingFunc,
 };
