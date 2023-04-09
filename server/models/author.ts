@@ -18,7 +18,7 @@ const authorSchema = new Schema(
     },
     image: {
       type: String,
-      required: true,
+      //required: true,
     },
     bookId: [{
       type: mongoose.Schema.Types.ObjectId,

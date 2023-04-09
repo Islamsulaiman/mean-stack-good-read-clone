@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import * as cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import { indexRouter } from './routes';
 
 // Read the content inside dotenv
