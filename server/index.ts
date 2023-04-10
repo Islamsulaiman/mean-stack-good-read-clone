@@ -2,6 +2,7 @@ import express, { Express } from 'express';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import { indexRouter } from './routes';
 
 // Read the content inside dotenv
@@ -18,6 +19,13 @@ const app: Express = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('server/uploadedImages'));
+
+const corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+
 app.use(indexRouter);
 
 const PORT: number = process.env.PORT as unknown as number;
