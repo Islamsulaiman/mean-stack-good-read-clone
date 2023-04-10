@@ -4,20 +4,24 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { TryalComponent } from './components/tryal/tryal.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+
+
 @NgModule({
   declarations: [
     UserComponent,
     RegistrationComponent,
-    TryalComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,
     UserRoutingModule, 
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class UserModule { }
