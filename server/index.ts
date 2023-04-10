@@ -21,7 +21,7 @@ app.use(express.static('server/uploadedImages'));
 app.use(indexRouter);
 
 const PORT: number = process.env.PORT as unknown as number;
-app.listen(4000, () => {
+app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`server is running on port ${PORT}`);
 });

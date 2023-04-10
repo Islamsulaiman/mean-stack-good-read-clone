@@ -4,7 +4,6 @@ import * as validation from '../middlewares/validateInput';
 import {
   createAuthor, getAuthors, editAuthorById, deleteAuthorById,
 } from '../middlewares/authors';
-import { auth } from '../middlewares/authuntication';
 import { authorUpload } from '../middlewares/imagesUpload';
 // authorUpload.single('image')
 const router = Router();

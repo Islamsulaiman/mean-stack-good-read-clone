@@ -18,19 +18,18 @@ const createBook = async (req:Request, res:Response) => {
   // Image handling
   let image: any = '';
   if (!req.file) {
-      image = 'https://res.cloudinary.com/drbxb4sn7/image/upload/v1681107813/p499wcwgyytpkhv5dsjx.png'
-
-  }else{
+    image = 'https://res.cloudinary.com/drbxb4sn7/image/upload/v1681107813/p499wcwgyytpkhv5dsjx.png';
+  } else {
     const uploadedImg = await cloudi.uploader.upload(req.file.path, {
-        public_id: `${Date.now}_author`,
-        width: 500,
-        height: 500,
-        crop: 'fill'
-    
-      })
-      image = uploadedImg.url
+      public_id: `${Date.now}_author`,
+      width: 500,
+      height: 500,
+      crop: 'fill',
+
+    });
+    image = uploadedImg.url;
   }
-  
+
   const book = await create({
     title,
     description,
