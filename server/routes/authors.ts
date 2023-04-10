@@ -9,14 +9,13 @@ import { authorUpload } from '../middlewares/imagesUpload';
 // authorUpload.single('image')
 const router = Router();
 
-router.use(errorHandling(auth));
 // Create author
 router.post(
   '/',
+  authorUpload.single('image'),
   validation.fullName,
   validation.checkDate,
   validation.validateInput,
-  authorUpload.single('image'),
   errorHandling(createAuthor),
 );
 
@@ -26,10 +25,10 @@ router.get('/', errorHandling(getAuthors));
 // Modify author
 router.patch(
   '/:id',
+  authorUpload.single('image'),
   validation.fullName,
   validation.checkDate,
   validation.validateInput,
-  authorUpload.single('image'),
   errorHandling(editAuthorById),
 );
 

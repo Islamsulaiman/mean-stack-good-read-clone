@@ -1,4 +1,13 @@
 import multer from 'multer';
+import cloudinary from 'cloudinary';
+
+const cloudi = cloudinary.v2;
+cloudi.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
 
 const randomNumber = Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
 const maxSize = 1024 * 1024 * 5;
@@ -6,7 +15,7 @@ const maxSize = 1024 * 1024 * 5;
 /* Save images in server */
 const authorStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'server/uploadedImages/authors');
+    cb(null, 'uploadedImages/authors');
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + randomNumber.toString() + file.originalname);
@@ -15,7 +24,7 @@ const authorStorage = multer.diskStorage({
 
 const bookStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'server/uploadedImages/books');
+    cb(null, 'uploadedImages/books');
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + randomNumber.toString() + file.originalname);
@@ -24,7 +33,7 @@ const bookStorage = multer.diskStorage({
 
 const userStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'server/uploadedImages/users');
+    cb(null, 'uploadedImages/users');
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + randomNumber.toString() + file.originalname);
@@ -49,4 +58,5 @@ export {
   authorUpload,
   bookUpload,
   userUpload,
+  cloudi
 };

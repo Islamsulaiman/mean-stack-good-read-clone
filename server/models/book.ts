@@ -21,8 +21,7 @@ export const bookSchema = new Schema(
     },
     image: {
       type: String,
-      // required: true,
-      // unique: true,
+      required: true,
       minLength: 5,
       maxLength: 1024,
     },

@@ -18,10 +18,10 @@ router.get('/bookAvarageRating/:id', bookAvarageRatingFunc);
 // 1.create Book
 router.post(
   '/',
+  bookUpload.single('image'),
   validation.checkTitle,
   validation.checkDescription,
   validation.validateInput,
-  bookUpload.single('image'),
   errorHandling(createBook),
 );
 // 1.create Book
