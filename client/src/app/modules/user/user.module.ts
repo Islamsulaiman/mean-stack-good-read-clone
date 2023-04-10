@@ -3,19 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
-import { AuthService } from './services/auth.service';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     UserComponent,
-    AuthService,
     RegistrationComponent,
   ],
   imports: [
     CommonModule,
     UserRoutingModule, 
+    ReactiveFormsModule
   ]
 })
 export class UserModule { }
