@@ -3,7 +3,6 @@ import { categoryRoute } from './cataegories';
 import { bookRouter } from './books';
 import { userRoute } from './users';
 import { authors } from './authors';
-import { reviews } from './reviews';
 import { AdminRoute } from './admins';
 import { userLogin, adminLogin } from '../middlewares/login';
 
@@ -20,10 +19,7 @@ router.use('/users', userRoute);
 // 2. author route
 router.use('/authors', authors);
 
-// 3. review route
-router.use('/reviews', reviews);
-// 4. Admin route
-
+// 3. Admin route
 router.use('/admin', AdminRoute);
 
 export const indexRouter:Router = router;
