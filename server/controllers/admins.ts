@@ -16,6 +16,8 @@ const getAdmin = (data : string) => {
 
 const create = (data: newAdmin) => Admin.create(data);
 
+const deleteAdmin = (data: string) => Admin.deleteOne({ email: data });
+
 export {
-  getAdmin, create,
+  getAdmin, create, deleteAdmin, newAdmin,
 };

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getAdmin, create } from '../controllers/admins';
+import { getAdmin, create, deleteAdmin } from '../controllers/admins';
 import { hashPassword } from './authuntication';
 
 const getAdminData = async (req:Request, res:Response) => {
@@ -24,4 +24,11 @@ const createAdmin = async (req: Request, res: Response) => {
   return res.status(200).json(admin);
 };
 
-export { getAdminData, createAdmin };
+const deleteAdminfunc = async (req: Request, res: Response) => {
+  const { email } = req.body;
+  const student = await deleteAdmin(email);
+
+  return res.status(200).json({ 'Admin deleted': student });
+};
+
+export { getAdminData, createAdmin, deleteAdminfunc };
