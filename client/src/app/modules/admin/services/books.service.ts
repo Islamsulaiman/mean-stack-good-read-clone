@@ -21,17 +21,17 @@ export class BooksService {
   }
 
   //Get Book by ID
-  getBookByID(id:string):Observable<any> {
+  getBookByID(id:number):Observable<any> {
     return this._HttpClient.get(`${this.URL}/${id}`);
   }
 
   //Update Book
-  updateBook(id:string , data:any):Observable<any>{
-    return this._HttpClient.put(`${this.URL}/${id}`,data);
+  updateBook(id:number , data:any):Observable<any>{
+    return this._HttpClient.patch(`${this.URL}/${id}`,data);
   }
 
   //Delete Book
-  deleteBook(id:string):Observable<any>{
+  deleteBook(id:number):Observable<any>{
     return this._HttpClient.delete(`${this.URL}/${id}`);
   }
 
