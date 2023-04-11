@@ -10,6 +10,7 @@ import { errorHandling } from '../middlewares/errorHandling';
 import * as validation from '../middlewares/validateInput';
 
 import { bookUpload } from '../middlewares/imagesUpload';
+import { userAuth } from '../middlewares/authuntication';
 
 const router = Router();
 
@@ -45,15 +46,15 @@ router.delete('/:id', errorHandling(deleteBook));
 /* Reviews routes */
 
 // 1. add review
-router.post('/:id/review', errorHandling(addReview));
+router.post('/:id/review', errorHandling(userAuth), errorHandling(addReview));
 
 // 2. get reviews
 router.get('/:id/review', errorHandling(getReviews));
 
 // 3. edit review
-router.patch('/:id/review/update', errorHandling(editReview));
+router.patch('/:id/review/update',errorHandling(userAuth), errorHandling(editReview));
 
 // 4. delete review
-router.delete('/:id/review/delete/', errorHandling(deleteReview));
+router.delete('/:id/review/delete/', errorHandling(userAuth), errorHandling(deleteReview));
 
 export const bookRouter : Router = router;
