@@ -10,7 +10,11 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent {
 
-  constructor(private _AuthService:AuthService, private _Router: Router) {}
+  constructor(private _AuthService:AuthService, private _Router: Router) {
+      this._AuthService.saveUser();
+      if(this._AuthService.currentUser.getValue())
+          this._Router.navigate(['/']);
+  }
 
   error= "";
 
@@ -27,7 +31,6 @@ export class RegistrationComponent {
 
 subbmitRegisterForm(registerForm:FormGroup){
   this._AuthService.register(registerForm.value).subscribe((res)=>{
-
     console.log(res.status)
     if(res === "success"){
       this._Router.navigate(['/login'])
