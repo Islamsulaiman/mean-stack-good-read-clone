@@ -23,7 +23,6 @@ const createUser = async (req: Request, res: Response) : Promise<Response> => {
   } = req.body;
   let { password } = req.body;
 
-  // password = bcrypt.hashSync(password, 10);
   password = hashPassword(password);
 
   // Avatar
@@ -44,9 +43,7 @@ const getAllUsersFunc = async (req: Request, res: Response): Promise<Response> =
 };
 
 const getOneUserFunc = async (req: Request, res: Response): Promise<Response> => {
-  // const { id } = req.params;
-
-  const id = '642f615500d8ccde87da9688';
+  const { id } = req.params;
 
   const oneUser = await userCont.getOneUser(id);
 
@@ -108,13 +105,10 @@ const adduserRatingFunc = async (req: Request, res: Response) : Promise<Response
   const oldUserRating : any = oldUserRatingObject?.books[0].rating;
   const updatedBookId :any = oldUserRatingObject?.books[0].bookId;
 
-  console.log(updatedBookId);
-
   // update the rating for the book
   const bookUpdated = await updateBookRating(updatedBookId, oldUserRating, rating);
-  console.log(bookUpdated);
 
-  return res.status(200).json(oldUserRating);
+  return res.status(200).json(bookUpdated);
 };
 
 const changeImgFunc = async (req: Request, res: Response) => {
