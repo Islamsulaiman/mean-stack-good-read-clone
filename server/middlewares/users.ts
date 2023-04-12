@@ -33,7 +33,8 @@ const createUser = async (req: Request, res: Response) : Promise<Response> => {
 
   if (!user) throw new Error('Error: user is not created');
 
-  return res.status(200).json('success');
+  // return res.status(200).json(user);
+  return res.status(200);
 };
 
 const getAllUsersFunc = async (req: Request, res: Response): Promise<Response> => {
@@ -54,7 +55,7 @@ const deleteUserFunc = async (req: Request, res: Response) => {
   const { id } = req.params;
   const student = await userCont.deleteUser(id);
 
-  return res.status(200).json({ 'User deleted': student });
+  return res.status(200);
 };
 
 const updateUserFunc = async (req: Request, res: Response) => {
@@ -81,9 +82,9 @@ const updateUserFunc = async (req: Request, res: Response) => {
     throw new Error('Please enter data to update!');
   }
 
-  const student = await userCont.updateUser(id, updateObject);
+  const newStudent = await userCont.updateUser(id, updateObject);
 
-  return res.status(200).json(student);
+  return res.status(200).json(newStudent);
 };
 
 const addBookToUserFunc = async (req: Request, res: Response) : Promise<Response> => {
