@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth.guard';
 import { AuthorsComponent } from './components/authors/authors.component';
 import { SingleBookComponent } from './components/single-book/single-book.component';
+import { BooksComponent } from './components/books/books.component';
 
 const routes: Routes = [
 
@@ -13,7 +14,9 @@ const routes: Routes = [
   { path: 'register', component: RegistrationComponent},
   { path: 'login', component: LoginComponent },
   { path: 'authors',  component: AuthorsComponent},
-  { path: 'books',  component: SingleBookComponent},
+  { path: 'books/book',  component: SingleBookComponent},
+  { path: 'books',  component: BooksComponent},
+  
 
   
 ];
