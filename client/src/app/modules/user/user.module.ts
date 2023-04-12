@@ -8,7 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { AuthorComponent } from './components/author/author.component';
-
+import { SingleBookComponent } from './components/single-book/single-book.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import { AuthorComponent } from './components/author/author.component';
     RegistrationComponent,
     LoginComponent,
     AuthorComponent,
+    SingleBookComponent,
   ],
   imports: [
     CommonModule,
