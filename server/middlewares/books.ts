@@ -103,6 +103,9 @@ const bookAvarageRatingFunc = async (req:Request, res:Response) => {
 
   // the avarage rating
   const avarageRating = (totalStarsSum / totalVoters).toFixed(1);
+
+  const popularityRating = "avrage rating * number of shelv's";
+
   return res.status(200).json(avarageRating);
 };
 
