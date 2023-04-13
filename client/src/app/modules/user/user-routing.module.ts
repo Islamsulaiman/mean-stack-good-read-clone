@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'register', component: RegistrationComponent},
   { path: 'login', component: LoginComponent },
   { path: 'authors',  component: AuthorsComponent},
-  { path: 'books/book',  component: SingleBookComponent},
+  { path: 'singleBook/:bookId',  component: SingleBookComponent},
   { path: 'books',  component: BooksComponent},
   
 
