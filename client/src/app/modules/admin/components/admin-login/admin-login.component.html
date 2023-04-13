@@ -1,1 +1,38 @@
-<p>admin-login works!</p>
+<section class="vh-100" style="background-color: beige;">
+  <div class="container h-10 d-flex justify-content-center">
+    <div class="jumbotron my-auto">
+      <h1 class="display-1">Welcome To Admin Panel</h1>
+    </div>
+  </div>
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+          class="img-fluid" alt="Phone image">
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm(loginForm)">
+          <div>
+            <label for="UserName">UserName</label>
+            <input formControlName="UserName" class="form-control" type="text" id="UserName">
+            <div *ngIf="loginForm.get('UserName')?.errors !== null && loginForm.get('UserName')?.touched" class="alert my-2 alert-danger">
+              <p *ngIf="loginForm.get('UserName')?.errors?.['required']" >UserName is required </p>
+              <p *ngIf="loginForm.get('UserName')?.errors?.['minlength']">UserName is minLength 3</p>
+              <p *ngIf="loginForm.get('UserName')?.errors?.['maxlength']" >UserName is maxLength 10</p>
+            </div>
+          </div>
+          <div>
+            <label for="password">password</label>
+            <input formControlName="password" class="form-control" type="password" id="password">
+            <div *ngIf="loginForm.get('password')?.errors !== null && loginForm.get('password')?.touched" class="alert my-2 alert-danger">
+              <p *ngIf="loginForm.get('password')?.errors?.['required']" style="color: red;" >password is required </p>
+            </div>
+          </div>
+
+          <!-- Submit button -->
+          <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

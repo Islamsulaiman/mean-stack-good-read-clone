@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Admin } from '../../interfaces/admin';
+import { FormControl , FormGroup , Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-login',
@@ -6,5 +10,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-login.component.css']
 })
 export class AdminLoginComponent {
+
+Admin : Admin | undefined;
+loginForm = new FormGroup({
+  UserName : new FormControl(null,[
+    Validators.required , Validators.minLength(3), Validators.maxLength(10)
+  ]),
+  password : new FormControl(null,[
+    Validators.required
+  ]),
+
+})
+constructor(private _router: Router){}
+
+
+submitLoginForm(loginForm:FormGroup){
+  this._router.navigate(['/admin/profile'])
+}
 
 }

@@ -9,6 +9,7 @@ import { AdminBooksComponent } from './components/admin-books/admin-books.compon
 import { AdminCategoriesComponent } from './components/admin-categories/admin-categories.component';
 import { AdminAuthorsComponent } from './components/admin-authors/admin-authors.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
   ]
 })
 export class AdminModule { }
