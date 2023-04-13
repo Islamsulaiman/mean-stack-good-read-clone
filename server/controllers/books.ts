@@ -24,7 +24,8 @@ const getAll = async (skip:number, limit:number) => {
 };
 // 3.getOneBook
 const getOne = async (data:string) => {
-  const book = await Book.findById({ _id: data });
+  const book = await Book.findById({ _id: data }).populate('category')
+    .populate('author');
   return book;
 };
 // 4.updateBook

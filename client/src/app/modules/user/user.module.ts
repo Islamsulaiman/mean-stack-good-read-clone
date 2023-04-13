@@ -11,6 +11,9 @@ import { AuthorComponent } from './components/author/author.component';
 import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 import { SingleBookComponent } from './components/single-book/single-book.component';
 import { BooksComponent } from './components/books/books.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { ShelveComponent } from './components/shelve/shelve.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { BooksComponent } from './components/books/books.component';
     AuthorDetailsComponent,
     AuthorsComponent,
     SingleBookComponent,
-    BooksComponent
+    BooksComponent,
+    NavbarComponent,
+    ShelveComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +35,8 @@ import { BooksComponent } from './components/books/books.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-  ]
+    
+  ],
+
 })
 export class UserModule { }

@@ -13,6 +13,13 @@ export class BooksService {
     return this._HttpClient.get(`http://localhost:3000/book?skip=${skip}&limit=${limit}`, options)
   }
 
+  getSingleBook(bookId:string, options:any): Observable<any>{
+    return this._HttpClient.get(`http://localhost:3000/book/${bookId}`, options)
+  }
+
+  getBookReviews(bookId:string, skip:number, limit:number, options:any): Observable<any>{
+    return this._HttpClient.get(`http://localhost:3000/book/${bookId}/review?skip=${skip}&limit=${limit}`, options)
+  }
 
 
 }

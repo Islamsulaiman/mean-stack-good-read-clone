@@ -17,13 +17,17 @@
             <a [routerLink] = '["/singleBook", book._id ]'>
                 <div class="team-boxes">
                     <div class="team-thumb overlay-image view-overlay">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
+                        <!-- <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Book Image"> -->
+                        <img [src]="book.image" alt="Book Image">
                         <div class="clear">
                         </div>
                         <div class="mask team_quote">
                             <div class="port-zoom-link">
                                 <p>
-                                    <span class="accentcolor" style="font-weight:700; font-size:x-large;">By : {{book.author[0].fullName}}</span>
+                                    <span class="accentcolor" style="font-weight:700; font-size:x-large;"><span style="font-weight: bold;">By: </span> <span *ngFor="let oneBook of book.author let isLast=last">
+                                        {{oneBook.fullName}} <span *ngIf="!isLast">,</span> 
+                                    </span>
+                                    </span>
                                 </p>
                             </div>
                         </div>
