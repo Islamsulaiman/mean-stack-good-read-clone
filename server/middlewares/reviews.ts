@@ -4,17 +4,19 @@ import {
 } from '../controllers/reviews';
 
 const addReview = async (req: Request, res: Response) => {
-  const { content } = req.body;
+  const { content, userId } = req.body;
   const { id } = req.params;
-  const userId = '642ca9cd340e07f65ed05a07'; // we will get it from front
   const review = await create(id, { content, userId });
   return res.status(200).json({ message: 'Review is created successfully', review });
 };
 
 const getReviews = async (req: Request, res: Response) => {
-  const { limit, page } = req.query;
+  const skip = parseInt(req.query.skip as string, 10);
+  const limit = parseInt(req.query.limit as string, 10);
+
   const { id } = req.params;
-  const reviews = await get(id, limit, page);
+
+  const reviews = await get(id, skip, limit);
   return res.status(200).json(reviews);
 };
 

@@ -14,10 +14,10 @@ const create = (id: any, data: Reviewdata) => Review.create({
 });
 
 // Get reviews for specific book
-const get = (id: any, limit:any, page:any) => Review.paginate({ bookId: id }, {
-  limit: limit > 0 && limit < 10 ? limit : 5,
-  page: page || 1,
-});
+const get = (id: string, skip:number, limit:number) => {
+  const reviews = Review.find({ bookId: id }).skip(skip).limit(limit).populate('userId');
+  return reviews;
+};
 
 // edit review
 const edit = (id: any, content: string, userId: any) => Review.findOneAndUpdate(
