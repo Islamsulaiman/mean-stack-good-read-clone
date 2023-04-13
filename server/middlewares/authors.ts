@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import {
-  create, get, edit, deleteAuthor,
+  create, get, getById, edit, deleteAuthor, addBook,
 } from '../controllers/authors';
 import { cloudi } from './imagesUpload';
 // import { authors } from '../routes/authors';
@@ -31,10 +31,18 @@ const createAuthor = async (req: Request, res: Response) => {
 };
 
 const getAuthors = async (req: Request, res: Response) => {
-  const author = await get();
+  const page = parseInt(req.query.page as string);
+  const limit = parseInt(req.query.limit as string);
+  const author = await get(limit, page);
   return res.status(200).json(author);
 };
 
+const getAuthorById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const getAuthor = await getById(id);
+  if (!getAuthor) throw new Error("User doens't exist");
+  return res.status(200).json(getAuthor);
+}
 const editAuthorById = async (req: Request, res: Response) => {
   const {
     fullName, DOB,
@@ -72,9 +80,26 @@ const deleteAuthorById = async (req: Request, res: Response) => {
   if (!deletedAuthor) throw new Error("User doens't exist");
   return res.status(200).json('Author has been deleted successfully');
 };
+
+
+
+
+const addBookToAuthor = async (req: Request, res: Response) : Promise<Response> => {
+  const { Books } = req.body;
+  const { id } = req.params;
+
+  const book = await addBook(id, Books);
+
+  return res.status(200).json(book);
+};
+
+
+
 export {
   createAuthor,
   getAuthors,
+  getAuthorById,
   editAuthorById,
   deleteAuthorById,
+  addBookToAuthor,
 };

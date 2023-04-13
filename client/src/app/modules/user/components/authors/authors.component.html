@@ -10,122 +10,21 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container authors">
     <div class="row">
-        <div class="col-md-3 col-sm-4 col-xs-12">
-            <div class="team-boxes">
-                <div class="team-thumb overlay-image view-overlay">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
-                    <div class="clear">
-                    </div>
-                    <div class="mask team_quote">
-                        <div class="port-zoom-link">
-                            <p>
-                                <span class="accentcolor" style="font-weight:700;">Number Of Books</span>
-                                <br><br>
-                                <i><span>150</span> Books</i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-info">
-                    <h2>Kathleen Walsh</h2>
-                    <p>
-                        Date Of Birth: 1990/02/15 
-                    </p>
-                </div>
-                <div class="separator">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-4 col-xs-12">
-            <div class="team-boxes">
-                <div class="team-thumb overlay-image view-overlay">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
-                    <div class="clear">
-                    </div>
-                    <div class="mask team_quote">
-                        <div class="port-zoom-link">
-                            <p>
-                                <span class="accentcolor" style="font-weight:700;">Number Of Books</span>
-                                <br><br>
-                                <i><span>150</span> Books</i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-info">
-                    <h2>Kathleen Walsh</h2>
-                    <p>
-                        Date Of Birth: 1990/02/15 
-                    </p>
-                </div>
-                <div class="separator">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-4 col-xs-12">
-            <div class="team-boxes">
-                <div class="team-thumb overlay-image view-overlay">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
-                    <div class="clear">
-                    </div>
-                    <div class="mask team_quote">
-                        <div class="port-zoom-link">
-                            <p>
-                                <span class="accentcolor" style="font-weight:700;">Number Of Books</span>
-                                <br><br>
-                                <i><span>150</span> Books</i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-info">
-                    <h2>Kathleen Walsh</h2>
-                    <p>
-                        Date Of Birth: 1990/02/15 
-                    </p>
-                </div>
-                <div class="separator">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-4 col-xs-12">
-            <div class="team-boxes">
-                <div class="team-thumb overlay-image view-overlay">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
-                    <div class="clear">
-                    </div>
-                    <div class="mask team_quote">
-                        <div class="port-zoom-link">
-                            <p>
-                                <span class="accentcolor" style="font-weight:700;">Number Of Books</span>
-                                <br><br>
-                                <i><span>150</span> Books</i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-info">
-                    <h2>Kathleen Walsh</h2>
-                    <p>
-                        Date Of Birth: 1990/02/15 
-                    </p>
-                </div>
-                <div class="separator">
-                </div>
-            </div>
-        </div>
+        <app-author class="col-md-3 col-sm-4 col-xs-12" *ngFor="let authorFromArray of authors" [author]="authorFromArray">
+        </app-author>
+    </div>
 
     <!-- Pagination -->
-    <nav aria-label="Page navigation example">
+      <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" tabindex="-1" aria-disabled="true" (click)="previousPage()">Previous</a>
           </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
           <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+            <a class="page-link">{{ currentPage }} of {{ totalPages }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="nextPage()">Next</a>
           </li>
         </ul>
       </nav>

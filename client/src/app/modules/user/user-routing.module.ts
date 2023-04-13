@@ -5,6 +5,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth.guard';
 import { AuthorsComponent } from './components/authors/authors.component';
+import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 import { SingleBookComponent } from './components/single-book/single-book.component';
 import { BooksComponent } from './components/books/books.component';
 
@@ -15,10 +16,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'authors',  component: AuthorsComponent},
   { path: 'singleBook/:bookId',  component: SingleBookComponent},
+  { path: 'author/:id',  component: AuthorDetailsComponent},
+  { path: 'books/book',  component: SingleBookComponent},
   { path: 'books',  component: BooksComponent},
-  
-
-  
 ];
 
 @NgModule({
