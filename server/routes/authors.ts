@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { errorHandling } from '../middlewares/errorHandling';
 import * as validation from '../middlewares/validateInput';
 import {
-  createAuthor, getAuthors, editAuthorById, deleteAuthorById,
+  createAuthor, getAuthors, editAuthorById, deleteAuthorById, getAuthorById, addBookToAuthor
 } from '../middlewares/authors';
 import { authorUpload } from '../middlewares/imagesUpload';
 // authorUpload.single('image')
@@ -20,6 +20,11 @@ router.post(
 
 // Get authors
 router.get('/', errorHandling(getAuthors));
+router.get('/:id', errorHandling(getAuthorById));
+// router.get('/:id/books', errorHandling(getAuthBooks));
+
+// add book to author with it's bookId
+router.patch('/:id', errorHandling(addBookToAuthor));
 
 // Modify author
 router.patch(
