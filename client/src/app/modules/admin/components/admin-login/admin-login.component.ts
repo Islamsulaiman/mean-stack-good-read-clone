@@ -24,6 +24,7 @@ loginForm = new FormGroup({
 constructor(private _router: Router){}
 
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 submitLoginForm(loginForm:FormGroup){
   this._router.navigate(['/admin/profile'])
 }

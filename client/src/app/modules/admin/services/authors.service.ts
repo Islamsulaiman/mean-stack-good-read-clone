@@ -17,10 +17,11 @@ export class AuthorsService {
   }
 
   //get Authors
+  limit = 10
+  currentPage = 1
   getAuthors():Observable<any> {
-    return this._HttpClient.get(this.URL);
+    return this._HttpClient.get(`${this.URL}/?page=${this.currentPage}&limit=${this.limit}`);
   }
-
   //get Author By Id
   getAuthorById(id:number):Observable<any> {
     return this._HttpClient.get(`${this.URL}/${id}`);
