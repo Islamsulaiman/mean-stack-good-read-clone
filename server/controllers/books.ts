@@ -16,11 +16,10 @@ type UpdatedBook = {
 // 1.createBook
 const create = async (data:NewBook) => Book.create(data);
 // 2.get All books
-const getAll = async (limit:any, page:any) => {
-  const books = await Book.paginate({}, {
-    limit: limit > 0 && limit < 10 ? limit : 5,
-    page: page || 1,
-  });
+const getAll = async (skip:any, limit:any) => {
+  const books = await Book.find({}).skip(skip).limit(limit).populate('category')
+    .populate('author');
+
   return books;
 };
 // 3.getOneBook

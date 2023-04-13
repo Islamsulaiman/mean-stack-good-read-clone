@@ -30,9 +30,13 @@ export class RegistrationComponent {
 
 
 subbmitRegisterForm(registerForm:FormGroup){
-  this._AuthService.register(registerForm.value).subscribe((res)=>{
-    console.log(res.status)
-    if(res === "success"){
+  this._AuthService.register(registerForm.value, {observe: 'response'}).subscribe((res)=>{
+
+    console.log(res)
+    console.log(res.body)
+
+     //now we can verify the response success using the status not a massage, so no beed for success massage
+    if(res.status === 200){  
       this._Router.navigate(['/login'])
 
     }else{ 

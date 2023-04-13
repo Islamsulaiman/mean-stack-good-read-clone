@@ -2,7 +2,7 @@
 <div class="w-75 m-auto py-5">
 
      <div *ngIf='error' class="alert alert-danger">
-        <p>{{error}}</p>
+        <p>{{error | json}}</p>
      </div>
 
     <form [formGroup]='registerForm' (ngSubmit)="subbmitRegisterForm(registerForm)">
