@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthorsService } from '../../services/authors.service';
 
 @Component({
@@ -6,45 +6,41 @@ import { AuthorsService } from '../../services/authors.service';
   templateUrl: './authors.component.html',
   styleUrls: ['./authors.component.css']
 })
-export class AuthorsComponent {
+export class AuthorsComponent implements OnInit {
   authors: any;
-  totalPages  = 1
   currentPage = 1
+  totalPages = 1;
 
-  constructor(private _authors: AuthorsService) {
-    this.fetchData();
+  constructor(private _author: AuthorsService) {
+
+    console.log(_author.currentPage);
+    
   }
 
-  fetchData(){
-    this._authors.getAuthors().subscribe((res) =>{
-      this.authors = res.docs
-      this.totalPages = res.totalPages;  
-      this._authors.currentPage = res.page; 
-      this.currentPage = res.page;
+  ngOnInit() {
+    this.loadAuthors();
+  }
+
+  loadAuthors() {
+    this._author.getAuthors().subscribe((data) => {
+      console.log(data);
+      this.authors = data.authors;
+      this.totalPages = data.totalPages;
+      this.currentPage = this._author.currentPage;
     });
   }
-  
+
+  previousPage() {
+    if (this._author.currentPage > 1) {
+      this._author.currentPage--;
+      this.loadAuthors();
+    }
+  }
+
   nextPage() {
-    if (this._authors.currentPage < this.totalPages) {
-      this._authors.currentPage++;
-      this.fetchData();
+    if (this._author.currentPage < this.totalPages) {
+      this._author.currentPage++;
+      this.loadAuthors();
     }
-  }
-
-  prevPage() {
-    if (this._authors.currentPage > 1) {
-      this._authors.currentPage--;
-      this.fetchData();
-    }
-  }
-
-  get totalPagesArray() {
-    return Array(this.totalPages).fill(0).map((x, i) => i + 1);
-  }
-
-
-  goToPage(page: number) {
-    this._authors.currentPage = page;
-    this.fetchData();
   }
 }

@@ -19,16 +19,27 @@ type EditAuthor = {
 const create = (data: CreateAuthor) => Author.create(data);
 
 // Get authors
-const get = async (limit:any, page:any) => {
-  const authors = await Author.paginate({}, {
-    limit: limit > 0 && limit < 10 ? limit : 5,
-    page: page || 1,
-  });
-  return authors;
+const get = async (limit: number, page: number) => {
+  const perPage = limit > 0 && limit < 10 ? limit : 5;
+  const pageNumber = page || 1;
+  const skip = (pageNumber - 1) * perPage;
+
+  const totalAuthors = await Author.countDocuments({});
+  const totalPages = Math.ceil(totalAuthors / perPage);
+
+  const authors = await Author.find({})
+    .skip(skip)
+    .limit(perPage)
+    .populate('Books')
+
+  return {
+    authors,
+    totalPages
+  }
 };
 
 //Get author by id
-const getById = (id: any) => Author.findById(id);
+const getById = (id: any) => Author.findById(id).populate('Books');;
 
 
 // edit author by id
@@ -39,9 +50,9 @@ const edit = (id: any, data: EditAuthor) => {
 
 // Add book to author
 // eslint-disable-next-line max-len, max-len
-const addBook = (id: string, bookId: string) => {
-  const bookObjectId = new mongoose.Types.ObjectId(bookId);
-  return Author.updateOne({ _id: id }, { $push: { bookId: bookObjectId } });
+const addBook = (id: string, Books: string) => {
+  const bookObjectId = new mongoose.Types.ObjectId(Books);
+  return Author.updateOne({ _id: id }, { $push: { Books: bookObjectId } });
 }
 
 

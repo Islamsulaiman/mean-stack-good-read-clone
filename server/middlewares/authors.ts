@@ -31,7 +31,8 @@ const createAuthor = async (req: Request, res: Response) => {
 };
 
 const getAuthors = async (req: Request, res: Response) => {
-  const { limit, page } = req.query;
+  const page = parseInt(req.query.page as string);
+  const limit = parseInt(req.query.limit as string);
   const author = await get(limit, page);
   return res.status(200).json(author);
 };
@@ -84,10 +85,10 @@ const deleteAuthorById = async (req: Request, res: Response) => {
 
 
 const addBookToAuthor = async (req: Request, res: Response) : Promise<Response> => {
-  const { bookId } = req.body;
+  const { Books } = req.body;
   const { id } = req.params;
 
-  const book = await addBook(id, bookId);
+  const book = await addBook(id, Books);
 
   return res.status(200).json(book);
 };

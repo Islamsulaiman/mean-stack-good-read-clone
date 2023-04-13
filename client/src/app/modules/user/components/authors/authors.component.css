@@ -83,3 +83,16 @@ header .overlay p {
     letter-spacing: 0.14rem;
     font-weight: bolder;
 }
+
+
+nav .pagination li a{
+    color: #E64C3C
+}
+
+nav .pagination li {
+    color: #E64C3C
+}
+
+nav .pagination .disabled a{
+    color: #999;
+}
