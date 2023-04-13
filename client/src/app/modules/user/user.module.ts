@@ -11,6 +11,7 @@ import { AuthorComponent } from './components/author/author.component';
 import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 import { SingleBookComponent } from './components/single-book/single-book.component';
 import { BooksComponent } from './components/books/books.component';
+import { ShelveComponent } from './components/shelve/shelve.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BooksComponent } from './components/books/books.component';
     AuthorDetailsComponent,
     AuthorsComponent,
     SingleBookComponent,
-    BooksComponent
+    BooksComponent,
+    ShelveComponent
   ],
   imports: [
     CommonModule,
