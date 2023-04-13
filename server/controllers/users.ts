@@ -54,10 +54,10 @@ const adduserRating = (id: string, bookId: string, rating: number) => {
   return user;
 };
 
-
 // 9. update image
-const UpdteUserImg = (id: string, image: string) => User.findOneAndUpdate({ _id: id }, {image});
+const UpdteUserImg = (id: string, image: string) => User.findOneAndUpdate({ _id: id }, { image });
 
 export {
-  create, getAllUsers, getOneUser, deleteUser, updateUser, getUser, addBookToUser, adduserRating, UpdteUserImg
+  create, getAllUsers, getOneUser, deleteUser, updateUser, getUser,
+  addBookToUser, adduserRating, UpdteUserImg,
 };

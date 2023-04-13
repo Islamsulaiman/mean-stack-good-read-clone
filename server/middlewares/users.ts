@@ -23,7 +23,6 @@ const createUser = async (req: Request, res: Response) : Promise<Response> => {
   } = req.body;
   let { password } = req.body;
 
-  // password = bcrypt.hashSync(password, 10);
   password = hashPassword(password);
 
   // Avatar
@@ -34,7 +33,8 @@ const createUser = async (req: Request, res: Response) : Promise<Response> => {
 
   if (!user) throw new Error('Error: user is not created');
 
-  return res.status(200).json('success');
+  // return res.status(200).json(user);
+  return res.status(200);
 };
 
 const getAllUsersFunc = async (req: Request, res: Response): Promise<Response> => {
@@ -44,9 +44,7 @@ const getAllUsersFunc = async (req: Request, res: Response): Promise<Response> =
 };
 
 const getOneUserFunc = async (req: Request, res: Response): Promise<Response> => {
-  // const { id } = req.params;
-
-  const id = '642f615500d8ccde87da9688';
+  const { id } = req.params;
 
   const oneUser = await userCont.getOneUser(id);
 
@@ -57,7 +55,7 @@ const deleteUserFunc = async (req: Request, res: Response) => {
   const { id } = req.params;
   const student = await userCont.deleteUser(id);
 
-  return res.status(200).json({ 'User deleted': student });
+  return res.status(200);
 };
 
 const updateUserFunc = async (req: Request, res: Response) => {
@@ -84,9 +82,9 @@ const updateUserFunc = async (req: Request, res: Response) => {
     throw new Error('Please enter data to update!');
   }
 
-  const student = await userCont.updateUser(id, updateObject);
+  const newStudent = await userCont.updateUser(id, updateObject);
 
-  return res.status(200).json(student);
+  return res.status(200).json(newStudent);
 };
 
 const addBookToUserFunc = async (req: Request, res: Response) : Promise<Response> => {
@@ -108,13 +106,10 @@ const adduserRatingFunc = async (req: Request, res: Response) : Promise<Response
   const oldUserRating : any = oldUserRatingObject?.books[0].rating;
   const updatedBookId :any = oldUserRatingObject?.books[0].bookId;
 
-  console.log(updatedBookId);
-
   // update the rating for the book
   const bookUpdated = await updateBookRating(updatedBookId, oldUserRating, rating);
-  console.log(bookUpdated);
 
-  return res.status(200).json(oldUserRating);
+  return res.status(200).json(bookUpdated);
 };
 
 const changeImgFunc = async (req: Request, res: Response) => {

@@ -30,7 +30,6 @@ export const bookSchema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
       },
-
     ],
 
     author: [{

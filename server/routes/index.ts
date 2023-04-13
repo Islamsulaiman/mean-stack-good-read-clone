@@ -7,6 +7,7 @@ import { AdminRoute } from './admins';
 import { userLogin, adminLogin } from '../middlewares/login';
 import { errorHandling } from '../middlewares/errorHandling';
 import { userAuth } from '../middlewares/authuntication';
+
 const router = Router();
 
 router.use('/login', errorHandling(userLogin));
@@ -16,8 +17,8 @@ router.use('/admin~@~Login', adminLogin);
 router.use('/category', categoryRoute);
 router.use('/book', bookRouter);
 
-
-router.use('/users', errorHandling(userAuth), userRoute);
+// router.use('/users', errorHandling(userAuth), userRoute);
+router.use('/users', userRoute);
 
 // 2. author route
 router.use('/authors', authors);

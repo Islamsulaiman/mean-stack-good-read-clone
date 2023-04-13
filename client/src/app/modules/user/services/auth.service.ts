@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
 import { Router } from '@angular/router';
 
+
 @Injectable({
   providedIn: 'any'
 })
@@ -18,8 +19,8 @@ export class AuthService {
     if(!token) return this.currentUser.next(null);
     this.currentUser.next(jwtDecode(token));
   }
-  register(formData: any): Observable<any>{
-    return this._HttpClient.post("http://localhost:3000/users", formData)
+  register(formData: any, options: any): Observable<any>{
+    return this._HttpClient.post("http://localhost:3000/users", formData, options)
   }
 
   login(formData: any): Observable<any>{

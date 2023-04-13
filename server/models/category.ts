@@ -3,7 +3,6 @@ import mongoose, {
   Schema,
 } from 'mongoose';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import mongoosePaginate from 'mongoose-paginate-v2';
 
 export const categorySchema = new Schema(
   {
@@ -19,10 +18,7 @@ export const categorySchema = new Schema(
     timestamps: true,
   },
 );
-categorySchema.plugin(mongoosePaginate);
-interface CategoryType extends mongoose.Document {}
-const Category = mongoose.model<
-CategoryType,
-mongoose.PaginateModel<CategoryType>
->('categories', categorySchema, 'categories');
+
+const Category = mongoose.model('Category', categorySchema);
+
 export default Category;
