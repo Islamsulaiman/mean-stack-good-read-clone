@@ -43,8 +43,11 @@ const createBook = async (req:Request, res:Response) => {
 };
 // 2.getAllbooks
 const getAllBooks = async (req:Request, res:Response) => {
-  const { limit, page } = req.query;
-  const book = await getAll(limit, page);
+  const skip = parseInt(req.query.skip as string, 10);
+  const limit = parseInt(req.query.limit as string, 10);
+
+  const book = await getAll(skip, limit);
+
   return res.status(200).json({ message: 'Books', book });
 };
 // 3.getOneBook
