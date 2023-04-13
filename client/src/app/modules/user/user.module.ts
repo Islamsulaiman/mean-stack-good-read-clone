@@ -7,7 +7,9 @@ import { RegistrationComponent } from './components/registration/registration.co
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
+import { AuthorsComponent } from './components/authors/authors.component';
 import { AuthorComponent } from './components/author/author.component';
+import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 
 
 @NgModule({
@@ -16,6 +18,8 @@ import { AuthorComponent } from './components/author/author.component';
     RegistrationComponent,
     LoginComponent,
     AuthorComponent,
+    AuthorDetailsComponent,
+    AuthorsComponent
   ],
   imports: [
     CommonModule,
