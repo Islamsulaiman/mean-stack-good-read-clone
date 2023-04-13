@@ -61,6 +61,12 @@ const userSchema = new Schema(
   },
   {
     timestamps: true,
+    toJSON: {
+      transform(doc, ret) {
+        // eslint-disable-next-line no-param-reassign
+        delete ret.password;
+      },
+    },
   },
 );
 
