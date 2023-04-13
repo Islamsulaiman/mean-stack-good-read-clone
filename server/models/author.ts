@@ -2,6 +2,7 @@
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const authorSchema = new Schema(
   {
@@ -28,6 +29,12 @@ const authorSchema = new Schema(
 
 );
 
-const Author = mongoose.model('Author', authorSchema);
+
+authorSchema.plugin(mongoosePaginate);
+interface AuthorType extends mongoose.Document {}
+const Author = mongoose.model<
+AuthorType,
+mongoose.PaginateModel<AuthorType>
+>('authors', authorSchema, 'authors');
 
 export default Author;
