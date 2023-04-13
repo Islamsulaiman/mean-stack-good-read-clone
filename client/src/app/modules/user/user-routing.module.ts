@@ -8,6 +8,7 @@ import { AuthorsComponent } from './components/authors/authors.component';
 import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 import { SingleBookComponent } from './components/single-book/single-book.component';
 import { BooksComponent } from './components/books/books.component';
+import { ShelveComponent } from './components/shelve/shelve.component';
 
 const routes: Routes = [
 
@@ -18,8 +19,8 @@ const routes: Routes = [
     { path: 'author/:id',  component: AuthorDetailsComponent},
     { path: 'books/book',  component: SingleBookComponent},
     { path: 'books',  component: BooksComponent},
+    { path: 'shelve',  component: ShelveComponent},
   ] },
- 
 ];
 
 @NgModule({

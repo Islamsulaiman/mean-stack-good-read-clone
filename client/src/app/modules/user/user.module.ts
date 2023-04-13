@@ -13,6 +13,8 @@ import { SingleBookComponent } from './components/single-book/single-book.compon
 import { BooksComponent } from './components/books/books.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { ShelveComponent } from './components/shelve/shelve.component';
+
 @NgModule({
   declarations: [
     UserComponent,
@@ -24,6 +26,7 @@ import { BrowserModule } from '@angular/platform-browser';
     SingleBookComponent,
     BooksComponent,
     NavbarComponent,
+    ShelveComponent,
   ],
   imports: [
     CommonModule,

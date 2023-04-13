@@ -16,7 +16,7 @@ type UpdatedBook = {
 // 1.createBook
 const create = async (data:NewBook) => Book.create(data);
 // 2.get All books
-const getAll = async (skip:any, limit:any) => {
+const getAll = async (skip:number, limit:number) => {
   const books = await Book.find({}).skip(skip).limit(limit).populate('category')
     .populate('author');
 
@@ -24,7 +24,8 @@ const getAll = async (skip:any, limit:any) => {
 };
 // 3.getOneBook
 const getOne = async (data:string) => {
-  const book = await Book.findById({ _id: data });
+  const book = await Book.findById({ _id: data }).populate('category')
+    .populate('author');
   return book;
 };
 // 4.updateBook

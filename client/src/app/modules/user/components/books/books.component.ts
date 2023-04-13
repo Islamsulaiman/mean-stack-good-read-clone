@@ -19,6 +19,8 @@ export class BooksComponent {
     //assume that every page have only 10 books, th 1st page from 0 to 10
     this._BooksService.getAllBooks(this.skip, this.limit, {observe: 'response'}).subscribe((res)=>{
 
+      console.log(res.body.book)
+      
       if(res.status === 200){
         this.books = res.body.book
       }else{

@@ -46,7 +46,8 @@ router.delete('/:id', errorHandling(deleteBook));
 /* Reviews routes */
 
 // 1. add review
-router.post('/:id/review', errorHandling(userAuth), errorHandling(addReview));
+// router.post('/:id/review', errorHandling(userAuth), errorHandling(addReview));
+router.post('/:id/review', errorHandling(addReview));
 
 // 2. get reviews
 router.get('/:id/review', errorHandling(getReviews));
