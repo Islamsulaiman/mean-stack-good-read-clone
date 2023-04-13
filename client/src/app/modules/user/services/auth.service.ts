@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   currentUser = new BehaviorSubject(null);
+  currentUserId: any;
+  URL = 'http://localhost:3000/users';
 
   constructor(private _HttpClient:HttpClient,private _router: Router) {}
 
@@ -18,9 +20,14 @@ export class AuthService {
     const token: any = localStorage.getItem('token')
     if(!token) return this.currentUser.next(null);
     this.currentUser.next(jwtDecode(token));
+  
+    if(this.currentUser)
+    this.currentUserId = this.currentUser.getValue()
+    this.currentUserId = this.currentUserId.id;
   }
+  
   register(formData: any, options: any): Observable<any>{
-    return this._HttpClient.post("http://localhost:3000/users", formData, options)
+    return this._HttpClient.post(`${this.URL}`, formData, options)
   }
 
   login(formData: any): Observable<any>{
@@ -28,10 +35,16 @@ export class AuthService {
       map((response: any) => {
         // Store the token in local storage
         localStorage.setItem('token', response.token);
-  
         // Return the response to the subscriber
         return response;
       })
     )
   }
+  //get Author By Id
+  getUserById(id:number):Observable<any> {
+      return this._HttpClient.get(`${this.URL}/${id}`);
+  
+    }
+
+
 }

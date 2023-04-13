@@ -12,14 +12,15 @@ import { ShelveComponent } from './components/shelve/shelve.component';
 
 const routes: Routes = [
 
-  { path: '', component: UserComponent },
-  { path: 'register', component: RegistrationComponent},
-  { path: 'login', component: LoginComponent },
-  { path: 'authors',  component: AuthorsComponent},
-  { path: 'singleBook/:bookId',  component: SingleBookComponent},
-  { path: 'author/:id',  component: AuthorDetailsComponent},
-  { path: 'books',  component: BooksComponent},
-  { path: 'shelve',  component: ShelveComponent},
+  { path: '', component: UserComponent, children: [
+    { path: 'register', component: RegistrationComponent,},
+    { path: 'login', component: LoginComponent},
+    { path: 'authors',  component: AuthorsComponent},
+    { path: 'author/:id',  component: AuthorDetailsComponent},
+    { path: 'books/book',  component: SingleBookComponent},
+    { path: 'books',  component: BooksComponent},
+    { path: 'shelve',  component: ShelveComponent},
+  ] },
 ];
 
 @NgModule({

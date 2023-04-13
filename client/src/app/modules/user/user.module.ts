@@ -11,6 +11,8 @@ import { AuthorComponent } from './components/author/author.component';
 import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 import { SingleBookComponent } from './components/single-book/single-book.component';
 import { BooksComponent } from './components/books/books.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { ShelveComponent } from './components/shelve/shelve.component';
 
 @NgModule({
@@ -23,7 +25,8 @@ import { ShelveComponent } from './components/shelve/shelve.component';
     AuthorsComponent,
     SingleBookComponent,
     BooksComponent,
-    ShelveComponent
+    NavbarComponent,
+    ShelveComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +35,8 @@ import { ShelveComponent } from './components/shelve/shelve.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-  ]
+    
+  ],
+
 })
 export class UserModule { }
