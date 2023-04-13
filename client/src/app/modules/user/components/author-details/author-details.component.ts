@@ -22,6 +22,7 @@ export class AuthorDetailsComponent {
       data => {
 
         this.author = data
+        console.log(this.author)
       },
       error => {
         if (error instanceof HttpErrorResponse) {

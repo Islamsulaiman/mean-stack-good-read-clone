@@ -21,7 +21,7 @@ const authorSchema = new Schema(
       type: String,
       required: true,
     },
-    bookId: [{
+    Books: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Book',
     }],
@@ -30,11 +30,6 @@ const authorSchema = new Schema(
 );
 
 
-authorSchema.plugin(mongoosePaginate);
-interface AuthorType extends mongoose.Document {}
-const Author = mongoose.model<
-AuthorType,
-mongoose.PaginateModel<AuthorType>
->('authors', authorSchema, 'authors');
+const Author = mongoose.model('Author', authorSchema);
 
 export default Author;
