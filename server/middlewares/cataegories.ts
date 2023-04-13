@@ -21,8 +21,10 @@ const createCategory = async (req:Request, res:Response) => {
 };
 // 2.getAllCategories
 const getAllCategories = async (req:Request, res:Response) => {
-  const { limit, page } = req.query;
-  const category = await getAll(limit, page);
+  const skip = parseInt(req.query.skip as string, 10);
+  const limit = parseInt(req.query.limit as string, 10);
+
+  const category = await getAll(skip, limit);
   return res.status(200).json({ message: 'Categories : ', category });
 };
 // 3.get One Category
