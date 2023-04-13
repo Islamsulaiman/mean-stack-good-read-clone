@@ -11,13 +11,15 @@ import { BooksComponent } from './components/books/books.component';
 
 const routes: Routes = [
 
-  { path: '', component: UserComponent },
-  { path: 'register', component: RegistrationComponent},
-  { path: 'login', component: LoginComponent },
-  { path: 'authors',  component: AuthorsComponent},
-  { path: 'author/:id',  component: AuthorDetailsComponent},
-  { path: 'books/book',  component: SingleBookComponent},
-  { path: 'books',  component: BooksComponent},
+  { path: '', component: UserComponent, children: [
+    { path: 'register', component: RegistrationComponent,},
+    { path: 'login', component: LoginComponent},
+    { path: 'authors',  component: AuthorsComponent},
+    { path: 'author/:id',  component: AuthorDetailsComponent},
+    { path: 'books/book',  component: SingleBookComponent},
+    { path: 'books',  component: BooksComponent},
+  ] },
+ 
 ];
 
 @NgModule({
