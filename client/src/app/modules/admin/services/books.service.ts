@@ -25,10 +25,10 @@ export class BooksService {
   getBookByID(id:string):Observable<any> {
     return this._HttpClient.get(`${this.URL}/${id}`);
   }
-
+  id : any ;
   //Update Book
-  updateBook(id:string , data:any):Observable<any>{
-    return this._HttpClient.patch(`${this.URL}/${id}`,data);
+  updateBook( data:any):Observable<any>{
+    return this._HttpClient.patch(`${this.URL}/${this.id}`,data);
   }
 
   //Delete Book

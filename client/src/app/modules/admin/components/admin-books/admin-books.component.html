@@ -40,7 +40,7 @@
           <td>{{book.title}}</td>
           <td>{{book.description}}</td>
           <td>{{book.image}}</td>
-         
+
           <td>
             <a (click)="getCurrentId(book._id)" href="#editBookModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
             <a href="#deleteBookModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -93,7 +93,7 @@
 <div id="editBookModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form>
+      <form #myForma= "ngForm" (ngSubmit)="UpdateBook(myForma)">
         <div class="modal-header">
           <h4 class="modal-title">Edit Book</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -105,15 +105,15 @@
           </div>
           <div class="form-group">
             <label>Title</label>
-            <input type="text" class="form-control" >
+            <input name="title"  ngModel type="text" class="form-control" >
           </div>
           <div class="form-group">
             <label>Description</label>
-            <input type="email" class="form-control">
+            <input name="description" ngModel type="description" class="form-control">
           </div>
           <div class="form-group">
             <label>image</label>
-            <input type="file"  class="form-control">
+            <input (change)="onFileChange($event)" ngModel name="image" type="file"  class="form-control">
           </div>
         </div>
         <div class="modal-footer">

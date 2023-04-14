@@ -37,4 +37,5 @@ getCurrentId(id:any){
  this.categoryId = id
 }
 
+
 }
