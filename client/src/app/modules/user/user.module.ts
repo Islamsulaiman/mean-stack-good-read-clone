@@ -18,6 +18,7 @@ import { CategoriesComponent } from './components/categories/categories/categori
 import { CategoryComponent } from './components/categories/category/category.component';
 import { CategoryDetailsComponent } from './components/categories/category-details/category-details.component';
 import { HomeComponent } from './components/home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { HomeComponent } from './components/home/home.component';
     CategoryComponent,
     CategoryDetailsComponent,
     HomeComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
