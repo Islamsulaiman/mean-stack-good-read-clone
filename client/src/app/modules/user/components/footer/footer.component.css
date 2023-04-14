@@ -1,0 +1,14 @@
+footer{
+    margin-top: 3em;
+}
+
+ .footer-brand {
+    text-decoration: none;
+    color: #fff;
+	padding-left: 0;
+	font-size: 40px;
+	/* padding-right: 50px; */
+}
+.footer-brand b {
+	color: #E64C3C;		
+}

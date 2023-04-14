@@ -11,10 +11,12 @@ import { BooksComponent } from './components/books/books.component';
 import { CategoriesComponent } from './components/categories/categories/categories.component';
 import { CategoryDetailsComponent } from './components/categories/category-details/category-details.component';
 import { ShelveMainComponent } from './components/shelve-main/shelve-main.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
 
   { path: '', component: UserComponent, children: [
+    {path: '', component:HomeComponent},
     { path: 'register', component: RegistrationComponent,},
     { path: 'login', component: LoginComponent},
     { path: 'authors',  component: AuthorsComponent},
