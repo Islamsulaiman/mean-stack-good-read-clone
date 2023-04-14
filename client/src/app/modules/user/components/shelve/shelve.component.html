@@ -62,7 +62,7 @@
                                                 <label for="status"></label>
                                                 <select class="form-control" id="status" name="status">
                                                     <option value="progress" selected ><span style="font-weight:900;">Book progress</span ></option>
-                                                    <option value="read">Read</option>
+                                                    <option  value="read"> <button (click)="onElementClicked($event)" value="read">Read</button>  </option>
                                                     <option value="to-read">To Read</option>
                                                     <option value="completed">Completed</option>
                                                 </select>

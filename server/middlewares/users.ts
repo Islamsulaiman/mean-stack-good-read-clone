@@ -142,18 +142,13 @@ const updateBookStatusFunc = async (req: Request, res: Response): Promise<Respon
   const { bookId, bookStatus } = req.query;
   const { userId } = req.body;
 
-  console.log(bookId, bookStatus, userId);
-
   const states = ['read', 'to_read', 'reading'];
 
   if (!states.includes(bookStatus as string)) {
     throw new Error('invalid book state');
   }
 
-  console.log(bookId, bookStatus, userId);
-
   const progress = await userCont.updateBookStatus(userId, bookId as string, bookStatus as string);
-  console.log(progress);
   return res.status(200).json(progress);
 };
 
