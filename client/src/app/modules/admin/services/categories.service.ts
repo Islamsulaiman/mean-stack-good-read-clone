@@ -19,8 +19,8 @@ export class CategoriesService {
   }
 
   //get category
-  getCategories():Observable<any> {
-    return this._HttpClient.get(this.URL);
+  getCategories(skip:number, limit:number, options:any):Observable<any> {
+    return this._HttpClient.get(`${this.URL}/?skip=${skip}&limit=${limit}`,options);
   }
 
   //get Category By Id
