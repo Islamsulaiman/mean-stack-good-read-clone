@@ -93,7 +93,9 @@ const bookAvarageRatingFunc = async (req:Request, res:Response) => {
 
   // eslint-disable-next-line no-restricted-syntax, guard-for-in
   for (const key in book) {
-    totalVoters += book[key];
+    if (key !== '0') {
+      totalVoters += book[key];
+    }
   }
 
   // get total votes
@@ -106,6 +108,8 @@ const bookAvarageRatingFunc = async (req:Request, res:Response) => {
 
   // the avarage rating
   const avarageRating = (totalStarsSum / totalVoters).toFixed(1);
+
+  console.log(totalStarsSum, totalVoters);
 
   const popularityRating = "avrage rating * number of shelv's";
 

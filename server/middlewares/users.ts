@@ -23,6 +23,8 @@ const createUser = async (req: Request, res: Response) : Promise<Response> => {
   } = req.body;
   let { password } = req.body;
 
+  console.log(firstName, lastName, email, password, userName);
+
   password = hashPassword(password);
 
   // Avatar
@@ -33,8 +35,8 @@ const createUser = async (req: Request, res: Response) : Promise<Response> => {
 
   if (!user) throw new Error('Error: user is not created');
 
-  // return res.status(200).json(user);
-  return res.status(200);
+  return res.status(200).json(user);
+  // return res.status(200);
 };
 
 const getAllUsersFunc = async (req: Request, res: Response): Promise<Response> => {
