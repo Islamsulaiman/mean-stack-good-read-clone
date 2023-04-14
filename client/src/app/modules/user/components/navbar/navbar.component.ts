@@ -4,6 +4,17 @@ import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BooksService } from '../../services/books.service';
+
+interface Book{
+  _id:string,
+  title: string,
+  author?: any,
+  category?: any,
+  description?: string,
+  rating?: object,
+
+}
 
 @Component({
   selector: 'app-navbar',
@@ -11,13 +22,15 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent{
-
   email = ""
   password = ""
   wrongData = false
   isLogged = false;
   userImage = "";
-constructor(private _AuthService:AuthService, private _Router: Router){
+
+  sortedBooks : Book[] = [];
+  hasQuery  =false;
+constructor(private _AuthService:AuthService, private _Router: Router, private search: BooksService){
       this._AuthService.saveUser()
       if(this._AuthService.currentUser.getValue() != null){
         this.getData()
@@ -64,4 +77,27 @@ getData(){
 logOut(){
   localStorage.removeItem("token");
 }
+
+
+
+// Search method
+sendData(event: any){
+  const query = event.target.value;
+  const matchSpaces:any =query.match(/\s*/);
+  if(matchSpaces[0] === query){
+      this.sortedBooks = []
+      this.hasQuery = false
+      return;
+  }
+  this.search.searchForBooks(query.trim()).subscribe((res =>{
+      this.sortedBooks = res;
+      this.hasQuery = true
+
+  }));
+}
+
+
+
+
+
 }

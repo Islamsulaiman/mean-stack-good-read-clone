@@ -15,13 +15,24 @@
 			<a class="nav-item nav-link" [routerLink]="['/about-us']">About us</a>
         </div>
 		<form class="navbar-form form-inline">
-			<div class="input-group search-box">								
-				<input type="text" id="search" class="form-control" placeholder="Search here...">
+			<div  class="input-group search-box">								
+				<input type="text" id="search" class="form-control" placeholder="Search for a book .." (keyup)="sendData($event)">
 				<div class="input-group-append">
 					<span class="input-group-text"><i class="material-icons">&#xE8B6;</i></span>
 				</div>
+				
+			</div>
+			<div class="search-resault" *ngIf="hasQuery" >
+				<p *ngIf="sortedBooks.length < 1">Sorry, Not found</p>
+	
+				<div *ngFor="let book of sortedBooks">
+					<hr>
+					<p><a [routerLink] = '["/singleBook", book._id ]'>{{book.title}}</a></p>
+				</div>
+				
 			</div>
 		</form>
+	
 		<div *ngIf="isLogged" class="logedin action-buttons ml-auto">
 			<div class="proile-image">
 				<img width="50" height="50" [src]= "userImage">
