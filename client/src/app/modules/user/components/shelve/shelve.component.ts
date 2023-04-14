@@ -15,14 +15,14 @@ export class ShelveComponent implements OnInit  {
   response: any ;
   books :any ;
   error = ""
-  bookStatus  = ""
+  bookStatus = "full"
   userId =""
   data:data={}
 
   constructor(private _UserService:UsersService){
     this._UserService.getUserById("643890010923d775b0ea7872", {observe: 'response'}).subscribe((res)=>{
 
-      console.log(res.body)
+      console.log(res.body.books)
       if(res.status === 200){
         this.books = res.body.books
         this.userId = res.body._id
@@ -35,7 +35,16 @@ export class ShelveComponent implements OnInit  {
   }
 
   ngOnInit(): void {
-    console.log(this.books)  
+
+
+
+    this._UserService.getDataSubject().subscribe((data)=>{
+      this.bookStatus=data
+      console.log("shelve",this.bookStatus)
+      console.log(this.books)
+    })
+
+
   }
 
 
@@ -66,6 +75,8 @@ export class ShelveComponent implements OnInit  {
       console.log(res)
     })
   }
+
+
 
 
 }

@@ -143,8 +143,10 @@ const updateBookStatusFunc = async (req: Request, res: Response): Promise<Respon
   // const { userId } = req.body;
 
   console.log(bookId, bookStatus, userId);
+  console.log('status', bookStatus);
 
-  const states = ['completed', 'to_read', 'reading'];
+  const states = ['completed', 'to-read', 'read'];
+  // const states = ['completed', 'to_read', 'reading'];
 
   if (!states.includes(bookStatus as string)) {
     throw new Error('invalid book state');

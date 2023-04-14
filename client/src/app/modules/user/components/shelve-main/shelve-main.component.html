@@ -1,15 +1,28 @@
 <div class="container-fluid">
     <div class="row">
 
+        <!-- Sidebar -->
+        <div class="col-md-2">
+            <app-shelve-sidebar></app-shelve-sidebar>
+
+        </div>
 
         <!-- Bookshelf -->
-        <!-- <div class="col-md-10"> -->
-            <!-- <div class="bookshelf"> -->
-                <div class="row">
+        <div class="col-md-10">
+            <h2>My Bookshelf</h2>
+            <div class="bookshelf">
+                <!-- <div class="row"> -->
 
-                    <div *ngFor="let oneBook of books" class="col-md-2" >
 
-                        <div class="card" style="border-top-right-radius: 25px; border-top-left-radius: 25px;">
+
+
+                    <app-shelve></app-shelve>
+
+                    <!-- <div *ngFor="let oneBook of books" class="col-md-2" > -->
+
+
+
+                        <!-- <div class="card" style="border-top-right-radius: 25px; border-top-left-radius: 25px;">
                             <img class="card-img-top" [src]= oneBook.bookId.image alt="Book cover">
 
                             <div class="card-body">
@@ -23,30 +36,28 @@
                                             </span> 
                                         
                                         </p>
-                                        <!-- Rating section -->
                                         <div class="rating">
-                                            <span class="star" (click)="selectStar(1)">
+                                            <span class="star" >
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(2)">
+                                            <span class="star" >
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(3)">
+                                            <span class="star" >
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(4)">
+                                            <span class="star">
                                                 <i class="fas fa-star"></i>
                                             </span>
                                             <span class="star" (click)="selectStar(5)">
                                                 <i class="fas fa-star"></i>
                                             </span>
                                         </div>
-                                        <!-- End rating section -->
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="status"></label>
-                                            <select class="form-control" id="status" name="status" (change)="onDropdownChange(oneBook,$event)">
+                                            <select class="form-control" id="status" name="status" >
                                                 <option value="progress" selected ><span style="font-weight:900;">Book progress</span ></option>
                                                 <option  value="read" > Read </option>
                                                 <option value="to-read">To Read</option>
@@ -57,15 +68,18 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                    </div>
+                        </div> -->
 
 
 
-                </div>
-            <!-- </div> -->
-        <!-- </div> -->
+
+                    <!-- </div> -->
+
+
+
+                <!-- </div> -->
+            </div>
+        </div>
 
     </div>
 </div>

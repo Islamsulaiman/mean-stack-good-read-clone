@@ -8,9 +8,9 @@ import { AuthorsComponent } from './components/authors/authors.component';
 import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 import { SingleBookComponent } from './components/single-book/single-book.component';
 import { BooksComponent } from './components/books/books.component';
-import { ShelveComponent } from './components/shelve/shelve.component';
 import { CategoriesComponent } from './components/categories/categories/categories.component';
 import { CategoryDetailsComponent } from './components/categories/category-details/category-details.component';
+import { ShelveMainComponent } from './components/shelve-main/shelve-main.component';
 
 const routes: Routes = [
 
@@ -23,7 +23,7 @@ const routes: Routes = [
     { path: 'category/:id',  component: CategoryDetailsComponent},
     { path: 'singleBook/:bookId',  component: SingleBookComponent},
     { path: 'books',  component: BooksComponent},
-    { path: 'shelve',  component: ShelveComponent},
+    { path: 'shelve',  component: ShelveMainComponent},
   ] },
 ];
 
