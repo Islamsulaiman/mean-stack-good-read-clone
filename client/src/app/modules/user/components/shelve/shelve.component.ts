@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 
+type data ={
+  userId?:string
+}
+
 @Component({
   selector: 'app-shelve',
   templateUrl: './shelve.component.html',
@@ -12,13 +16,16 @@ export class ShelveComponent implements OnInit  {
   books :any ;
   error = ""
   bookStatus  = ""
+  userId =""
+  data:data={}
 
   constructor(private _UserService:UsersService){
     this._UserService.getUserById("643890010923d775b0ea7872", {observe: 'response'}).subscribe((res)=>{
 
-      console.log(res.body.books)
+      console.log(res.body)
       if(res.status === 200){
         this.books = res.body.books
+        this.userId = res.body._id
       }else{
         this.error = res
       }
@@ -47,15 +54,17 @@ export class ShelveComponent implements OnInit  {
     return index
   }
 
-  onElementClicked(event: MouseEvent) {
-    const clickedElement = event.target as HTMLElement;
-    const elementContent = clickedElement.innerHTML;
-    console.log('Clicked element content:', elementContent);
-    // Do something with the element content
+  onDropdownChange(bookDbValues: any, selectedValue:any) {
+    console.log('book status:',selectedValue.target.value);
+    console.log("userId",this.userId)
+    console.log("bookId",bookDbValues.bookId._id)
+
+    this.data.userId = this.userId;
+
+    this._UserService.changeBookState(bookDbValues.bookId._id, selectedValue.target.value, this.userId, {observe: 'response'}).subscribe((res)=>{
+      console.log(res)
+    })
   }
 
-
-
-  
 
 }

@@ -54,15 +54,14 @@
                                                     <i class="fas fa-star"></i>
                                                 </span>
                                             </div>
-                                            <a href="#" class="btn btn-primary">Read</a>
                                             <!-- End rating section -->
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="status"></label>
-                                                <select class="form-control" id="status" name="status">
+                                                <select class="form-control" id="status" name="status" (change)="onDropdownChange(oneBook,$event)">
                                                     <option value="progress" selected ><span style="font-weight:900;">Book progress</span ></option>
-                                                    <option  value="read"> <button (click)="onElementClicked($event)" value="read">Read</button>  </option>
+                                                    <option  value="read" > Read </option>
                                                     <option value="to-read">To Read</option>
                                                     <option value="completed">Completed</option>
                                                 </select>

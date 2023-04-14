@@ -15,7 +15,11 @@ export class UsersService {
   
     }
 
-    // changeBookState(options:any):Observable<any>{
-    //   return this._HttpClient.patch(`${this.URL}/${id}`, options)
+    changeBookState(bookId:string,bookStatus:string, userId:string,options:any):Observable<any>{
+      return this._HttpClient.patch(`${this.URL}/bookProgress?bookId=${bookId}&userId=${userId}&bookStatus=${bookStatus}`, options)
+    }
+
+    // changeBookState(bookId:string,bookStatus:string ,options:any):Observable<any>{
+    //   return this._HttpClient.patch(`${this.URL}/bookProgress?bookId=${bookId}&userId=${userId}&bookStatus=${bookStatus}`, options)
     // }
 }
