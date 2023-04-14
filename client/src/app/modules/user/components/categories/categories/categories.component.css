@@ -1,0 +1,98 @@
+*{
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+body {
+    height: auto;
+    width: auto;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: "Poiret One", cursive;
+}
+
+h1,
+h2 {
+    font-family: Arial;
+    font-weight: 900;
+    color: #fff;
+}
+h3 {
+    font-size: 30px;
+    font-family: Arial Narrow;
+}
+a,
+b,
+u {
+    font-family: Arial Narrow;
+}
+header {
+    margin-bottom: 5em;
+    height: auto;
+    width: 100%;
+    border-radius: 0 0 72% 72% / 25%;
+    background-image: url("https://littleartsydreams.com/copy_metal.jpg?bypass-cache=09629320");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    text-align: center;
+    overflow: hidden;
+}
+header .overlay {
+    width: 100%;
+    padding: 5rem;
+    padding-bottom: 0;
+    font-weight: bold;
+    background-image: linear-gradient(
+        135deg,
+        rgba(100, 149, 237, 92) 10%,
+        rgba(255, 192, 203, 0.9) 100%
+    );
+}
+.overlay h1 {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 900;
+}
+/*header paragraph text*/
+header .overlay p {
+    padding: 1rem;
+    letter-spacing: 0.14rem;
+    font-size: 20px;
+    border-radius: 50px;
+    color: white;
+}
+
+.overlay button {
+    width: 100%;
+    bottom: 0;
+    padding: 1rem;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+.overlay button a {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem;
+    position: relative;
+    border-radius: 50px;
+    font-size: 30px;
+    text-decoration: none;
+    letter-spacing: 0.14rem;
+    font-weight: bolder;
+}
+
+
+nav .pagination li a{
+    color: #E64C3C
+}
+
+nav .pagination li {
+    color: #E64C3C
+}
+
+nav .pagination .disabled a{
+    color: #999;
+}

@@ -13,6 +13,10 @@ export const categorySchema = new Schema(
       minLength: 3,
       maxLength: 255,
     },
+    Books: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Book',
+    }],
   },
   {
     timestamps: true,

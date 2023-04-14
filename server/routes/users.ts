@@ -25,10 +25,10 @@ router.patch('/image/:id', userUpload.single('image'), errorHandling(changeImgFu
 router.post('/', errorHandling(createUser));
 
 // 2. get all users
-router.get('/', getAllUsersFunc);
+router.get('/', errorHandling(getAllUsersFunc));
 
 // 3. get one user
-router.get('/:id', getOneUserFunc);
+router.get('/:id', errorHandling(getOneUserFunc));
 
 // 4. delete user
 router.delete('/:id', deleteUserFunc);

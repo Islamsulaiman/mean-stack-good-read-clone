@@ -12,9 +12,6 @@ export class AuthorsComponent implements OnInit {
   totalPages = 1;
 
   constructor(private _author: AuthorsService) {
-
-    console.log(_author.currentPage);
-    
   }
 
   ngOnInit() {

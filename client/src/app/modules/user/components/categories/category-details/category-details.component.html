@@ -2,15 +2,15 @@
 <div class="container">
     <div class="profile">
         <div class="profile-header">
-            <div class="profile-header-cover"></div>
+            <div class="profile-header-cover">
+                <h1>{{category.name}}</h1>
+
+            </div>
             <div class="profile-header-content">
-                <div *ngIf="author" class="profile-header-img">
-                    <img [src]=[author.image] alt="" />
-                </div>
                 <ul class="profile-header-tab nav nav-tabs nav-tabs-v2">
-                    <li class="nav-item">
+                    <li class="nav-item" style="margin-top: 50px;">
                         <a class="nav-link active" data-toggle="tab">
-                            <div class="nav-field">Books</div>
+                            <div  class="nav-field">Books</div>
                         </a>
                     </li>
                 </ul>
@@ -18,26 +18,13 @@
         </div>
 
         <div class="profile-container">
-            <div class="profile-sidebar">
-                <div *ngIf="author" class="desktop-sticky-top">
-                    <h4>{{author.fullName}}</h4>
-                    <div class="font-weight-600 mb-3 text-muted mt-n2">{{author.DOB.substring(0, 10)}}</div>
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem fugiat nisi facilis omnis dignissimos? Obcaecati delectus totam minima voluptatum voluptas quidem sed! Ex maiores delectus deserunt recusandae accusamus! Suscipit, quaerat?
-                    </p>
-                    <div class="mb-1"><i class="fa fa-map-marker-alt fa-fw text-muted"></i> New York, NY</div>
-                    <div class="mb-3"><i class="fa fa-link fa-fw text-muted"></i> seantheme.com/studio</div>
-                    <hr class="mt-4 mb-4" />
-                </div>
-            </div>
-
             <div class="profile-content">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="tab-content p-0">
-                            <div *ngIf="author" class="tab-pane fade active show" id="profile-books">
+                            <div *ngIf="category" class="tab-pane fade active show" id="profile-books">
 
-                                <div *ngFor="let book of author.Books">
+                                <div *ngFor="let book of category.Books">
                                 <section class="list-group">
                                     <div class="list-group-item d-flex align-items-center">
                                         <img [src]=[book.image] alt="" width="50px" class="rounded-sm ml-n2" />
