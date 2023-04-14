@@ -10,7 +10,7 @@ import { AdminCategoriesComponent } from './components/admin-categories/admin-ca
 import { AdminAuthorsComponent } from './components/admin-authors/admin-authors.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AdminModule { }
