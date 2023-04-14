@@ -17,8 +17,8 @@ export class BooksService {
     return this._HttpClient.post(this.URL,data);
   }
   //Get All Books
-  getBooks(): Observable<any>{
-    return this._HttpClient.get(`${this.URL}?skip=${this.currPage}&limit=${this.limit}`)
+  getBooks(skip:number, limit:number, options:any): Observable<any>{
+    return this._HttpClient.get(`http://localhost:3000/book?skip=${skip}&limit=${limit}`, options)
   }
 
   //Get Book by ID
@@ -32,7 +32,7 @@ export class BooksService {
   }
 
   //Delete Book
-  deleteBook(id:string):Observable<any>{
+  deleteBook(id:number):Observable<any>{
     return this._HttpClient.delete(`${this.URL}/${id}`);
   }
 

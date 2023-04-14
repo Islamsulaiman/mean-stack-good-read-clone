@@ -1,8 +1,8 @@
 export interface Book {
   _id?: number;
-  name: string;
+  title: string;
   description: string;
-  imageUrl?: string;
+  image?: string;
   category: string; // reference to Category
   author: string; // reference to Author
   avgRating?: number;
