@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { BooksService } from '../../services/books.service';
 import { Book } from '../../interfaces/book';
+import { NgForm } from '@angular/forms';
 // import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
@@ -31,6 +32,8 @@ export class AdminBooksComponent {
       }
 
     })
+
+    
   }
 getCurrentId(id:any){
  if(!id) return
@@ -38,7 +41,33 @@ getCurrentId(id:any){
  this.bookId = id
 }
 
-  }
+
+formData = new FormData();
+file: File | undefined;
+
+
+onFileChange(event: any) {
+  this.file = event.target.files[0];
+}
+
+addNewBook(myForm: NgForm){
+
+  const { title, description } = myForm.value;
+  
+  this.formData.append('title', title);
+  this.formData.append('description', description);
+  if(this.file) this.formData.append('image', this.file);
+
+  this._BooksService.addBook(this.formData).subscribe(
+    (response) => {
+      console.log('Response:', response);
+    },
+    (error) => {
+      console.error('Error:', error);
+    }
+  );
+}
+}
 
 
 
