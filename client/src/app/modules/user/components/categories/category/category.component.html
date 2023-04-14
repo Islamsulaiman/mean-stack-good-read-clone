@@ -1,0 +1,21 @@
+<div class="team-boxes" (click)="navigateToDetails()">
+    <div class="team-thumb overlay-image view-overlay">
+        <img src="assets/Old-Bookcase.jpg" width="300" height="250" alt="">
+        <div class="clear">
+        </div>
+        <div class="mask team_quote">
+            <div class="port-zoom-link">
+                <p>
+                    <span class="accentcolor" style="font-weight:700;">Number Of Books</span>
+                    <br><br>
+                    <i><span>{{category.Books.length}}</span> Books</i>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="team-info">
+        <h2>{{category.name}}</h2>
+    </div>
+    <div class="separator">
+    </div>
+</div>

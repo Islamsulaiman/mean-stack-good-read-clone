@@ -14,6 +14,11 @@ import { BooksComponent } from './components/books/books.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ShelveComponent } from './components/shelve/shelve.component';
+import { CategoriesComponent } from './components/categories/categories/categories.component';
+import { CategoryComponent } from './components/categories/category/category.component';
+import { CategoryDetailsComponent } from './components/categories/category-details/category-details.component';
+import { HomeComponent } from './components/home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,11 @@ import { ShelveComponent } from './components/shelve/shelve.component';
     BooksComponent,
     NavbarComponent,
     ShelveComponent,
+    CategoriesComponent,
+    CategoryComponent,
+    CategoryDetailsComponent,
+    HomeComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,

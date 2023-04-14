@@ -20,7 +20,7 @@ const userLogin = async (req: Request, res: Response) => {
   else {
   // send user a token
     const token = generateJWT({ id: userDataFromDB.id });
-    res.status(200).json({ 'token': token });
+    res.status(200).json({'token': token });
   }
 };
 

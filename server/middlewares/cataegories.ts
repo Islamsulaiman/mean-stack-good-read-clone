@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import * as dotenve from 'dotenv';
 import {
-  create, getAll, getOne, update, deleteOne,
+  create, getAll, getOne, update, deleteOne, addBook
 } from '../controllers/cataegories';
 
 dotenve.config();
@@ -21,10 +21,10 @@ const createCategory = async (req:Request, res:Response) => {
 };
 // 2.getAllCategories
 const getAllCategories = async (req:Request, res:Response) => {
-  const skip = parseInt(req.query.skip as string, 10);
-  const limit = parseInt(req.query.limit as string, 10);
+  const page = parseInt(req.query.page as string);
+  const limit = parseInt(req.query.limit as string);
 
-  const category = await getAll(skip, limit);
+  const category = await getAll(limit, page);
   return res.status(200).json({ message: 'Categories : ', category });
 };
 // 3.get One Category
@@ -56,6 +56,18 @@ const deleteCategory = async (req:Request, res:Response) => {
   if (!deletedCategory) throw new Error('Error: Category not deleted');
   res.status(200).json({ 'Category deleted Successfully': deletedCategory });
 };
+
+
+const addBookToCategory = async (req: Request, res: Response) : Promise<Response> => {
+  const { Books } = req.body;
+  const { id } = req.params;
+
+  const book = await addBook(id, Books);
+
+  return res.status(200).json(book);
+};
+
+
 export {
-  createCategory, getAllCategories, getOneCategory, updateCategory, deleteCategory,
+  createCategory, getAllCategories, getOneCategory, updateCategory, deleteCategory, addBookToCategory
 };

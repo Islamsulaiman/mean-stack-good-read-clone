@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import {
-  create, getAll, getOne, update, deleteOne, bookAvarageRating,
+  create, getAll, getOne, update, deleteOne, bookAvarageRating, search
 } from '../controllers/books';
 import { cloudi } from './imagesUpload';
 
@@ -93,7 +93,9 @@ const bookAvarageRatingFunc = async (req:Request, res:Response) => {
 
   // eslint-disable-next-line no-restricted-syntax, guard-for-in
   for (const key in book) {
-    totalVoters += book[key];
+    if (key !== '0') {
+      totalVoters += book[key];
+    }
   }
 
   // get total votes
@@ -107,11 +109,21 @@ const bookAvarageRatingFunc = async (req:Request, res:Response) => {
   // the avarage rating
   const avarageRating = (totalStarsSum / totalVoters).toFixed(1);
 
+  console.log(totalStarsSum, totalVoters);
+
   const popularityRating = "avrage rating * number of shelv's";
 
   return res.status(200).json(avarageRating);
 };
 
+
+// 7.Search for book
+const searchForBook = async (req:Request, res:Response, ) =>{
+    let payload = req.body.payload;
+    const searchforBook = await search(payload);
+    res.send({payload: searchforBook});
+}
+
 export {
-  createBook, getAllBooks, getOneBook, updateBook, deleteBook, bookAvarageRatingFunc,
+  createBook, getAllBooks, getOneBook, updateBook, deleteBook, bookAvarageRatingFunc, searchForBook
 };

@@ -33,8 +33,8 @@ const createUser = async (req: Request, res: Response) : Promise<Response> => {
 
   if (!user) throw new Error('Error: user is not created');
 
-  // return res.status(200).json(user);
-  return res.status(200);
+  return res.status(200).json(user);
+  // return res.status(200);
 };
 
 const getAllUsersFunc = async (req: Request, res: Response): Promise<Response> => {
@@ -112,7 +112,7 @@ const adduserRatingFunc = async (req: Request, res: Response) : Promise<Response
   return res.status(200).json(bookUpdated);
 };
 
-const changeImgFunc = async (req: Request, res: Response) => {
+const changeImgFunc = async (req: Request, res: Response) : Promise<Response> => {
   if (!req.params.id) {
     throw new Error('Enter id to update');
   }
@@ -133,7 +133,26 @@ const changeImgFunc = async (req: Request, res: Response) => {
   return res.status(200).json('Image has been uploaded');
 };
 
+const updateBookStatusFunc = async (req: Request, res: Response): Promise<Response> => {
+  if (!req.query.bookId || !req.query.bookStatus || !req.body.userId) {
+    throw new Error('Missing data!!');
+  }
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { bookId, bookStatus } = req.query;
+  const { userId } = req.body;
+
+  const states = ['read', 'to_read', 'reading'];
+
+  if (!states.includes(bookStatus as string)) {
+    throw new Error('invalid book state');
+  }
+
+  const progress = await userCont.updateBookStatus(userId, bookId as string, bookStatus as string);
+  return res.status(200).json(progress);
+};
+
 export {
   createUser, getAllUsersFunc, getOneUserFunc, deleteUserFunc,
-  updateUserFunc, addBookToUserFunc, adduserRatingFunc, changeImgFunc,
+  updateUserFunc, addBookToUserFunc, adduserRatingFunc, changeImgFunc, updateBookStatusFunc,
 };

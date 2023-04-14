@@ -58,6 +58,9 @@ const bookAvarageRating = async (bookId:string) => {
   return returnBook;
 };
 
+const search = async (payload: string) => (await Book.find({ title: { $regex: new RegExp('^' + payload + '.*', 'i') } })
+  .exec())
+  .slice(0,10)
 export {
-  create, getAll, getOne, update, deleteOne, updateBookRating, bookAvarageRating,
+  create, getAll, getOne, update, deleteOne, updateBookRating, bookAvarageRating, search
 };
