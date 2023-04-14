@@ -1,13 +1,13 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a [routerLink]="['/']" class="navbar-brand">Book<b>nary</b></a>  		
+	<a href="/" class="navbar-brand">Book<b>nary</b></a>  		
 	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
 		<div class="navbar-nav">
-			<a class="nav-item nav-link active" [routerLink]="['/']">Home</a>
+			<a class="nav-item nav-link active" href="/">Home</a>
 			<a  class="nav-item nav-link" [routerLink]="['/books']">Books</a>	
 			<a *ngIf="isLogged" class="nav-item nav-link" [routerLink]="['/']">My books</a>		
 			<a class="nav-item nav-link" [routerLink]="['/authors']">Authors</a>
