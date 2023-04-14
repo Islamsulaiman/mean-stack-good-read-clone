@@ -1,0 +1,31 @@
+<header>
+    <div class="overlay">
+        <h1>Categories</h1>
+        <p>
+            <!-- Author writes a novel, poem, essay, etc. -->
+        </p>
+        <button><a><i style="color: #fff;" class="fa-solid fa-chevron-down"></i></a></button>
+    </div>
+</header>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container categories">
+    <div class="row">
+        <app-category class="col-md-3 col-sm-4 col-xs-12" *ngFor="let categoryFromArray of categories" [category]="categoryFromArray">
+        </app-category>
+    </div>
+
+    <!-- Pagination -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" tabindex="-1" aria-disabled="true" (click)="previousPage()">Previous</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link">{{ currentPage }} of {{ totalPages }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="nextPage()">Next</a>
+          </li>
+        </ul>
+      </nav>
+</div>

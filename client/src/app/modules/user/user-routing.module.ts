@@ -9,6 +9,8 @@ import { AuthorDetailsComponent } from './components/author-details/author-detai
 import { SingleBookComponent } from './components/single-book/single-book.component';
 import { BooksComponent } from './components/books/books.component';
 import { ShelveComponent } from './components/shelve/shelve.component';
+import { CategoriesComponent } from './components/categories/categories/categories.component';
+import { CategoryDetailsComponent } from './components/categories/category-details/category-details.component';
 
 const routes: Routes = [
 
@@ -17,6 +19,8 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'authors',  component: AuthorsComponent},
     { path: 'author/:id',  component: AuthorDetailsComponent},
+    { path: 'categories',  component:CategoriesComponent},
+    { path: 'category/:id',  component: CategoryDetailsComponent},
     { path: 'singleBook/:bookId',  component: SingleBookComponent},
     { path: 'books',  component: BooksComponent},
     { path: 'shelve',  component: ShelveComponent},

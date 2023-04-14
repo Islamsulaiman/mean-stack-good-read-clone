@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {
-  createBook, getAllBooks, getOneBook, updateBook, deleteBook, bookAvarageRatingFunc,
+  createBook, getAllBooks, getOneBook, updateBook, deleteBook, bookAvarageRatingFunc, searchForBook
 } from '../middlewares/books';
 
 import {
@@ -42,6 +42,9 @@ router.patch(
 );
 // 5.delete book
 router.delete('/:id', errorHandling(deleteBook));
+
+// 6.search for book
+router.post('/search', errorHandling(searchForBook))
 
 /* Reviews routes */
 

@@ -9,7 +9,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })         
 export class LoginComponent {
-    
   email = ""
   password = ""
   wrongData = false
