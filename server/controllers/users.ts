@@ -26,7 +26,26 @@ const create = (data: NewUser) => User.create(data);
 const getAllUsers = () => User.find().exec();
 
 // 3. get one user
-const getOneUser = (data: string) => User.findOne({ _id: data });
+const getOneUser = (data: string) => {
+  const user = User.findOne({ _id: data }).populate('books.bookId').populate({
+    path: 'books.bookId',
+    // populate: {
+    //   path: 'author',
+    //   model: 'Author',
+    // },
+    populate: [
+      {
+        path: 'category',
+        model: 'Category',
+      },
+      {
+        path: 'author',
+        model: 'Author',
+      },
+    ],
+  });
+  return user;
+};
 
 // 4. delete user
 const deleteUser = (data: string) => User.deleteOne({ _id: data });
@@ -36,7 +55,6 @@ const getUser = (email:string) => {
   const user = User.findOne({ email });
   return user;
 };
-
 // 6. update user
 const updateUser = (id: string, data: UpdteUserData) => User.updateOne({ _id: id }, data);
 
