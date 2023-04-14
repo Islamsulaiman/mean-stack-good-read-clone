@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Admin } from '../../interfaces/admin';
 import { FormControl , FormGroup , Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-login',
@@ -11,22 +13,51 @@ import { FormControl , FormGroup , Validators } from '@angular/forms';
 })
 export class AdminLoginComponent {
 
+  wrongData = false
+  islogged = false
+
+  constructor(private _router: Router, private _authService:AuthService){}
+
 Admin : Admin | undefined;
 loginForm = new FormGroup({
-  UserName : new FormControl(null,[
-    Validators.required , Validators.minLength(3), Validators.maxLength(10)
-  ]),
-  password : new FormControl(null,[
-    Validators.required
-  ]),
+  email  : new FormControl(null,[Validators.required, Validators.email]),
+  password : new FormControl(null,[Validators.required, Validators.minLength(8)]),
 
-})
-constructor(private _router: Router){}
+});
+ 
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 submitLoginForm(loginForm:FormGroup){
-  this._router.navigate(['/admin/profile'])
+  this._authService.login(loginForm.value).subscribe((response) =>{
+    
+    if (response.message === 'success')
+    {
+      
+      localStorage.setItem("adminToken",response.token);
+      this._authService.savecurrentAdmin();
+
+      if(this._authService.currentAdmin.getValue != null)
+      {
+        this.islogged = true;
+      }
+      
+    this.islogged = true ;
+    
+    }
+    else
+    {
+      this.islogged = false;
+    }
+
+    this._router.navigate(['admin/profile']);
+  },
+  error => {
+    if (error instanceof HttpErrorResponse) {
+      this.wrongData = true;
+    }
+  }
+  )
 }
 
 }
