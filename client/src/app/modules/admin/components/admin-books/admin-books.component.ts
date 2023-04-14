@@ -14,7 +14,7 @@ export class AdminBooksComponent {
 
   books:Book[] = []
   error  ="";
-
+  bookId = "";
   constructor(private _BooksService: BooksService){
 
     //assume that every page have only 10 books, th 1st page from 0 to 10
@@ -32,7 +32,11 @@ export class AdminBooksComponent {
 
     })
   }
+getCurrentId(id:any){
+ if(!id) return
 
+ this.bookId = id
+}
 
   }
 
