@@ -15,7 +15,7 @@ export class UsersService {
   
     }
 
-    changeBookState(options:any):Observable<any>{
-      return this._HttpClient.patch(`${this.URL}/${id}`, options)
-    }
+    // changeBookState(options:any):Observable<any>{
+    //   return this._HttpClient.patch(`${this.URL}/${id}`, options)
+    // }
 }
