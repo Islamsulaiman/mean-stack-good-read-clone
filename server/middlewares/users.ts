@@ -134,21 +134,28 @@ const changeImgFunc = async (req: Request, res: Response) : Promise<Response> =>
 };
 
 const updateBookStatusFunc = async (req: Request, res: Response): Promise<Response> => {
-  if (!req.query.bookId || !req.query.bookStatus || !req.body.userId) {
+  if (!req.query.bookId || !req.query.bookStatus || !req.query.userId) {
     throw new Error('Missing data!!');
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { bookId, bookStatus } = req.query;
-  const { userId } = req.body;
+  const { bookId, bookStatus, userId } = req.query;
+  // const { userId } = req.body;
 
-  const states = ['read', 'to_read', 'reading'];
+  console.log(bookId, bookStatus, userId);
+
+  const states = ['completed', 'to_read', 'reading'];
 
   if (!states.includes(bookStatus as string)) {
     throw new Error('invalid book state');
   }
 
-  const progress = await userCont.updateBookStatus(userId, bookId as string, bookStatus as string);
+  const progress = await userCont.updateBookStatus(
+    userId as string,
+    bookId as string,
+
+    bookStatus as string,
+  );
   return res.status(200).json(progress);
 };
 

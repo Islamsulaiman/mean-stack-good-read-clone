@@ -54,14 +54,6 @@ export const bookSchema = new Schema(
 
 );
 
-// bookSchema.plugin(mongoosePaginate);
-// interface BookType extends mongoose.Document {}
-// const Book = mongoose.model<
-// BookType,
-// mongoose.PaginateModel<BookType>
-// >('books', bookSchema, 'books');
-// export default Book;
-
 const Book = mongoose.model('Book', bookSchema);
 
 export default Book;
