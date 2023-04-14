@@ -17,7 +17,6 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'authors',  component: AuthorsComponent},
     { path: 'author/:id',  component: AuthorDetailsComponent},
-    // { path: 'books/book',  component: SingleBookComponent},
     { path: 'singleBook/:bookId',  component: SingleBookComponent},
     { path: 'books',  component: BooksComponent},
     { path: 'shelve',  component: ShelveComponent},
