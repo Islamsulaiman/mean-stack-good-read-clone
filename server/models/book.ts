@@ -2,8 +2,6 @@
 import mongoose, {
   Schema,
 } from 'mongoose';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import mongoosePaginate from 'mongoose-paginate-v2';
 
 export const bookSchema = new Schema(
   {

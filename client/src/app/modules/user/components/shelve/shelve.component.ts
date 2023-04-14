@@ -13,7 +13,11 @@ type data ={
 export class ShelveComponent implements OnInit  {
 
   response: any ;
+
   books :any ;
+  bookDb:any;
+  filteredBooks:any;
+
   error = ""
   bookStatus = "full"
   userId =""
@@ -24,7 +28,7 @@ export class ShelveComponent implements OnInit  {
 
       console.log(res.body.books)
       if(res.status === 200){
-        this.books = res.body.books
+        this.books =this.bookDb =res.body.books
         this.userId = res.body._id
       }else{
         this.error = res
@@ -42,6 +46,16 @@ export class ShelveComponent implements OnInit  {
       this.bookStatus=data
       console.log("shelve",this.bookStatus)
       console.log(this.books)
+
+      // console.log("inside service: ",this.books[0].book_status)
+
+      //create a function that filters book and return only what match the status
+      this.books = this.bookDb.filter((book:any)=> book.book_status === this.bookStatus)
+      if(this.books.length === 0){
+        this.books = this.bookDb
+      }
+      console.log("filtred book",this.filteredBooks)
+
     })
 
 
