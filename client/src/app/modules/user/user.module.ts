@@ -17,6 +17,7 @@ import { ShelveComponent } from './components/shelve/shelve.component';
 import { CategoriesComponent } from './components/categories/categories/categories.component';
 import { CategoryComponent } from './components/categories/category/category.component';
 import { CategoryDetailsComponent } from './components/categories/category-details/category-details.component';
+import { ShelveSidebarComponent } from './components/shelve-sidebar/shelve-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { CategoryDetailsComponent } from './components/categories/category-detai
     CategoriesComponent,
     CategoryComponent,
     CategoryDetailsComponent,
+    ShelveSidebarComponent,
   ],
   imports: [
     CommonModule,
