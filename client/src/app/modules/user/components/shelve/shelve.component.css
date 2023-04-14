@@ -1,3 +1,7 @@
+.container-fluid{
+  margin-top: 20px;
+}
+
 .sidebar {
     background-color: #f8f9fa;
     padding: 20px;
@@ -34,6 +38,8 @@
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    min-height: 40vh;
+    overflow: auto;
   }
   
   .card:hover {

@@ -1,11 +1,37 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-shelve',
   templateUrl: './shelve.component.html',
   styleUrls: ['./shelve.component.css']
 })
-export class ShelveComponent   {
+export class ShelveComponent implements OnInit  {
+
+  response: any ;
+  books :any ;
+  error = ""
+  bookStatus  = ""
+
+  constructor(private _UserService:UsersService){
+    this._UserService.getUserById("643890010923d775b0ea7872", {observe: 'response'}).subscribe((res)=>{
+
+      console.log(res.body.books)
+      if(res.status === 200){
+        this.books = res.body.books
+      }else{
+        this.error = res
+      }
+    })
+    
+
+  }
+
+  ngOnInit(): void {
+    console.log(this.books)  
+  }
+
+
 
 
   selectStar(index: number): number {
@@ -19,5 +45,5 @@ export class ShelveComponent   {
     }
     console.log(index)
     return index
-}
+  }
 }

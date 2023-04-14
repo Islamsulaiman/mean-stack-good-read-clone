@@ -10,8 +10,8 @@ export class UsersService {
   constructor(private _HttpClient:HttpClient) { }
 
   //get Author By Id
-  getUserById(id:number):Observable<any> {
-      return this._HttpClient.get(`${this.URL}/${id}`);
+  getUserById(id:string, options:any):Observable<any> {
+      return this._HttpClient.get(`${this.URL}/${id}`, options);
   
     }
 }
