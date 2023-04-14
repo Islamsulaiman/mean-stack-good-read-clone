@@ -7,38 +7,53 @@ import { HttpErrorResponse } from '@angular/common/http';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
-})
+})         
 export class LoginComponent {
-    email = ""
-    password = ""
-    wrongData = false
-    isLogged = false;
-
-  constructor(private _AuthService:AuthService, private _Router: Router){
-        this._AuthService.saveUser()
-        if(this._AuthService.currentUser.getValue())
-            this._Router.navigate(['/'])
-  }
-
-  onSubmit(Form: NgForm) {
-      this._AuthService.login(Form.value).subscribe(
-      data => {
-        this.wrongData = false;
-        this._AuthService.currentUser.subscribe(()=>{
-          
-          if(this._AuthService.currentUser.getValue != null)
-            this.isLogged = true
-            
-          this.isLogged = true  
-          
-        })
-        this._Router.navigate(['/']);
-      },
-      error => {
-        if (error instanceof HttpErrorResponse) {
-          this.wrongData = true;
-        }
+    
+  email = ""
+  password = ""
+  wrongData = false
+  isLogged = false;
+  userImage = "";
+constructor(private _AuthService:AuthService, private _Router: Router){
+      this._AuthService.saveUser()
+      if(this._AuthService.currentUser.getValue() != null){
+        this.getData()
+        this.isLogged = true;
+        this._Router.navigate(['/'])    
       }
-      )
+      else
+        this.isLogged = false
+}
+
+onSubmit(Form: NgForm) {
+  this._AuthService.login(Form.value).subscribe(
+  data => {
+    this.wrongData = false;
+    this._AuthService.currentUser.subscribe(()=>{
+
+      if(this._AuthService.currentUser.getValue() != null){
+        this.isLogged = true     
+      }
+      this.isLogged = true  
+      window.location.reload();
+    })
+  },
+  error => {
+    if (error instanceof HttpErrorResponse) {
+      this.wrongData = true;
+    }
   }
+  )}
+
+
+getData(){
+  this._AuthService.getUserById(this._AuthService.currentUserId).subscribe(
+    data => {
+      this.userImage = data.image
+    },
+    error => {
+      return
+    })
+}
 }

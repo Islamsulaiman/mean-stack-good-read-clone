@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'any'
@@ -22,4 +22,16 @@ export class BooksService {
   }
 
 
+// Function to retrieve data from the database [Search]
+
+searchForBooks(searchQuery: string): Observable<any> {
+  return this._HttpClient.post<{payload: Array<object>}>(`http://localhost:3000/book/search`, {payload: searchQuery},{
+    headers: new HttpHeaders({"Content-Type": 'application/json'})
+  }).pipe(
+    map(data=> data.payload)
+  )
+
 }
+
+}
+  

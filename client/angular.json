@@ -64,6 +64,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options":{
+              "browserTarget": "appui:build",
+          },
           "configurations": {
             "production": {
               "browserTarget": "client:build:production"
