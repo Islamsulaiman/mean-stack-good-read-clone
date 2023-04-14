@@ -46,4 +46,16 @@ export class ShelveComponent implements OnInit  {
     console.log(index)
     return index
   }
+
+  onElementClicked(event: MouseEvent) {
+    const clickedElement = event.target as HTMLElement;
+    const elementContent = clickedElement.innerHTML;
+    console.log('Clicked element content:', elementContent);
+    // Do something with the element content
+  }
+
+
+
+  
+
 }

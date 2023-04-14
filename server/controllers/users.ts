@@ -29,10 +29,6 @@ const getAllUsers = () => User.find().exec();
 const getOneUser = (data: string) => {
   const user = User.findOne({ _id: data }).populate('books.bookId').populate({
     path: 'books.bookId',
-    // populate: {
-    //   path: 'author',
-    //   model: 'Author',
-    // },
     populate: [
       {
         path: 'category',
@@ -75,7 +71,17 @@ const adduserRating = (id: string, bookId: string, rating: number) => {
 // 9. update image
 const UpdteUserImg = (id: string, image: string) => User.findOneAndUpdate({ _id: id }, { image });
 
+// update book status
+const updateBookStatus = (userId: string, bookId:string, bookStatus: string) => {
+  console.log('contro', userId, bookId, bookStatus);
+  // eslint-disable-next-line max-len
+  const user = User.updateOne({ _id: userId, 'books.bookId': bookId }, { $set: { 'books.$.book_status': bookStatus } }).exec();
+  // const user = User.findOne({ _id: userId }).exec();
+
+  return user;
+};
+
 export {
   create, getAllUsers, getOneUser, deleteUser, updateUser, getUser,
-  addBookToUser, adduserRating, UpdteUserImg,
+  addBookToUser, adduserRating, UpdteUserImg, updateBookStatus,
 };

@@ -1,13 +1,16 @@
 import { Router } from 'express';
 import {
   createUser, getAllUsersFunc, getOneUserFunc, deleteUserFunc,
-  updateUserFunc, addBookToUserFunc, adduserRatingFunc, changeImgFunc,
+  updateUserFunc, addBookToUserFunc, adduserRatingFunc, changeImgFunc, updateBookStatusFunc,
 } from '../middlewares/users';
 
 import { errorHandling } from '../middlewares/errorHandling';
 import { userUpload } from '../middlewares/imagesUpload';
 
 const router = Router();
+
+// change book progress
+router.patch('/bookProgress', updateBookStatusFunc);
 
 // add rating to a specific book inside one user with it's bookId
 router.patch('/rating/:bookId', adduserRatingFunc);
