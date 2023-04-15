@@ -7,34 +7,34 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CategoriesService {
-
+  id : any;
   URL = 'http://localhost:3000/category';
   constructor(private _HttpClient:HttpClient) { }
 
   //Add category
   limit = 5
   currentPage = 1
-  getAuthors():Observable<any> {
-    return this._HttpClient.get(`${this.URL}/?page=${this.currentPage}&limit=${this.limit}`);
+  data:any 
+  addCategory():Observable<any> {
+    return this._HttpClient.post(this.URL, this.data);
   }
-
   //get category
   getCategories(skip:number, limit:number, options:any):Observable<any> {
-    return this._HttpClient.get(`${this.URL}/?skip=${skip}&limit=${limit}`,options);
+    return this._HttpClient.get(`${this.URL}/?page=${skip}&limit=${limit}`,options);
   }
 
   //get Category By Id
-  getCategoryById(id:number):Observable<any> {
-    return this._HttpClient.get(`${this.URL}/${id}`);
+  getCategoryById():Observable<any> {
+    return this._HttpClient.get(`${this.URL}/${this.id}`);
   }
 
   //update category
-  updateCategory(id:number,data:any):Observable<any>{
-    return this._HttpClient.put(`${this.URL}/${id}`, data);
+  updateCategory(data:any):Observable<any>{
+    return this._HttpClient.patch(`${this.URL}/${this.id}`, data);
   }
 
   //delete category
-  deleteCategory(id:number):Observable<any> {
-    return this._HttpClient.delete(`${this.URL}/${id}`);
+  deleteCategory():Observable<any> {
+    return this._HttpClient.delete(`${this.URL}/${this.id}`);
   }
 }

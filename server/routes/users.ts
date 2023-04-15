@@ -28,7 +28,7 @@ router.post('/', errorHandling(createUser));
 router.get('/', errorHandling(getAllUsersFunc));
 
 // 3. get one user
-router.get('/:id', errorHandling(getOneUserFunc));
+router.get('/oneUser', errorHandling(getOneUserFunc));
 
 // 4. delete user
 router.delete('/:id', deleteUserFunc);

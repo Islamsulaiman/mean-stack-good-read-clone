@@ -2,8 +2,6 @@
 import mongoose, {
   Schema,
 } from 'mongoose';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import mongoosePaginate from 'mongoose-paginate-v2';
 
 export const bookSchema = new Schema(
   {
@@ -53,14 +51,6 @@ export const bookSchema = new Schema(
   },
 
 );
-
-// bookSchema.plugin(mongoosePaginate);
-// interface BookType extends mongoose.Document {}
-// const Book = mongoose.model<
-// BookType,
-// mongoose.PaginateModel<BookType>
-// >('books', bookSchema, 'books');
-// export default Book;
 
 const Book = mongoose.model('Book', bookSchema);
 

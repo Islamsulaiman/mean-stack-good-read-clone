@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class AdminBooksComponent {
   skip = 0
   limit = 12
+
   books:Book[] = []
   error  ="";
   doneReq = false

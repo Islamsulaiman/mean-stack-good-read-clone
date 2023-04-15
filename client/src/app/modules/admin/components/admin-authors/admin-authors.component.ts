@@ -46,7 +46,7 @@ addNewAuthor(myForm: NgForm){
 
   this._AuthorsService.addAuthor(this.formData).subscribe(
     (response) => {
-      console.log(response)
+      console.log(myForm.value)
       this.doneReq =true
     },
     (error) => {

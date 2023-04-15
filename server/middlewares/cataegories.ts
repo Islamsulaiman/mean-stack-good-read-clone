@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import * as dotenve from 'dotenv';
 import {
-  create, getAll, getOne, update, deleteOne, addBook
+  create, getAll, getOne, update, deleteOne, addBook,
 } from '../controllers/cataegories';
 
 dotenve.config();
@@ -57,7 +57,6 @@ const deleteCategory = async (req:Request, res:Response) => {
   res.status(200).json({ 'Category deleted Successfully': deletedCategory });
 };
 
-
 const addBookToCategory = async (req: Request, res: Response) : Promise<Response> => {
   const { Books } = req.body;
   const { id } = req.params;
@@ -67,7 +66,6 @@ const addBookToCategory = async (req: Request, res: Response) : Promise<Response
   return res.status(200).json(book);
 };
 
-
 export {
-  createCategory, getAllCategories, getOneCategory, updateCategory, deleteCategory, addBookToCategory
+  createCategory, getAllCategories, getOneCategory, updateCategory, deleteCategory, addBookToCategory,
 };
