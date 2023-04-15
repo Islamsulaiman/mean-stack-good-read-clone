@@ -67,15 +67,14 @@ addNewBook(myForm: NgForm){
     }
   );
 }
-UpdateBook(myForma:NgForm){
-  const { title , description } = myForma.value;
+UpdateBook(myFormU:NgForm){
+  const { title , description } = myFormU.value;
 
   this.formData.append('title',title);
   this.formData.append('description',description);
   // this.formData.append('categoryId', category);
   //   this.formData.append('authorId',author);
   if(this.file) this.formData.append('image',this.file);
-  const id = this.getCurrentId(this.bookId)
 
   this._BooksService.updateBook(this.formData).subscribe((res)=>{
     console.log('Response',res);
@@ -87,21 +86,21 @@ UpdateBook(myForma:NgForm){
 
   })
 }
-// updateBook(myForm: NgForm, bookId: string) {
-//   const { title, description } = myForm.value;
-//   const formData = new FormData();
-//   formData.append('title', title);
-//   formData.append('description', description);
-//   if (this.file) formData.append('image', this.file);
-//   this._BooksService.updateBook(bookId, formData).subscribe(
-//     (response) => {
-//       console.log('Response:', response);
-//     },
-//     (error) => {
-//       console.error('Error:', error);
-//     }
-//   );
-// }
+
+deleteBook() {
+  this._BooksService.deleteBook().subscribe(
+    (response) => {
+
+      console.log('Response:', response);
+    },
+    (error) => {
+      console.log();
+
+      console.error('Error:', error);
+    }
+  );
+}
+
 }
 
 
