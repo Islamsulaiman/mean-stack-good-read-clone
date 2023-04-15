@@ -50,7 +50,7 @@ const edit = (id: any, data: EditAuthor) => {
 
 // Add book to author
 // eslint-disable-next-line max-len, max-len
-const addBook = (id: string, Books: string) => {
+const addBooktoAuth = (id: string, Books: string) => {
   const bookObjectId = new mongoose.Types.ObjectId(Books);
   return Author.updateOne({ _id: id }, { $push: { Books: bookObjectId } });
 }
@@ -65,5 +65,5 @@ export {
   getById,
   edit,
   deleteAuthor,
-  addBook,
+  addBooktoAuth,
 };

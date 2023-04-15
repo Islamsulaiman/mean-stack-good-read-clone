@@ -1,4 +1,5 @@
 // import { toWords } from 'num-to-words';
+import mongoose from 'mongoose';
 import { Book } from '../models';
 
 type NewBook = {
@@ -33,6 +34,21 @@ const update = async (id:string, data:UpdatedBook) => {
   const book = await Book.findByIdAndUpdate({ _id: id }, data, { new: true });
   return book;
 };
+
+
+// Add category to book
+const addCategory = (id: string, category: string) => {
+  const categoryId = new mongoose.Types.ObjectId(category);
+  return Book.updateOne({ _id: id }, { $push: { category: categoryId } });
+}
+
+// Add author to book
+const addAuthor = (id: string, author: string) => {
+  const authorId = new mongoose.Types.ObjectId(author);
+  return Book.updateOne({ _id: id }, { $push: { author: authorId } });
+}
+
+
 // 5.deleteBook
 const deleteOne = async (id:string) => {
   const book = await Book.findByIdAndDelete({ _id: id });
@@ -61,6 +77,21 @@ const bookAvarageRating = async (bookId:string) => {
 const search = async (payload: string) => (await Book.find({ title: { $regex: new RegExp('^' + payload + '.*', 'i') } })
   .exec())
   .slice(0,10)
+
+
+
+
+
+  
 export {
-  create, getAll, getOne, update, deleteOne, updateBookRating, bookAvarageRating, search
+  create,
+  getAll,
+  getOne,
+  update,
+  deleteOne, 
+  updateBookRating, 
+  bookAvarageRating, 
+  search,
+  addCategory,
+  addAuthor,
 };

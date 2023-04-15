@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import {
-  create, getAll, getOne, update, deleteOne, bookAvarageRating, search
+  create, getAll, getOne, update, deleteOne, bookAvarageRating, search, addCategory,
+  addAuthor,
 } from '../controllers/books';
+import { addBook } from '../controllers/cataegories';
+import { addBooktoAuth } from '../controllers/authors';
 import { cloudi } from './imagesUpload';
 import { log } from 'console';
 
@@ -13,9 +16,11 @@ const createBook = async (req:Request, res:Response) => {
   const {
     title,
     description,
-    author,
-    category,
+    author, // ID
+    category, // ID
   } = req.body;
+
+
   // Image handling
   let image: any = '';
   if (!req.file) {
@@ -39,6 +44,22 @@ const createBook = async (req:Request, res:Response) => {
     image,
   });
   if (!book) throw new Error('Error: Book not created');
+
+  const bookId: any = book._id
+
+
+  // add book to category 
+  await addBook(category, bookId);
+
+  // add book to author
+  await addBooktoAuth(author, bookId)
+
+  // Push category to book
+  await addCategory(bookId,category)
+
+  // Push author to book
+  await addAuthor(bookId, author)
+
 
   return res.status(200).json({ message: 'Book created successfully', book });
 };
