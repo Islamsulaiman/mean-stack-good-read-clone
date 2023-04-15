@@ -7,7 +7,7 @@ type NewUser = {
   password: String
   email: String,
   userName: String
-  image: String
+  image?: String
 };
 
 type UpdteUserData = {

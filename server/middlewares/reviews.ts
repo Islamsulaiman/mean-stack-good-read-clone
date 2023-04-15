@@ -2,8 +2,10 @@ import { Request, Response } from 'express';
 import {
   create, get, edit, deleteRev,
 } from '../controllers/reviews';
+import { User } from '../models';
 
 const addReview = async (req: Request, res: Response) => {
+
   const { content, userId } = req.body;
   const { id } = req.params;
   const review = await create(id, { content, userId });
