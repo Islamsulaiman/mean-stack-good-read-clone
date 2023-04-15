@@ -71,9 +71,11 @@ const getUser = (email:string) => {
 // 6. update user
 const updateUser = (id: string, data: UpdteUserData) => User.updateOne({ _id: id }, data);
 
+// { $addToSet: { books: bookId } }
+
 // 7. Add book to user
 // eslint-disable-next-line max-len, max-len
-const addBookToUser = (id: string, bookId: string) => User.updateOne({ _id: id }, { $push: { books: { bookId } } });
+const addBookToUser = (id: string, bookId: string) => User.updateOne({ _id: id, 'books.bookId': { $ne: bookId } }, { $push: { books: { bookId } } });
 
 const removeBookFromUser = async (userId: string, bookId: string) => {
   try {
