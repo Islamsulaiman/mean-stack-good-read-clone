@@ -16,13 +16,13 @@ export class AdminCategoriesComponent {
   totalPages = 1
   doneReq = false
   constructor(private _CategoriesService: CategoriesService){
-    this.loadAuthors();
+    this.loadCategories();
   }
 
 
 
 
-  loadAuthors() {
+  loadCategories() {
     this._CategoriesService.getCategories(this.currentPage, this.limit, {observe: 'response'}).subscribe((data:any)=>{
       this.categories = data.body.category.categories;
       this.totalPages = data.body.category.totalPages;
@@ -36,13 +36,13 @@ export class AdminCategoriesComponent {
 
   getCurrentId(id:any){
     if(!id) return
-   
+
     this._CategoriesService.id = id
    }
-   
+
    formData = new FormData();
    file: File | undefined;
-   
+
 
 onFileChange(event: any) {
   this.file = event.target.files[0];
@@ -88,18 +88,18 @@ deleteCategory() {
   );
 }
 
-// Pagianate 
+// Pagianate
 previousPage() {
   if (this.currentPage > 1) {
     this.currentPage--;
-    this.loadAuthors();
+    this.loadCategories();
   }
 }
 
 nextPage() {
   if (this.currentPage < this.totalPages) {
     this.currentPage++;
-    this.loadAuthors();
+    this.loadCategories();
   }
 }
 
