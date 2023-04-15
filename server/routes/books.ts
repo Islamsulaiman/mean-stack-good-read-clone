@@ -34,10 +34,10 @@ router.get('/:id', errorHandling(getOneBook));
 // 4.update one book
 router.patch(
   '/:id',
+  bookUpload.single('image'),
   validation.checkTitle,
   validation.checkDescription,
   validation.validateInput,
-  bookUpload.single('image'),
   errorHandling(updateBook),
 );
 // 5.delete book
