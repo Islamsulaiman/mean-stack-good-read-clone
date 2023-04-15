@@ -98,9 +98,6 @@ const updateUserFunc = async (req: Request, res: Response) => {
 };
 
 const addBookToUserFunc = async (req: Request, res: Response) : Promise<Response> => {
-  // const { id } = req.body;
-  // const { bookId } = req.params;
-
   const { id, bookId } = req.query;
 
   const book = await userCont.addBookToUser(id as string, bookId as string);

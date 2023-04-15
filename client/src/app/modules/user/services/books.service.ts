@@ -21,7 +21,9 @@ export class BooksService {
     return this._HttpClient.get(`http://localhost:3000/book/${bookId}/review?skip=${skip}&limit=${limit}`, options)
   }
 
-  addBookToUserShelve()
+  addBookToUserShelve(userId: string, bookId: string , options:any) : Observable<any>{
+    return this._HttpClient.patch(`http://localhost:3000/users/addBook?id=${userId}&bookId=${bookId}`, options)
+  }
 
 
 // Function to retrieve data from the database [Search]
