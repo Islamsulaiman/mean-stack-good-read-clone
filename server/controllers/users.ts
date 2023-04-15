@@ -26,8 +26,24 @@ const create = (data: NewUser) => User.create(data);
 const getAllUsers = () => User.find().exec();
 
 // 3. get one user
-const getOneUser = (data: string) => {
-  const user = User.findOne({ _id: data }).populate('books.bookId').populate({
+const getOneUser = (data: string, skip:number, limit:number) => {
+  if (limit === 0) {
+    const user = User.findOne({ _id: data }).populate('books.bookId').populate({
+      path: 'books.bookId',
+      populate: [
+        {
+          path: 'category',
+          model: 'Category',
+        },
+        {
+          path: 'author',
+          model: 'Author',
+        },
+      ],
+    });
+    return user;
+  }
+  const user = User.findOne({ _id: data }, { books: { $slice: [skip, limit] }, numberOfPages: { $ceil: { $divide: [{ $size: '$books' }, limit] } } }).populate('books.bookId').populate({
     path: 'books.bookId',
     populate: [
       {
@@ -40,6 +56,7 @@ const getOneUser = (data: string) => {
       },
     ],
   });
+
   return user;
 };
 

@@ -44,9 +44,18 @@ const getAllUsersFunc = async (req: Request, res: Response): Promise<Response> =
 };
 
 const getOneUserFunc = async (req: Request, res: Response): Promise<Response> => {
-  const { id } = req.params;
+  const { id, skip, limit } = req.query;
 
-  const oneUser = await userCont.getOneUser(id);
+  if (parseInt(skip as string, 10) < 0 || parseInt(limit as string, 10) < 0) throw new Error('Please enter valid range');
+
+  const oneUser = await userCont.getOneUser(
+    id as string,
+    parseInt(skip as string, 10),
+
+    parseInt(limit as string, 10),
+  );
+  // oneUser.totalBooks = 10;
+  console.log(oneUser);
 
   return res.status(200).json(oneUser);
 };
@@ -145,7 +154,7 @@ const updateBookStatusFunc = async (req: Request, res: Response): Promise<Respon
   console.log(bookId, bookStatus, userId);
   console.log('status', bookStatus);
 
-  const states = ['completed', 'to-read', 'read'];
+  const states = ['reading', 'to_read', 'read'];
   // const states = ['completed', 'to_read', 'reading'];
 
   if (!states.includes(bookStatus as string)) {
