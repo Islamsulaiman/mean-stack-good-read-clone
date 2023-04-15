@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   createUser, getAllUsersFunc, getOneUserFunc, deleteUserFunc,
   updateUserFunc, addBookToUserFunc, adduserRatingFunc, changeImgFunc, updateBookStatusFunc,
+  removeBookFromUserFunc,
 } from '../middlewares/users';
 
 import { errorHandling } from '../middlewares/errorHandling';
@@ -9,6 +10,7 @@ import { userUpload } from '../middlewares/imagesUpload';
 
 const router = Router();
 
+router.patch('/remove', errorHandling(removeBookFromUserFunc));
 // change book progress
 router.patch('/bookProgress', updateBookStatusFunc);
 
