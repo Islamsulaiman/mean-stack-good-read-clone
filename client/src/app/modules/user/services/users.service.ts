@@ -10,30 +10,21 @@ export class UsersService {
   constructor(private _HttpClient:HttpClient) { }
 
   //variables
-  // SharedBookState=""
+  skip = 0
 
   private sharedData: any;
   private dataSubject = new Subject<any>();
 
 
   //get Author By Id
-  getUserById(id:string, options:any):Observable<any> {
-      return this._HttpClient.get(`${this.URL}/${id}`, options);
+  getUserById(id:string, skip:number, limit:number ,options:any):Observable<any> {
+      return this._HttpClient.get(`${this.URL}/oneUser?id=${id}&skip=${skip}&limit=${limit}`, options);
   
     }
 
     changeBookState(bookId:string,bookStatus:string, userId:string,options:any):Observable<any>{
       return this._HttpClient.patch(`${this.URL}/bookProgress?bookId=${bookId}&userId=${userId}&bookStatus=${bookStatus}`, options)
     }
-
-    // setBookState(data: string){
-    //   this.SharedBookState = data;
-    //   console.log("user service",this.SharedBookState)
-    // }
-
-    // getBookState(){
-    //   return this.SharedBookState;
-    // }
 
 
   setData(data: any) {
@@ -48,7 +39,6 @@ export class UsersService {
   getDataSubject() {
     return this.dataSubject.asObservable();
   }
-
 
 
 

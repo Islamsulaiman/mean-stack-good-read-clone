@@ -3,11 +3,9 @@
 
 
         <!-- Bookshelf -->
-        <!-- <div class="col-md-10"> -->
-            <!-- <div class="bookshelf"> -->
                 <div class="row">
 
-                    <div *ngFor="let oneBook of books" class="col-md-2" >
+                    <div *ngFor="let oneBook of books; let i = index" class="col-md-2" >
 
                         <div class="card" style="border-top-right-radius: 25px; border-top-left-radius: 25px;">
                             <img class="card-img-top" [src]= oneBook.bookId.image alt="Book cover">
@@ -23,24 +21,30 @@
                                             </span> 
                                         
                                         </p>
+
+
+
                                         <!-- Rating section -->
                                         <div class="rating">
-                                            <span class="star" (click)="selectStar(1)">
+                                            <span class="star" (click)="selectStar(1, i+1)">
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(2)">
+                                            <span class="star" (click)="selectStar(2, i+1)">
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(3)">
+                                            <span class="star" (click)="selectStar(3, i+1)">
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(4)">
+                                            <span class="star" (click)="selectStar(4, i+1)">
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(5)">
+                                            <span class="star" (click)="selectStar(5, i+1)">
                                                 <i class="fas fa-star"></i>
                                             </span>
                                         </div>
+
+
+
                                         <!-- End rating section -->
                                     </div>
                                     <div class="col-sm-6">
@@ -48,9 +52,9 @@
                                             <label for="status"></label>
                                             <select class="form-control" id="status" name="status" (change)="onDropdownChange(oneBook,$event)">
                                                 <option value="progress" selected ><span style="font-weight:900;">Book progress</span ></option>
-                                                <option  value="read" > Read </option>
-                                                <option value="to-read">To Read</option>
-                                                <option value="completed">Completed</option>
+                                                <option  value="reading" >Read </option>
+                                                <option value="to_read">To Read</option>
+                                                <option value="read">Completed</option>
                                             </select>
                                         </div>
                                         
@@ -60,12 +64,24 @@
                         </div>
 
                     </div>
-
-
-
                 </div>
-            <!-- </div> -->
-        <!-- </div> -->
+
+                <!-- Pagination -->
+                <!-- <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item" [class.disabled]="skip === 0">
+                        <a class="page-link" tabindex="-1" aria-disabled="true" (click)="previousPage()">Previous</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" *ngIf="bookStatusSwitch">{{ currentPage }} of {{ totalPages }}</a> 
+                        <a class="page-link" *ngIf="!bookStatusSwitch">{{ currentPage }} of {{ totalPages }}</a> 
+
+                      </li>
+                      <li class="page-item" [class.disabled]="currentPage === totalPages || !bookStatusSwitch">
+                        <a class="page-link" (click)="nextPage()">Next</a>
+                      </li>
+                    </ul>
+                  </nav> -->
 
     </div>
 </div>
