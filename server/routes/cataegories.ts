@@ -21,13 +21,14 @@ router.get('/', getAllCategories);
 router.get('/:id', errorHandling(getOneCategory));
 // 4.update one category
 // add book to author with it's bookId
-router.patch('/:id', errorHandling(addBookToCategory));
 router.patch(
   '/:id',
   validation.checkCatagoryName,
   validation.validateInput,
   errorHandling(updateCategory),
 );
-// 5.delete  category
+router.patch('/:id/book', errorHandling(addBookToCategory));
+
+// 5.delete  categorys
 router.delete('/:id', errorHandling(deleteCategory));
 export const categoryRoute : Router = router;

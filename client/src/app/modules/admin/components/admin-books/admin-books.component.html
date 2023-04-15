@@ -23,6 +23,8 @@
           <th>Title</th>
           <th>Description</th>
           <th>Image</th>
+          <th>Category</th>
+          <th>Author</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -39,7 +41,10 @@
           <td >{{book._id}}</td>
           <td>{{book.title}}</td>
           <td>{{book.description}}</td>
-          <td>{{book.image}}</td>
+          <td><img [src]=book.image width="50" height="50" alt=""></td>
+          <td>{{book.category}}</td>
+          <td>{{book.author}}</td>
+
 
           <td>
             <a (click)="getCurrentId(book._id)" href="#editBookModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
@@ -80,6 +85,28 @@
             <label>image</label>
             <input type="file" ngModel name="image"  (change)="onFileChange($event)" class="form-control">
           </div>
+          <div class="form-group">
+            <label>category</label>
+            <!-- <input type="text" ngModel name="category s class="form-control> -->
+            <select name="category"  (change)="changeCategory($event)" class="form-control">
+              <option>--Select--</option>
+              <option [value]="category._id" *ngFor="let category of categories">
+                {{category.name}}
+              </option>
+
+            </select>
+          </div>
+          <div class="form-group">
+            <label>author</label>
+            <!-- <input type="text" ngModel name="author"   class="form-control"> -->
+            <select name="author"  class="form-control">
+              <option>--Select--</option>
+              <option  *ngFor="let author of authors">
+                {{author.fullName}}
+              </option>
+
+            </select>
+          </div>
         </div>
         <div class="modal-footer">
           <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -101,7 +128,6 @@
         <div class="modal-body">
           <div class="form-group">
             <label>ID: </label>
-            {{bookId}}
           </div>
           <div class="form-group">
             <label>Title</label>
@@ -114,6 +140,14 @@
           <div class="form-group">
             <label>image</label>
             <input (change)="onFileChange($event)" ngModel name="image" type="file"  class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <input (change)="onFileChange($event)" ngModel name="category" type="text"  class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Author</label>
+            <input (change)="onFileChange($event)" ngModel name="author" type="text"  class="form-control">
           </div>
         </div>
         <div class="modal-footer">

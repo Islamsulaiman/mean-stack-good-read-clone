@@ -16,7 +16,9 @@ export class AdminLoginComponent {
   wrongData = false
   islogged = false
 
-  constructor(private _router: Router, private _authService:AuthService){}
+  constructor(private _router: Router, private _authService:AuthService){
+    if(this._authService.currentAdmin.getValue != null) this._router.navigate(['/admin/profile']);  
+  }
 
 Admin : Admin | undefined;
 loginForm = new FormGroup({
