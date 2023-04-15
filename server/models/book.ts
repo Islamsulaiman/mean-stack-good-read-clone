@@ -27,6 +27,7 @@ export const bookSchema = new Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
+        required: true,
       },
     ],
     avgRating: {
@@ -43,6 +44,7 @@ export const bookSchema = new Schema(
     author: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Author',
+      required: true,
     },
     ],
     rating: {

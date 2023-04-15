@@ -18,7 +18,7 @@ export class AdminBooksComponent implements OnInit{
   skip = 0
   limit = 12
 
-  books:Book[] = []
+  books:Book | any;
   error  ="";
   doneReq = false
   currentPage = 1
@@ -56,13 +56,13 @@ export class AdminBooksComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this._CategoriesService.getCategories(this.currentPage, this.limit, {observe: 'response'}).subscribe((data:any)=>{
+    this._CategoriesService.getCategories(0, 0, {observe: 'response'}).subscribe((data:any)=>{
       this.categories = data.body.category.categories;
       this.totalPages = data.body.category.totalPages;
 
     });
 
-    this._AuthorsService.getAuthors(this.currentPage, this.limit, {observe: 'response'}).subscribe((data:any)=>{
+    this._AuthorsService.getAuthors(0, 0, {observe: 'response'}).subscribe((data:any)=>{
       console.log(data.body.authors);
       this.authors = data.body.authors;
       this.totalPages = data.body.totalPages;
@@ -87,13 +87,15 @@ onFileChange(event: any) {
 
 addNewBook(myForm: NgForm){
 
-  const { title, description } = myForm.value;
+  const { title, description, category, author } = myForm.value;
 
   this.formData.append('title', title);
   this.formData.append('description', description);
+  this.formData.append('category', category);
+  this.formData.append('author', author);
   if(this.file) this.formData.append('image', this.file);
-
-  this._BooksService.addBook(this.formData).subscribe(
+  console.log(myForm.value)
+  this._BooksService.addBook(myForm.value, ).subscribe(
     (response) => {
       this.doneReq =true
     },

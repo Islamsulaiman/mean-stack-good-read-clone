@@ -41,11 +41,4 @@ export class AuthService {
       })
     )
   }
-  //get User By Id
-  getUserById(id:number):Observable<any> {
-      return this._HttpClient.get(`${this.URL}/${id}`);
-  
-    }
-
-
 }
