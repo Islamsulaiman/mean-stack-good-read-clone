@@ -22,8 +22,8 @@
           <th>ID</th>
           <th>FullName</th>
           <th>Image</th>
-          <th>DateOfBirth</th>
-          <th>Books</th>
+          <th>Date Of Birth</th>
+          <th>Authors Qty</th>
         </tr>
       </thead>
 
@@ -39,12 +39,12 @@
           <td >{{author._id}}</td>
           <td>{{author.fullName}}</td>
           <td>{{author.DOB}}</td>
-          <td>{{author.image}}</td>
-          <td>{{author.Books}}</td>
+          <td><img [src]=author.image width="50" height="50" alt=""></td>
+          <td>{{author.Books.length}}</td>
 
           <td>
-            <a (click)="getCurrentId(author._id)" href="#ditAuthorModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-            <a href="#deleteAuthorModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+            <a (click)="getCurrentId(author._id)"  href="#editAuthorModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+            <a (click)="getCurrentId(author._id)" href="#deleteAuthorModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
           </td>
         </tr>
       </tbody>
@@ -52,17 +52,17 @@
     <div class="clearfix">
       <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
       <ul class="pagination">
-        <li class="page-item disabled"><a href="#">Previous</a></li>
-        <li class="page-item"><a href="#" class="page-link">Next</a></li>
+        <li (click)="previousPage()" class="page-item disabled"><a>Previous</a></li>
+        <li (click)="nextPage()" class="page-item"><a class="page-link">Next</a></li>
       </ul>
     </div>
   </div>
 </div>
 <!-- Edit Modal HTML -->
-<div id="addBookModal" class="modal fade">
+<div id="addAuthorModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form>
+      <form #myForm="ngForm" (ngSubmit)="addNewAuthor(myForm)">
         <div class="modal-header">
           <h4 class="modal-title">Add Author</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -70,24 +70,21 @@
         <div class="modal-body">
           <div class="form-group">
             <label>FullName</label>
-            <input type="text" class="form-control" >
+            <input  name="fullName"  ngModel type="text" class="form-control" >
           </div>
           <div class="form-group">
             <label>DOB</label>
-            <input type="email" class="form-control">
+            <input name="DOB" ngModel type="date" class="form-control">
+            
           </div>
           <div class="form-group">
             <label>image</label>
-            <input type="file" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Books</label>
-            <input type="email" class="form-control">
+            <input type="file" ngModel name="image" (change)="onFileChange($event)"  class="form-control">
           </div>
         </div>
         <div class="modal-footer">
           <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-success" value="Add">
+          <input *ngIf="!doneReq" type="submit" class="btn btn-success" value="Add">
         </div>
       </form>
     </div>
@@ -97,7 +94,7 @@
 <div id="editAuthorModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form>
+      <form #myFormU= "ngForm" (ngSubmit)="UpdateAuthor(myFormU)">
         <div class="modal-header">
           <h4 class="modal-title">Edit Author</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -105,28 +102,23 @@
         <div class="modal-body">
           <div class="form-group">
             <label>ID: </label>
-            {{authorId}}
           </div>
           <div class="form-group">
             <label>FullName</label>
-            <input type="text" class="form-control" >
+            <input name="fullName"  ngModel  class="form-control" >
           </div>
           <div class="form-group">
             <label>DOB</label>
-            <input type="email" class="form-control">
+            <input name="DOB" ngModel type="date" class="form-control">
           </div>
           <div class="form-group">
             <label>image</label>
-            <input type="file"  class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Books</label>
-            <input type="file"  class="form-control">
+            <input (change)="onFileChange($event)" ngModel name="image" type="file"  class="form-control">
           </div>
         </div>
         <div class="modal-footer">
           <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-info" value="Save">
+          <input *ngIf="!doneReq"  type="submit" class="btn btn-info" value="Save">
         </div>
       </form>
     </div>
@@ -136,7 +128,7 @@
 <div id="deleteAuthorModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form>
+      <form (ngSubmit)="deleteAuthor()">
         <div class="modal-header">
           <h4 class="modal-title">Delete Author</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -147,7 +139,7 @@
         </div>
         <div class="modal-footer">
           <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-danger" value="Delete">
+          <input *ngIf="!doneReq" type="submit" class="btn btn-danger" value="Delete">
         </div>
       </form>
     </div>

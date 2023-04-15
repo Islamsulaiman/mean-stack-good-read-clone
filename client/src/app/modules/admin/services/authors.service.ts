@@ -6,9 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthorsService {
+  id : any ;
+  currentPage = 1
 
-
-  URL = 'http://localhost:3000/category';
+  URL = 'http://localhost:3000/authors';
   constructor(private _HttpClient:HttpClient) { }
 
   //Add Author
@@ -17,21 +18,21 @@ export class AuthorsService {
   }
 
   //get Authors
-  getAuthors(skip:number, limit:number, options:any):Observable<any> {
-    return this._HttpClient.get(`${this.URL}/?skip=${skip}&limit=${limit}`,options);
+  getAuthors(page:number, limit:number, options:any):Observable<any> {
+    return this._HttpClient.get(`${this.URL}/?page=${page}&limit=${limit}`,options);
   }
   //get Author By Id
-  getAuthorById(id:number):Observable<any> {
-    return this._HttpClient.get(`${this.URL}/${id}`);
+  getAuthorById():Observable<any> {
+    return this._HttpClient.get(`${this.URL}/${this.id}`);
   }
 
   //update Author
-  updateAuthor(id:number,data:any):Observable<any>{
-    return this._HttpClient.put(`${this.URL}/${id}`, data);
+  updateAuthor(data:any):Observable<any>{
+    return this._HttpClient.put(`${this.URL}/${this.id}`, data);
   }
 
   //delete Author
-  deleteAuthor(id:number):Observable<any> {
-    return this._HttpClient.delete(`${this.URL}/${id}`);
+  deleteAuthor():Observable<any> {
+    return this._HttpClient.delete(`${this.URL}/${this.id}`);
   }
 }

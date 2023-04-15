@@ -13,10 +13,8 @@ import { Router } from '@angular/router';
 export class AdminBooksComponent {
   skip = 0
   limit = 12
-
   books:Book[] = []
   error  ="";
-  bookId = "";
   doneReq = false
   constructor(private _BooksService: BooksService, private _router:Router){
 
@@ -73,8 +71,6 @@ UpdateBook(myFormU:NgForm){
 
   this.formData.append('title',title);
   this.formData.append('description',description);
-  // this.formData.append('categoryId', category);
-  //   this.formData.append('authorId',author);
   if(this.file) this.formData.append('image',this.file);
 
   this._BooksService.updateBook(this.formData).subscribe((res)=>{

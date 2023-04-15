@@ -39,7 +39,7 @@
           <td >{{book._id}}</td>
           <td>{{book.title}}</td>
           <td>{{book.description}}</td>
-          <td>{{book.image}}</td>
+          <td><img [src]=book.image width="50" height="50" alt=""></td>
 
           <td>
             <a (click)="getCurrentId(book._id)" href="#editBookModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
@@ -101,7 +101,6 @@
         <div class="modal-body">
           <div class="form-group">
             <label>ID: </label>
-            {{bookId}}
           </div>
           <div class="form-group">
             <label>Title</label>
