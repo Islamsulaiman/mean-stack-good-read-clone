@@ -37,4 +37,5 @@ export class CategoriesService {
   deleteCategory():Observable<any> {
     return this._HttpClient.delete(`${this.URL}/${this.id}`);
   }
+  
 }

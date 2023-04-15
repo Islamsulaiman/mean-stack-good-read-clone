@@ -5,7 +5,7 @@
         <!-- Bookshelf -->
                 <div class="row">
 
-                    <div *ngFor="let oneBook of books; let i = index" class="col-md-2" >
+                    <div *ngFor="let oneBook of books; let i = index" [attr.data-index]="i" class="col-md-2" >
 
                         <div class="card" style="border-top-right-radius: 25px; border-top-left-radius: 25px;">
                             <img class="card-img-top" [src]= oneBook.bookId.image alt="Book cover">
@@ -23,22 +23,21 @@
                                         </p>
 
 
-
                                         <!-- Rating section -->
                                         <div class="rating">
-                                            <span class="star" (click)="selectStar(1, i+1)">
+                                            <span class="star" (click)="selectStar(1, i+1, oneBook)">
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(2, i+1)">
+                                            <span class="star" (click)="selectStar(2, i+1, oneBook)">
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(3, i+1)">
+                                            <span class="star" (click)="selectStar(3, i+1, oneBook)">
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(4, i+1)">
+                                            <span class="star" (click)="selectStar(4, i+1, oneBook)">
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(5, i+1)">
+                                            <span class="star" (click)="selectStar(5, i+1, oneBook)">
                                                 <i class="fas fa-star"></i>
                                             </span>
                                         </div>
@@ -51,7 +50,7 @@
                                         <div class="form-group">
                                             <label for="status"></label>
                                             <select class="form-control" id="status" name="status" (change)="onDropdownChange(oneBook,$event)">
-                                                <option value="progress" selected ><span style="font-weight:900;">Book progress</span ></option>
+                                                <option value="progress" selected ><span style="font-weight:900;">Status</span ></option>
                                                 <option  value="reading" >Read </option>
                                                 <option value="to_read">To Read</option>
                                                 <option value="read">Completed</option>
@@ -59,6 +58,7 @@
                                         </div>
                                         
                                     </div>
+                                    <div class="userRating">{{oneBook.rating}}x</div>
                                 </div>
                             </div>
                         </div>

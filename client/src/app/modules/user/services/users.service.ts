@@ -40,6 +40,10 @@ export class UsersService {
     return this.dataSubject.asObservable();
   }
 
+  changeBookRating(bookId:string, userId:string, rating : number, options:any){
+    return this._HttpClient.patch(`${this.URL}/rating?bookId=${bookId}&id=${userId}&rating=${rating}`, options)
+  }
+
 
 
 

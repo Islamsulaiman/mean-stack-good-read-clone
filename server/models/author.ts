@@ -2,7 +2,6 @@
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
-import mongoosePaginate from 'mongoose-paginate-v2';
 
 const authorSchema = new Schema(
   {
@@ -28,7 +27,6 @@ const authorSchema = new Schema(
   },
 
 );
-
 
 const Author = mongoose.model('Author', authorSchema);
 

@@ -1,15 +1,21 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
+import { log } from 'console';
 import {
-  create, getAll, getOne, update, deleteOne, bookAvarageRating, search, addCategory,
-  addAuthor,
+  create, getAll, getOne, update, deleteOne, bookAvarageRating, search,
+  updateAvgRating, addCategory, addAuthor,
 } from '../controllers/books';
 import { addBook } from '../controllers/cataegories';
 import { addBooktoAuth } from '../controllers/authors';
 import { cloudi } from './imagesUpload';
-import { log } from 'console';
 
 dotenv.config();
+
+// types
+type Ratings = {
+  avarageRating: number,
+  popularityRating: number
+};
 
 // 1.createBook
 const createBook = async (req:Request, res:Response) => {
@@ -85,9 +91,7 @@ const updateBook = async (req:Request, res:Response) => {
     description,
   } = req.body;
   const book = await getOne(id);
-  
- console.log(req.file)
-  // update image
+
   if (!req.file) throw new Error('No Image has uploaded');
 
   const uploadedImg = req.file.path;
@@ -98,10 +102,10 @@ const updateBook = async (req:Request, res:Response) => {
     crop: 'fill',
 
   });
-   const image = images.url;
-   console.log(image);
+  const image = images.url;
+  console.log(image);
   if (!book) throw new Error('Error: Book not found');
-  const updatedBook = await update(id, { title, description , image });
+  const updatedBook = await update(id, { title, description, image });
   if (!updatedBook) throw new Error('Error: Book not updated');
   return res.status(200).json({ message: 'Book updated successfully', updatedBook });
 };
@@ -115,9 +119,44 @@ const deleteBook = async (req:Request, res:Response) => {
   return res.status(200).json({ message: 'Book deleted successfully', deletedBook });
 };
 
+// // 6. book avarage rating
+// const bookAvarageRatingFunc = async (req:Request, res:Response) => {
+//   const { id } = req.params;
+
+//   const book = await bookAvarageRating(id);
+//   if (!book) throw new Error('Error: Book avarage not found');
+
+//   // get total people voting
+//   let totalVoters : number = 0;
+
+//   // eslint-disable-next-line no-restricted-syntax, guard-for-in
+//   for (const key in book) {
+//     if (key !== '0') {
+//       totalVoters += book[key];
+//     }
+//   }
+
+//   // get total votes
+//   let totalStarsSum : number = 0;
+
+//   // eslint-disable-next-line no-restricted-syntax, guard-for-in
+//   for (const key in book) {
+//     totalStarsSum += book[key] * Number(key);
+//   }
+
+//   // the avarage rating
+//   const avarageRating = (totalStarsSum / totalVoters).toFixed(1);
+
+//   console.log(totalStarsSum, totalVoters);
+
+//   const popularityRating = "avrage rating * number of shelv's";
+
+//   return res.status(200).json(avarageRating);
+// };
+
 // 6. book avarage rating
-const bookAvarageRatingFunc = async (req:Request, res:Response) => {
-  const { id } = req.params;
+const bookAvarageRatingFunc = async (id: string) => {
+  // const { id } = req.params;
 
   const book = await bookAvarageRating(id);
   if (!book) throw new Error('Error: Book avarage not found');
@@ -141,23 +180,31 @@ const bookAvarageRatingFunc = async (req:Request, res:Response) => {
   }
 
   // the avarage rating
-  const avarageRating = (totalStarsSum / totalVoters).toFixed(1);
+  const avarageRating : number = parseFloat((totalStarsSum / totalVoters).toFixed(1));
 
-  console.log(totalStarsSum, totalVoters);
+  const popularityRating: number = totalStarsSum;
 
-  const popularityRating = "avrage rating * number of shelv's";
-
-  return res.status(200).json(avarageRating);
+  return { avarageRating, popularityRating };
 };
 
-
 // 7.Search for book
-const searchForBook = async (req:Request, res:Response, ) =>{
-    let payload = req.body.payload;
-    const searchforBook = await search(payload);
-    res.send({payload: searchforBook});
-}
+const searchForBook = async (req:Request, res:Response) => {
+  const { payload } = req.body;
+  const searchforBook = await search(payload);
+  res.send({ payload: searchforBook });
+};
+
+const updateAvgRatingFunc = async (ratings : Ratings, bookId: string) => {
+  const updatedRatings = await updateAvgRating(
+    ratings.avarageRating,
+    ratings.popularityRating,
+    bookId,
+  );
+
+  return updatedRatings;
+};
 
 export {
-  createBook, getAllBooks, getOneBook, updateBook, deleteBook, bookAvarageRatingFunc, searchForBook
+  createBook, getAllBooks, getOneBook, updateBook, deleteBook, bookAvarageRatingFunc,
+  searchForBook, updateAvgRatingFunc,
 };
