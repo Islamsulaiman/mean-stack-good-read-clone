@@ -1,7 +1,7 @@
-<section class="vh-100" style="background-color: beige;">
+<section class="vh-100" >
   <div class="container h-10 d-flex justify-content-center">
-    <div class="jumbotron my-auto">
-      <h1 class="display-1">Welcome To Admin Panel</h1>
+    <div class=" my-auto">
+      <h1 class="display-1">Admin Panel</h1>
     </div>
   </div>
   <div class="container py-5 h-100">
@@ -13,12 +13,12 @@
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
         <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm(loginForm)">
           <div>
-            <label for="UserName">UserName</label>
-            <input formControlName="UserName" class="form-control" type="text" id="UserName">
-            <div *ngIf="loginForm.get('UserName')?.errors !== null && loginForm.get('UserName')?.touched" class="alert my-2 alert-danger">
-              <p *ngIf="loginForm.get('UserName')?.errors?.['required']" >UserName is required </p>
-              <p *ngIf="loginForm.get('UserName')?.errors?.['minlength']">UserName is minLength 3</p>
-              <p *ngIf="loginForm.get('UserName')?.errors?.['maxlength']" >UserName is maxLength 10</p>
+            <label for="email">Email</label>
+            <input formControlName="email" class="form-control" type="email" id="email">
+            <div *ngIf="loginForm.get('email')?.errors !== null && loginForm.get('UserName')?.touched" class="alert my-2 alert-danger">
+              <p *ngIf="loginForm.get('email')?.errors?.['required']" >email is required </p>
+              <p *ngIf="loginForm.get('email')?.errors?.['minlength']">email is minLength 3</p>
+              <p *ngIf="loginForm.get('email')?.errors?.['maxlength']" >UserName is maxLength 10</p>
             </div>
           </div>
           <div>
@@ -26,6 +26,8 @@
             <input formControlName="password" class="form-control" type="password" id="password">
             <div *ngIf="loginForm.get('password')?.errors !== null && loginForm.get('password')?.touched" class="alert my-2 alert-danger">
               <p *ngIf="loginForm.get('password')?.errors?.['required']" style="color: red;" >password is required </p>
+             <p *ngIf="wrongData" style="color: red;">* Check your email/password and try again</p>
+
             </div>
           </div>
 

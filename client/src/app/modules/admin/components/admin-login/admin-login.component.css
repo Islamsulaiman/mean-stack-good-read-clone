@@ -6,3 +6,7 @@ flex: 1;
 height: 1px;
 background: #eee;
 }
+.display-1{
+    font-weight: bolder;
+    padding-top: 50px;
+}
