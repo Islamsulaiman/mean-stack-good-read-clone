@@ -36,13 +36,13 @@ export class AdminCategoriesComponent {
 
   getCurrentId(id:any){
     if(!id) return
-   
+
     this._CategoriesService.id = id
    }
-   
+
    formData = new FormData();
    file: File | undefined;
-   
+
 
 onFileChange(event: any) {
   this.file = event.target.files[0];
@@ -88,7 +88,7 @@ deleteCategory() {
   );
 }
 
-// Pagianate 
+// Pagianate
 previousPage() {
   if (this.currentPage > 1) {
     this.currentPage--;

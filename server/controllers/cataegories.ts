@@ -11,7 +11,7 @@ const create = (data:NewCategory) => Category.create(data);
 
 // 2.get all categories
 const getAll =  async (limit: number, page: number) => {
-  const perPage = limit > 0 && limit < 10 ? limit : 5;
+  const perPage = limit > 0 && limit < 10 ? limit : limit == 0 ? limit = 100 : 5;
   const pageNumber = page || 1;
   const skip = (pageNumber - 1) * perPage;
 

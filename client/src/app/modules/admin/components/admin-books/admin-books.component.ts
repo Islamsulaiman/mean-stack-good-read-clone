@@ -3,6 +3,10 @@ import { BooksService } from '../../services/books.service';
 import { Book } from '../../interfaces/book';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CategoriesService } from '../../services/categories.service';
+import { Category } from '../../interfaces/category';
+import { Author } from '../../interfaces/author';
+import { AuthorsService } from '../../services/authors.service';
 // import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
@@ -10,14 +14,25 @@ import { Router } from '@angular/router';
   templateUrl: './admin-books.component.html',
   styleUrls: ['./admin-books.component.css']
 })
-export class AdminBooksComponent {
+export class AdminBooksComponent implements OnInit{
   skip = 0
   limit = 12
 
-  books:Book[] = []
+  books:Book | any;
   error  ="";
   doneReq = false
-  constructor(private _BooksService: BooksService, private _router:Router){
+  currentPage = 1
+  totalPages = 1
+  categories:Category | any;
+  authors:Author | any ;
+  selectedValue:any;
+
+  constructor(private _BooksService: BooksService,
+    private _router:Router ,
+    private _CategoriesService:CategoriesService,
+    private _AuthorsService:AuthorsService){
+
+
 
     //assume that every page have only 10 books, th 1st page from 0 to 10
     this._BooksService.getBooks(this.skip, this.limit, {observe: 'response'}).subscribe((res)=>{
@@ -33,6 +48,25 @@ export class AdminBooksComponent {
       }
 
     })
+  }
+
+  changeCategory(e:any){
+    console.log(e.target.value);
+    this.selectedValue = e.target.value;
+
+  }
+  ngOnInit(): void {
+    this._CategoriesService.getCategories(0, 0, {observe: 'response'}).subscribe((data:any)=>{
+      this.categories = data.body.category.categories;
+      this.totalPages = data.body.category.totalPages;
+
+    });
+
+    this._AuthorsService.getAuthors(0, 0, {observe: 'response'}).subscribe((data:any)=>{
+      console.log(data.body.authors);
+      this.authors = data.body.authors;
+      this.totalPages = data.body.totalPages;
+    });
 
 
   }
@@ -53,13 +87,15 @@ onFileChange(event: any) {
 
 addNewBook(myForm: NgForm){
 
-  const { title, description } = myForm.value;
+  const { title, description, category, author } = myForm.value;
 
   this.formData.append('title', title);
   this.formData.append('description', description);
+  this.formData.append('category', category);
+  this.formData.append('author', author);
   if(this.file) this.formData.append('image', this.file);
-
-  this._BooksService.addBook(this.formData).subscribe(
+  console.log(myForm.value)
+  this._BooksService.addBook(myForm.value, ).subscribe(
     (response) => {
       this.doneReq =true
     },
@@ -93,6 +129,15 @@ deleteBook() {
     }
   );
 }
+loadCategories() {
+  this._CategoriesService.getCategories(this.currentPage, this.limit, {observe: 'response'}).subscribe((data:any)=>{
+    this.categories = data.body.category.categories;
+    this.totalPages = data.body.category.totalPages;
+    console.log(this.categories);
+
+  });
+}
+
 
 }
 

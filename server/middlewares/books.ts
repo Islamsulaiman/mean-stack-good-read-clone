@@ -20,7 +20,6 @@ const createBook = async (req:Request, res:Response) => {
     category, // ID
   } = req.body;
 
-
   // Image handling
   let image: any = '';
   if (!req.file) {
@@ -39,8 +38,6 @@ const createBook = async (req:Request, res:Response) => {
   const book = await create({
     title,
     description,
-    author,
-    category,
     image,
   });
   if (!book) throw new Error('Error: Book not created');
