@@ -4,6 +4,7 @@ import {
   create, getAll, getOne, update, deleteOne, bookAvarageRating, search
 } from '../controllers/books';
 import { cloudi } from './imagesUpload';
+import { log } from 'console';
 
 dotenv.config();
 
@@ -66,8 +67,23 @@ const updateBook = async (req:Request, res:Response) => {
     description,
   } = req.body;
   const book = await getOne(id);
+  
+ console.log(req.file)
+  // update image
+  if (!req.file) throw new Error('No Image has uploaded');
+
+  const uploadedImg = req.file.path;
+  const images = await cloudi.uploader.upload(uploadedImg, {
+    public_id: `${id}_profile`,
+    width: 500,
+    height: 500,
+    crop: 'fill',
+
+  });
+   const image = images.url;
+   console.log(image);
   if (!book) throw new Error('Error: Book not found');
-  const updatedBook = await update(id, { title, description });
+  const updatedBook = await update(id, { title, description , image });
   if (!updatedBook) throw new Error('Error: Book not updated');
   return res.status(200).json({ message: 'Book updated successfully', updatedBook });
 };
