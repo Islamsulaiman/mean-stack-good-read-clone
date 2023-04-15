@@ -13,14 +13,29 @@ type UpdatedBook = {
   description?:string,
   image?: string,
 };
+type Ratings = {
+  avarageRating: number,
+  popularityRating: number
+};
+
 // 1.createBook
 const create = async (data:NewBook) => Book.create(data);
 // 2.get All books
 const getAll = async (skip:number, limit:number) => {
+  if (!limit) {
+    const books = await Book.find({}).skip(skip).limit(limit).populate('category')
+      .populate('author');
+
+    return books;
+  }
   const books = await Book.find({}).skip(skip).limit(limit).populate('category')
     .populate('author');
 
-  return books;
+  let noOfPages = await Book.find({}).count();
+  noOfPages /= limit <= 0 ? 1 : limit;
+  noOfPages = Math.ceil(noOfPages);
+
+  return { books, noOfPages };
 };
 // 3.getOneBook
 const getOne = async (data:string) => {
@@ -44,6 +59,11 @@ const updateBookRating = async (bookId:string, oldRating:number, newRating:numbe
   const oldRatingField = `rating.${oldRating.toString()}`;
   const newRatingField = `rating.${newRating.toString()}`;
 
+  if (oldRatingField === newRatingField) {
+    const book = Book.findById({ _id: bookId });
+    return book;
+  }
+
   const book = await Book.findByIdAndUpdate(
     { _id: bookId },
     { $inc: { [oldRatingField]: -1, [newRatingField]: 1 } },
@@ -58,9 +78,17 @@ const bookAvarageRating = async (bookId:string) => {
   return returnBook;
 };
 
-const search = async (payload: string) => (await Book.find({ title: { $regex: new RegExp('^' + payload + '.*', 'i') } })
+const search = async (payload: string) => (await Book.find({ title: { $regex: new RegExp(`^${payload}.*`, 'i') } })
   .exec())
-  .slice(0,10)
+  .slice(0, 10);
+
+// update user avgrating and popularity rating
+const updateAvgRating = async (avgRating: number, popUlarityRating: number, bookId: string) => {
+  const rating = await Book.findByIdAndUpdate({ _id: bookId }, { avgRating, popUlarityRating });
+  return rating;
+};
+
 export {
-  create, getAll, getOne, update, deleteOne, updateBookRating, bookAvarageRating, search
+  create, getAll, getOne, update, deleteOne, updateBookRating, bookAvarageRating,
+  search, updateAvgRating,
 };

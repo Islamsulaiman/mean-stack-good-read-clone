@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import * as userCont from '../controllers/users';
-import { updateBookRating } from '../controllers/books';
+import { updateBookRating, getOne } from '../controllers/books';
 import { cloudi } from './imagesUpload';
 import { hashPassword } from './authuntication';
+import { bookAvarageRatingFunc, updateAvgRatingFunc } from './books';
 
 // data types
 type UpdteUserData = {
@@ -110,8 +111,6 @@ const adduserRatingFunc = async (req: Request, res: Response) : Promise<Response
   const id = req.query.id as string;
   const rating = parseInt(req.query.rating as string, 10);
 
-  console.log(bookId, id, rating);
-
   // update the user rating for this book
   const oldUserRatingObject = await userCont.adduserRating(id, bookId, rating);
 
@@ -119,9 +118,18 @@ const adduserRatingFunc = async (req: Request, res: Response) : Promise<Response
   const updatedBookId :any = oldUserRatingObject?.books[0].bookId;
 
   // update the rating for the book
-  const bookUpdated = await updateBookRating(updatedBookId, oldUserRating, rating);
+  await updateBookRating(updatedBookId, oldUserRating, rating);
 
-  return res.status(200).json(bookUpdated);
+  // get avarage rating and popularity for the book
+  const avgRatingAndPopularity = await bookAvarageRatingFunc(bookId);
+
+  // go to book and add these attributes
+  await updateAvgRatingFunc(avgRatingAndPopularity, bookId);
+
+  // get the final book
+  const finalBook = await getOne(bookId);
+
+  return res.status(200).json(finalBook);
 };
 
 const changeImgFunc = async (req: Request, res: Response) : Promise<Response> => {
