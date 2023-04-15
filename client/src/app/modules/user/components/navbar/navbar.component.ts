@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BooksService } from '../../services/books.service';
+import { UsersService } from '../../services/users.service';
 
 interface Book{
   _id:string,
@@ -27,10 +28,11 @@ export class NavbarComponent{
   wrongData = false
   isLogged = false;
   userImage = "";
-
   sortedBooks : Book[] = [];
   hasQuery  =false;
-constructor(private _AuthService:AuthService, private _Router: Router, private search: BooksService){
+constructor(private _AuthService:AuthService, private _Router: Router, private search: BooksService,
+            private _UserServ: UsersService
+  ){
       this._AuthService.saveUser()
       if(this._AuthService.currentUser.getValue() != null){
         this.getData()
@@ -62,7 +64,7 @@ onSubmit(Form: NgForm) {
 
 
 getData(){
-  this._AuthService.getUserById(this._AuthService.currentUserId).subscribe(
+  this._UserServ.getUserById(this._AuthService.currentUserId, 0, 0, {}).subscribe(
     data => {
       this.userImage = data.image
     },

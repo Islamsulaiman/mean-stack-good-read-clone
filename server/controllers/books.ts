@@ -107,5 +107,5 @@ const updateAvgRating = async (avgRating: number, popUlarityRating: number, book
 
 export {
   create, getAll, getOne, update, deleteOne, updateBookRating, bookAvarageRating,
-  search, updateAvgRating,addAuthor,addCategory
+  search, updateAvgRating, addAuthor, addCategory,
 };

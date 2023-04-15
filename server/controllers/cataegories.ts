@@ -21,7 +21,7 @@ const getAll =  async (limit: number, page: number) => {
   const categories = await Category.find({})
     .skip(skip)
     .limit(perPage)
-    .populate('Books')
+    .populate('Books');
 
   return {
     categories,
