@@ -18,7 +18,7 @@ router.patch('/bookProgress', updateBookStatusFunc);
 router.patch('/rating/', adduserRatingFunc);
 
 // add book to user with it's bookId
-router.patch('/:bookId', addBookToUserFunc);
+router.patch('/addBook', addBookToUserFunc);
 
 // Change Image
 router.patch('/image/:id', userUpload.single('image'), errorHandling(changeImgFunc));

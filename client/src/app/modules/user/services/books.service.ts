@@ -21,6 +21,8 @@ export class BooksService {
     return this._HttpClient.get(`http://localhost:3000/book/${bookId}/review?skip=${skip}&limit=${limit}`, options)
   }
 
+  addBookToUserShelve()
+
 
 // Function to retrieve data from the database [Search]
 
@@ -30,7 +32,6 @@ searchForBooks(searchQuery: string): Observable<any> {
   }).pipe(
     map(data=> data.payload)
   )
-
 }
 
 }
