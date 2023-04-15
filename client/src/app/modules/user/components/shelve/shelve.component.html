@@ -5,7 +5,7 @@
         <!-- Bookshelf -->
                 <div class="row">
 
-                    <div *ngFor="let oneBook of books; let i = index" class="col-md-2" >
+                    <div *ngFor="let oneBook of books; let i = index" [attr.data-index]="i" class="col-md-2" >
 
                         <div class="card" style="border-top-right-radius: 25px; border-top-left-radius: 25px;">
                             <img class="card-img-top" [src]= oneBook.bookId.image alt="Book cover">

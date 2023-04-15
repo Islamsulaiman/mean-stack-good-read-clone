@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
+import { BehaviorSubject } from 'rxjs';
 
 type data ={
   userId?:string
@@ -10,7 +11,7 @@ type data ={
   templateUrl: './shelve.component.html',
   styleUrls: ['./shelve.component.css']
 })
-export class ShelveComponent implements OnInit  {
+export class ShelveComponent implements OnInit {
 
   i = 0;
 
@@ -129,13 +130,11 @@ export class ShelveComponent implements OnInit  {
 
     }
 
-    console.log("userId", this.userId)
-    console.log("book", book.bookId._id)
-    console.log("rating",index)
-
     this._UserService.changeBookRating(book.bookId._id, this.userId, index,{observe: 'response'}).subscribe((res)=>{
       console.log(res)
     })
+
+    window.location.reload();
     return index
   }
 
