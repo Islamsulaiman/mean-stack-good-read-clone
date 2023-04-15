@@ -12,6 +12,7 @@ import { CategoriesComponent } from './components/categories/categories/categori
 import { CategoryDetailsComponent } from './components/categories/category-details/category-details.component';
 import { ShelveMainComponent } from './components/shelve-main/shelve-main.component';
 import { HomeComponent } from './components/home/home.component';
+import { AboutusComponent } from './components/aboutus/aboutus.component';
 
 const routes: Routes = [
 
@@ -26,6 +27,7 @@ const routes: Routes = [
     { path: 'singleBook/:bookId',  component: SingleBookComponent},
     { path: 'books',  component: BooksComponent},
     { path: 'shelve',  component: ShelveMainComponent},
+    {path: 'aboutus', component:AboutusComponent}
   ] },
 ];
 
