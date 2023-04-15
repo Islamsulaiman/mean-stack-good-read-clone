@@ -21,7 +21,7 @@ export class AdminLoginComponent {
 Admin : Admin | undefined;
 loginForm = new FormGroup({
   email  : new FormControl(null,[Validators.required, Validators.email]),
-  password : new FormControl(null,[Validators.required, Validators.minLength(8)]),
+  password : new FormControl(null,[Validators.required]),
 
 });
  
@@ -33,17 +33,17 @@ submitLoginForm(loginForm:FormGroup){
     
     if (response.message === 'success')
     {
-      
+      this.wrongData = false
       localStorage.setItem("adminToken",response.token);
       this._authService.savecurrentAdmin();
 
       if(this._authService.currentAdmin.getValue != null)
       {
         this.islogged = true;
+        
       }
       
     this.islogged = true ;
-    
     }
     else
     {
