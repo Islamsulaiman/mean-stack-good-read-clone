@@ -13,7 +13,7 @@ const router = Router();
 router.patch('/bookProgress', updateBookStatusFunc);
 
 // add rating to a specific book inside one user with it's bookId
-router.patch('/rating/:bookId', adduserRatingFunc);
+router.patch('/rating/', adduserRatingFunc);
 
 // add book to user with it's bookId
 router.patch('/:bookId', addBookToUserFunc);

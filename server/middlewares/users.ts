@@ -106,8 +106,11 @@ const addBookToUserFunc = async (req: Request, res: Response) : Promise<Response
 };
 
 const adduserRatingFunc = async (req: Request, res: Response) : Promise<Response> => {
-  const { id, rating } = req.body;
-  const { bookId } = req.params;
+  const bookId = req.query.bookId as string;
+  const id = req.query.id as string;
+  const rating = parseInt(req.query.rating as string, 10);
+
+  console.log(bookId, id, rating);
 
   // update the user rating for this book
   const oldUserRatingObject = await userCont.adduserRating(id, bookId, rating);

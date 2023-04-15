@@ -99,35 +99,16 @@ export class ShelveComponent implements OnInit  {
   }
 
 
-
-
-  // selectStar(index: number, cardNumber: number): number {
-
-  //   const stars = document.querySelectorAll('.rating .star'); //array of all stars
-
-  //   console.log("stars",stars)
-  //   console.log("card number", cardNumber)
-
-  //   for (let i = 0; i < stars.length; i++) {
-  //     if (i < index) {
-  //       stars[i].classList.add('selected');
-  //     } else {
-  //       stars[i].classList.remove('selected');
-  //     }
-  //   }
-  //   console.log(index)
-  //   return index
-  // }
-
-  selectStar(index: number, cardNumber: number): number {
+  selectStar(index: number, cardNumber: number, book: any): number {
 
     const stars = document.querySelectorAll('.rating .star'); //array of all stars
 
     console.log("stars",stars)
     console.log("card number", cardNumber)
+    console.log("stars length", stars.length)
 
     if(cardNumber === 1) {
-      for (let i = 0; i < stars.length; i++) {
+      for (let i = 0; i < 5; i++) {
         if (i < index) {
           stars[i].classList.add('selected');
         } else {
@@ -137,7 +118,7 @@ export class ShelveComponent implements OnInit  {
     }else{
       const prevCardsStars = (cardNumber-1) * 5;
 
-      for (let i = prevCardsStars ; i < prevCardsStars+index; i++) {
+      for (let i = prevCardsStars ; i <= prevCardsStars + 4; i++) {
 
         if (i < prevCardsStars+index) {
           stars[i].classList.add('selected');
@@ -148,10 +129,51 @@ export class ShelveComponent implements OnInit  {
 
     }
 
+    console.log("userId", this.userId)
+    console.log("book", book.bookId._id)
+    console.log("rating",index)
 
-    console.log(index)
+    this._UserService.changeBookRating(book.bookId._id, this.userId, index,{observe: 'response'}).subscribe((res)=>{
+      console.log(res)
+    })
     return index
   }
+
+
+  // selectStar(index: number, cardNumber: number): number {
+
+  //   const stars = document.querySelectorAll('.rating .star'); //array of all stars
+
+  //   console.log("stars",stars)
+  //   console.log("card number", cardNumber)
+  //   console.log("stars length", stars.length)
+
+  //   if(cardNumber === 1) {
+  //     for (let i = 0; i < stars.length; i++) {
+  //       if (i < index) {
+  //         stars[i].classList.add('selected');
+  //       } else {
+  //         stars[i].classList.remove('selected');
+  //       }
+  //     }
+  //   }else{
+  //     const prevCardsStars = (cardNumber-1) * 5;
+
+  //     for (let i = prevCardsStars ; i < prevCardsStars+index; i++) {
+
+  //       if (i < prevCardsStars+index) {
+  //         stars[i].classList.add('selected');
+  //       } else {
+  //         stars[i].classList.remove('selected');
+  //       }
+  //     }
+
+  //   }
+
+
+  //   console.log(index)
+  //   return index
+  // }
 
 
   
