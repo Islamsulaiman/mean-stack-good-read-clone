@@ -22,6 +22,12 @@ export class BooksService {
   }
 
 
+  getPopularBooks(options:any): Observable<any>{
+    return this._HttpClient.get(`http://localhost:3000/book/all/popular`, options)
+  }
+
+
+
 // Function to retrieve data from the database [Search]
 
 searchForBooks(searchQuery: string): Observable<any> {

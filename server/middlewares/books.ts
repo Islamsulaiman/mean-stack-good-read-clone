@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import { log } from 'console';
 import {
-  create, getAll, getOne, update, deleteOne, bookAvarageRating, search,
+  create, getAll, getOne, update, deleteOne, bookAvarageRating, search, getPopular,
   updateAvgRating, addCategory, addAuthor,
 } from '../controllers/books';
 import { addBook } from '../controllers/cataegories';
@@ -204,7 +204,16 @@ const updateAvgRatingFunc = async (ratings : Ratings, bookId: string) => {
   return updatedRatings;
 };
 
+
+
+const popularBooks = async (req:Request, res:Response) => {
+
+  const book = await getPopular();
+
+  return res.status(200).json({ message: 'Books', book });
+};
+
 export {
   createBook, getAllBooks, getOneBook, updateBook, deleteBook, bookAvarageRatingFunc,
-  searchForBook, updateAvgRatingFunc,
+  searchForBook, updateAvgRatingFunc, popularBooks
 };

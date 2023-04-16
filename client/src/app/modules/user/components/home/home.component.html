@@ -45,6 +45,41 @@
     </div>
   </div>
 
+
+
+
+
+  <div id="portfolio" class="our-portfolio section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
+            <h6>Popular books</h6>
+            <h4>See Our Popular <em>Books</em></h4>
+            <div class="line-dec"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div >
+      <div class="d-flex justify-content-center row">
+        <div *ngFor="let book of books" class="col-md-2 col-sm-12">
+          <a class="cta text-center" [routerLink] = '["/singleBook", book._id ]'>
+                <h2 class="name">{{book.title}}</h2>
+                <img alt="" class="img-thumbnail img-responsive" [src]="book.image">
+                <h2>{{book.title}}</h2>
+                <p>{{book.description}}</p>
+            </a>   
+        </div>
+    </div>
+  </div>
+  </div>
+
+
+
+
+
   <div id="about" class="about section">
     <div class="container">
       <div class="row">
@@ -128,25 +163,36 @@
     </div>
   </div>
   
-  <!-- <div id="portfolio" class="our-portfolio section">
+  <div id="portfolio" class="our-portfolio section">
     <div class="container">
       <div class="row">
         <div class="col-lg-5">
           <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
-            <h6>Popular books</h6>
-            <h4>See Our Popular <em>Books</em></h4>
+            <h6>Popular Categories</h6>
+            <h4>See Our Popular <em>Categories</em></h4>
             <div class="line-dec"></div>
           </div>
         </div>
       </div>
     </div>
-
-  </div> -->
+    <div class="container bootstrap snippets bootdey">
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <a class="cta text-center" href="#">
+                <h2 class="name">Martin Breton</h2>
+                <img alt="" class="img-thumbnail img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                <h2>Tester</h2>
+                <p>Adventure time</p>
+            </a>   
+        </div>
+    </div>
+  </div>
+  </div>
   
   <div id="free-quote" class="free-quote">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 offset-lg-4">
+        <div class="col-lg-3 offset-lg-4">
           <div class="section-heading  wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
             <h6>Keep updated</h6>
             <h4>for any new books</h4>
@@ -173,21 +219,6 @@
     </div>
   </div>
 
-
-  <!-- <div id="portfolio" class="our-portfolio section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-5">
-          <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
-            <h6>Popular authors</h6>
-            <h4>See Our Popular <em>Authors</em></h4>
-            <div class="line-dec"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-  </div> -->
 
 
   <div id="contact" class="contact-us section">

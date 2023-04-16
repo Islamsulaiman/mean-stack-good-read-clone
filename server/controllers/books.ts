@@ -8,6 +8,8 @@ type NewBook = {
   author?: string,
   category?:string
   image:string,
+  popularityRating: number,
+  avarageRating: number
 };
 type UpdatedBook = {
   title?:string,
@@ -105,7 +107,10 @@ const updateAvgRating = async (avgRating: number, popUlarityRating: number, book
   return rating;
 };
 
+// Get popular books
+const getPopular = async () => Book.find().sort({'popUlarityRating': -1}).limit(5)
+
 export {
   create, getAll, getOne, update, deleteOne, updateBookRating, bookAvarageRating,
-  search, updateAvgRating, addAuthor, addCategory,
+  search, updateAvgRating, addAuthor, addCategory, getPopular
 };
