@@ -22,6 +22,7 @@ import { ShelveMainComponent } from './components/shelve-main/shelve-main.compon
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AboutusComponent } from './components/aboutus/aboutus.component';
     HomeComponent,
     FooterComponent,
     AboutusComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

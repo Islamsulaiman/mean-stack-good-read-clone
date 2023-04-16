@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'any'
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AuthorsService {
 
 
-  URL = 'http://localhost:3000/authors';
+  URL = `${environment.domain}/authors`;
   constructor(private _HttpClient:HttpClient) { }
 
   //get Authors
@@ -23,4 +24,10 @@ export class AuthorsService {
     return this._HttpClient.get(`${this.URL}/${id}`);
 
   }
+
+  getPopularAuthors(options:any): Observable<any>{
+    return this._HttpClient.get(`${this.URL}/all/popular`, options)
+  }
+
+
 }

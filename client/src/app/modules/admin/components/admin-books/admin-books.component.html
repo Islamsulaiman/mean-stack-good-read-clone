@@ -42,11 +42,17 @@
           <td>{{book.title}}</td>
           <td>{{book.description}}</td>
           <td><img [src]=book.image width="50" height="50" alt=""></td>
+          <td>
+            <div *ngFor="let category of book.category">
+              <p>{{category.name}}</p>
+            </div>
+           </td>
+           <td>
+            <div *ngFor="let author of book.author">
+              <p>{{author.fullName}}</p>
 
-          <td>{{book.category}}</td>
-          <td>{{book.author}}</td>
-
-
+            </div>
+           </td>
           <td>
             <a (click)="getCurrentId(book._id)" href="#editBookModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
             <a (click)="getCurrentId(book._id)" href="#deleteBookModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -89,7 +95,7 @@
           <div class="form-group">
             <label>category</label>
             <!-- <input type="text" ngModel name="category s class="form-control> -->
-            <select name="category"  (change)="changeCategory($event)" class="form-control">
+            <select ngModel name="category"  (change)="changeCategory($event)" class="form-control">
               <option>--Select--</option>
               <option [value]="category._id" *ngFor="let category of categories">
                 {{category.name}}
@@ -100,9 +106,9 @@
           <div class="form-group">
             <label>author</label>
             <!-- <input type="text" ngModel name="author"   class="form-control"> -->
-            <select name="author"  class="form-control">
+            <select ngModel name="author"  class="form-control">
               <option>--Select--</option>
-              <option  *ngFor="let author of authors">
+              <option  [value]="author._id"  *ngFor="let author of authors">
                 {{author.fullName}}
               </option>
 

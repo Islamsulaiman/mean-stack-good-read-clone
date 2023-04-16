@@ -27,22 +27,26 @@ export const bookSchema = new Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
+        required: true,
       },
     ],
     avgRating: {
       type: Number,
       maximum: 5,
       minimum: 0,
+      default: 0
     },
 
     popUlarityRating: {
       type: Number,
       minimum: 0,
+      default: 0
     },
 
     author: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Author',
+      required: true,
     },
     ],
     rating: {

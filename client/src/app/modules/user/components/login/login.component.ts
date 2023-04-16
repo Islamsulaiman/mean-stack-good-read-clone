@@ -13,11 +13,9 @@ export class LoginComponent {
   password = ""
   wrongData = false
   isLogged = false;
-  userImage = "";
 constructor(private _AuthService:AuthService, private _Router: Router){
       this._AuthService.saveUser()
       if(this._AuthService.currentUser.getValue() != null){
-        this.getData()
         this.isLogged = true;
         this._Router.navigate(['/'])    
       }
@@ -46,13 +44,4 @@ onSubmit(Form: NgForm) {
   )}
 
 
-getData(){
-  this._AuthService.getUserById(this._AuthService.currentUserId).subscribe(
-    data => {
-      this.userImage = data.image
-    },
-    error => {
-      return
-    })
-}
 }

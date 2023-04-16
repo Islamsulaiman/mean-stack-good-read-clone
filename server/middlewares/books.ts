@@ -2,9 +2,11 @@ import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import { log } from 'console';
 import {
-  create, getAll, getOne, update, deleteOne, bookAvarageRating, search,
-  updateAvgRating,
+  create, getAll, getOne, update, deleteOne, bookAvarageRating, search, getPopular,
+  updateAvgRating, addCategory, addAuthor,
 } from '../controllers/books';
+import { addBook } from '../controllers/cataegories';
+import { addBooktoAuth } from '../controllers/authors';
 import { cloudi } from './imagesUpload';
 
 dotenv.config();
@@ -20,9 +22,10 @@ const createBook = async (req:Request, res:Response) => {
   const {
     title,
     description,
-    author,
-    category,
+    author, // ID
+    category, // ID
   } = req.body;
+
   // Image handling
   let image: any = '';
   if (!req.file) {
@@ -41,11 +44,25 @@ const createBook = async (req:Request, res:Response) => {
   const book = await create({
     title,
     description,
-    author,
-    category,
     image,
   });
   if (!book) throw new Error('Error: Book not created');
+
+  const bookId: any = book._id
+
+
+  // add book to category 
+  await addBook(category, bookId);
+
+  // add book to author
+  await addBooktoAuth(author, bookId)
+
+  // Push category to book
+  await addCategory(bookId,category)
+
+  // Push author to book
+  await addAuthor(bookId, author)
+
 
   return res.status(200).json({ message: 'Book created successfully', book });
 };
@@ -187,7 +204,16 @@ const updateAvgRatingFunc = async (ratings : Ratings, bookId: string) => {
   return updatedRatings;
 };
 
+
+
+const popularBooks = async (req:Request, res:Response) => {
+
+  const book = await getPopular();
+
+  return res.status(200).json({ message: 'Books', book });
+};
+
 export {
   createBook, getAllBooks, getOneBook, updateBook, deleteBook, bookAvarageRatingFunc,
-  searchForBook, updateAvgRatingFunc,
+  searchForBook, updateAvgRatingFunc, popularBooks
 };
