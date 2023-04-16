@@ -160,6 +160,29 @@
     color: #333;
   }
 
+
+  .remove-book {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove border */
+    color: white; /* White text */
+    padding:0.2rem 0.7rem; /* Relative padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Make it a block element */
+    font-size: 1rem; /* Relative font size */
+    margin: 0 auto; /* Center horizontally */
+    margin-bottom: 1rem; /* Add space below the button */
+    cursor: pointer; /* Add pointer cursor on hover */
+    width: 70%; /* Set a percentage width */
+    max-width: 10em; /* Set a max-width in em units */
+    border-radius: 0.6rem;
+  }
+
+  
+  .remove-book:hover {
+    background-color: #fc4f4f; /* Darker green on hover */
+  }
+
   
   @keyframes sparkling {
     0% {

@@ -5,7 +5,6 @@ import {
 import { User } from '../models';
 
 const addReview = async (req: Request, res: Response) => {
-
   const { content, userId } = req.body;
   const { id } = req.params;
   const review = await create(id, { content, userId });
@@ -37,6 +36,7 @@ const deleteReview = async (req: Request, res: Response) => {
   if (!deletedReview) throw new Error("Review doens't exist");
   return res.status(200).json({ message: 'Review has been deleted successfully' });
 };
+
 export {
   addReview,
   getReviews,
