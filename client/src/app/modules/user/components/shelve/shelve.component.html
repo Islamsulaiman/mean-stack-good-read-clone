@@ -48,20 +48,16 @@
                                                 <option value="read">Completed</option>
                                             </select>
                                         </div>
-<<<<<<< HEAD
-                                        <div style="margin-bottom: 50px;" class="form-group mt-5 d-flex justify-content-center">
-                                            <p class="status-text ">{{ oneBook.book_status === 'to_read' ? 'To Read' : 
-=======
+
                                         <div id="parent-{{i}}" class="form-group mt-5 d-flex justify-content-center">
                                             <p id="item-{{i}}" class="status-text">{{ oneBook.book_status === 'to_read' ? 'To Read' : 
->>>>>>> c175e5dd4f81679012687311a42d1acfbe999f5f
                                                 oneBook.book_status === 'read'? 'Compleated':
                                                  'Reading'
                                             }}</p>
-                                        </div>
+                                        </div>  
                                         
                                     </div>
-                                    <button (click)="deleteBook(oneBook)" class="remove-book">Remove Book</button>
+                                    <button style="margin-bottom: 50px;" (click)="deleteBook(oneBook)" class="remove-book">Remove Book</button>
                                     <div class="userRating">{{oneBook.rating}}x</div>
                                 </div>
                             </div>
