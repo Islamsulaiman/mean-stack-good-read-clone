@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../../services/books.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { UsersService } from '../../services/users.service';
 @Component({
   selector: 'app-single-book',
   templateUrl: './single-book.component.html',
@@ -20,9 +21,8 @@ export class SingleBookComponent implements OnInit{
   addReviewForm!:FormGroup
   editReviewForm!: FormGroup;
   deleteReviewForm!: FormGroup;
-
-  userId = "643b11f461dee46ad0581e9b"
-  clicked = false
+  isLogged = false
+  isChecked = false
   currentReview: any={
     title:'',
     content:''
@@ -34,7 +34,14 @@ export class SingleBookComponent implements OnInit{
   constructor(private _ActivatedRoute:ActivatedRoute,
      private _BooksService:BooksService,
      private _FormBuilder:FormBuilder,
+     private _AuthService: AuthService,
+     private _UserService: UsersService
       ){
+
+
+       
+    if(this._AuthService.currentUser.getValue()) this.isLogged = true
+
     this.bookId = this._ActivatedRoute.snapshot.params['bookId']
 
     this._BooksService.getSingleBook(this.bookId,{observe: 'response'}).subscribe((res)=>{
@@ -47,8 +54,6 @@ export class SingleBookComponent implements OnInit{
 
     this._BooksService.getBookReviews(this.bookId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
       if(res.status === 200){
-        this.bookReviews = res.body.book
-        console.log(res)
         this.bookReviews = res.body
       }else{
         this.error = res
@@ -59,20 +64,17 @@ export class SingleBookComponent implements OnInit{
 
 
   addBookToUserShelve(){
-    console.log("addBookToUserShelve")
-    console.log("bookId",this.bookId)
     this._BooksService.addBookToUserShelve(this._AuthService.currentUserId, this.bookId, {observe: 'response'}).subscribe((res)=>{
       console.log(res)
 
       if(res.status === 200){
         this.massage = res.body
-        console.log(this.bookReviews)
+
       }else{
         this.error = res
       }
     })
   }
-
 
 
   // this.userId = this._AuthService.currentUser
@@ -83,15 +85,12 @@ export class SingleBookComponent implements OnInit{
   addReview(){
     const reviewData = {
       content: this.addReviewForm.value.content,
-      userId:this.userId,
+      userId:this._AuthService.currentUserId,
     }
 
     this._BooksService.addBookReviews(this.bookId,reviewData).subscribe((res)=>{
-      console.log(reviewData);
 
-      console.log(res);
     },(err)=>{
-      console.log(err);
 
     })
     this.formSubmitted = true;
@@ -100,10 +99,8 @@ export class SingleBookComponent implements OnInit{
 
   getReviews(){
     this._BooksService.getBookReviews(this.bookId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
-      console.log(res)
       if(res.status === 200){
         this.bookReviews = res.body
-        console.log(this.bookReviews)
       }else{
         this.error = res
       }
@@ -141,6 +138,13 @@ export class SingleBookComponent implements OnInit{
 
 
   ngOnInit(): void {
+
+    //Check user has book
+    this._UserService.getUserById(this._AuthService.currentUserId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
+      if(res.body.books.find((e:any)=> e.bookId._id === this.bookId)) this.isChecked = true
+      else
+      this.isChecked = false
+    })
     this.addReviewForm = this._FormBuilder.group({
       userId:[],
       content:['', [Validators.required, Validators.minLength(3)]]

@@ -9,7 +9,7 @@ import { BooksService } from '../../services/books.service';
 export class BooksComponent {
 
   skip = 0
-  limit = 12
+  limit = 8
   currentPage = 1
   totalPages = 0
 

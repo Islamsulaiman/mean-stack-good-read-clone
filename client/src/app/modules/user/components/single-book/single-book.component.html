@@ -22,42 +22,35 @@
         <div class="profile-container">
             <div class="profile-sidebar">
 
-                <div class="dropdown">
-                    <button (click)="addBookToUserShelve()" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"  aria-expanded="false">
+                <div  *ngIf="isLogged"  class="dropdown">
+                    <button  *ngIf="!isChecked" (click)="addBookToUserShelve()" class="btn first btn-primary" type="button" id="dropdownMenu2"  aria-expanded="false">
                       Add to shelve
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                      <li><button class="dropdown-item" type="button">Read</button></li>
-                      <li><button class="dropdown-item" type="button">Currently Reading</button></li>
-                      <li><button class="dropdown-item" type="button">Want to read</button></li>
-                    </ul>
+                    <button *ngIf="isChecked" class="btn second btn-primary" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"  aria-expanded="false">
+                        Added
+                      </button>
                 </div>
+                <div class="starrating risingstar d-flex justify-content-end flex-row-reverse" style="margin-top: 10px;">
+                    <span class="justify-content-end align-middle ml-2 text-muted" >{{book.avgRating}}</span>
+                    <input type="radio" id="star3" name="rating" class="checked " value="3" /><label for="star3" title="3 star"></label>
 
-                <div class="starrating risingstar d-flex justify-content-end flex-row-reverse">
-                    <span class="justify-content-end align-middle ml-2" >No. of ratings</span>
-
-                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
-                    <input type="radio" id="star4" name="rating"  value="4" /><label for="star4" title="4 star"></label>
-                    <input type="radio" id="star3" name="rating" class="checked" value="3" /><label for="star3" title="3 star"></label>
-                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
-                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
 
                 </div>
 
-                <div class="desktop-sticky-top">
+                <div class="desktop-sticky-top" style="margin-top: 10px;">
                     <h4>{{book.title}}</h4>
-                    <div class="font-weight-600 mb-3 text-muted mt-n2"><span style="font-weight: bold;">By: </span> <span *ngFor="let author of book.author let isLast=last">
+                    <div class="font-weight-600 mb-3 text-muted "><span style="font-weight: bold; margin-top: 10em;">By: </span> <span *ngFor="let author of book.author let isLast=last">
                         {{author.fullName}} <span *ngIf="!isLast">,</span>
                     </span></div>
 
-                    <div class="font-weight-600 mb-3 text-muted mt-n2"><span style="font-weight: bold;">Category: </span> <span *ngFor="let category of book.category let isLast=last">
+                    <div  class="font-weight-600 mb-3 text-muted mt-n2"><span style="font-weight: bold;">Category: </span> <span *ngFor="let category of book.category let isLast=last">
                         {{category.name}} <span *ngIf="!isLast">,</span>
                     </span>
 
                     </div>
-                    <p>
-                        {{book.description}}
-                    </p>
+                    <div class="font-weight-600 mb-3 text-muted "><span style="font-weight: bold; margin-top: 10em;">Description: </span> <span *ngFor="let author of book.author let isLast=last">
+                        {{book.description}} <span *ngIf="!isLast">,</span>
+                    </span></div>
                 </div>
             </div>
 
@@ -68,7 +61,7 @@
                         <div class="tab-content p-0">
                             <div class="tab-pane fade active show" id="profile-books">
 
-                              <div class="modal-body">
+                              <div class="modal-body" *ngIf="isLogged">
                                 <form [formGroup]="addReviewForm" (ngSubmit)="addReview()">
                                   <input
                                     type="text"
@@ -82,16 +75,16 @@
                                 </form>
                               </div>
 
-                                <div *ngFor="let bookReview of bookReviews" class="list-group ">
+                                <div class="list-group ">
 
                                     <!-- "https://bootdey.com/img/Content/avatar/avatar1.png" -->
 
-                                    <div class="list-group-item d-flex align-items-center my-3" style = "border: 1px solid rgba(0, 0, 0, 0.2); ; border-radius: 20px;">
-                                        <img [src]= bookReview.userId.image alt="User picture" width="50px" class="rounded-sm ml-n2" />
+                                    <div *ngFor="let review of bookReviews " class="list-group-item d-flex align-items-center my-3" style = "border: 1px solid rgba(0, 0, 0, 0.2); ; border-radius: 20px;">
+                                        <img [src]= review.userId.image alt="User picture" width="50px" class="rounded-sm ml-n2" />
                                         <div class="flex-fill pl-3 pr-3 content">
-                                            <div><a href="#" class="text-dark font-weight-600">{{bookReview.userId.userName}}</a></div>
-                                            <p>{{bookReview.content}}</p>
-                                        </div>
+                                            <div><a href="#" class="text-dark font-weight-600">{{review.userId.firsName}}</a></div>
+                                            <p>{{review.content}}</p>
+                                    </div>
                                         <!-- <form [formGroup]="editReviewForm" (ngSubmit)="editReview()">
                                           <input
                                             type="text"

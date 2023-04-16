@@ -10,7 +10,6 @@ body {
     font-family: "Poiret One", cursive;
 }
 
-h1,
 h2 {
     font-family: Arial;
     font-weight: 900;
@@ -91,7 +90,10 @@ header .overlay p {
 .team-body {
     width:100%;
 	height:100%;
-	margin:0;
+	
+}
+.boxes{
+	margin:0 0 2em 0;
 }
 .team-wrap {
 	width:100%;

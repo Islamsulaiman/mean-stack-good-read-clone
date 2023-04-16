@@ -54,8 +54,6 @@ export class ShelveComponent implements OnInit {
       
     })
 
-    console.log("constructor run")
-
   }
 
 
@@ -76,7 +74,10 @@ export class ShelveComponent implements OnInit {
     })
   }
 
+  bookIsAdded(){
 
+    
+  }
 
 
   ngOnInit(): void {

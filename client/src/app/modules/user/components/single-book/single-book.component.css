@@ -2,6 +2,10 @@ body{
     background-color: #ebeef4;
     margin-top:20px;
 }
+
+.profile{
+    height: 100%
+}
 .nav-tabs {
     border-bottom: 1px solid #c9d2e3;
 }
@@ -18,8 +22,12 @@ body{
 }
 
 
-.btn {
+.btn{
     background: #E64C3C
+}
+
+.second{
+    background-color: green;
 }
 
  .list-group .content{
