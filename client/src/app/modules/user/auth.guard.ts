@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
   isLogged = false;
   
   constructor(private _router: Router, private _Auth: AuthService){
-    
+    this._Auth.saveUser();    
   }
   canActivate(
     route: ActivatedRouteSnapshot,

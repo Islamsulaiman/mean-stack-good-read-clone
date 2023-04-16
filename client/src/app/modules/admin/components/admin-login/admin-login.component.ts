@@ -32,17 +32,18 @@ loginForm = new FormGroup({
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 submitLoginForm(loginForm:FormGroup){
   this._authService.login(loginForm.value).subscribe((response) =>{
-    
+    this.wrongData = false
+    console.log(this.wrongData)
     if (response.message === 'success')
     {
-      this.wrongData = false
+      
       localStorage.setItem("adminToken",response.token);
       this._authService.savecurrentAdmin();
 
       if(this._authService.currentAdmin.getValue != null)
       {
         this.islogged = true;
-        
+        this.wrongData = false
       }
       
     this.islogged = true ;
@@ -57,6 +58,8 @@ submitLoginForm(loginForm:FormGroup){
   error => {
     if (error instanceof HttpErrorResponse) {
       this.wrongData = true;
+    console.log(this.wrongData)
+
     }
   }
   )

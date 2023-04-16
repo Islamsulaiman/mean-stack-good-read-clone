@@ -27,9 +27,9 @@ const routes: Routes = [
     { path: 'category/:id',  component: CategoryDetailsComponent},
     { path: 'singleBook/:bookId',  component: SingleBookComponent},
     { path: 'books',  component: BooksComponent},
-    { path: 'shelve',  component: ShelveMainComponent},
+    { path: 'shelve',  component: ShelveMainComponent, canActivate:[AuthGuard]},
     {path: 'aboutus', component:AboutusComponent},
-    {path: "profile", component:ProfileComponent},
+    {path: "profile", component:ProfileComponent, canActivate:[AuthGuard]},
   ] },
 ];
 

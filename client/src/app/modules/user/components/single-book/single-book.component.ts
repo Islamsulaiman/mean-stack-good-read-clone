@@ -37,23 +37,20 @@ export class SingleBookComponent implements OnInit{
     this._BooksService.getBookReviews(this.bookId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
       if(res.status === 200){
         this.bookReviews = res.body.book
-        console.log(this.bookReviews)
+        console.log(res)
         this.bookReviews = res.body
       }else{
         this.error = res
       }
 
     })
-
-
-
   }
 
 
   addBookToUserShelve(){
     console.log("addBookToUserShelve")
     console.log("bookId",this.bookId)
-    this._BooksService.addBookToUserShelve( "643890010923d775b0ea7872", this.bookId, {observe: 'response'}).subscribe((res)=>{
+    this._BooksService.addBookToUserShelve(this._AuthService.currentUserId, this.bookId, {observe: 'response'}).subscribe((res)=>{
       console.log(res)
 
       if(res.status === 200){

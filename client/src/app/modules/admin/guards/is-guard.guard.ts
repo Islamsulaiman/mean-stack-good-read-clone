@@ -7,20 +7,13 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root'
 })
 export class IsGuardGuard implements CanActivate {
-  constructor(private _router:Router, private _authservice: AuthService){}
+  constructor(private _router:Router, private _authservice: AuthService){
+    this._authservice.savecurrentAdmin()
+  }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      return this._authservice.currentAdmin.getValue() ? true : this._router.navigate(['/admin/login']);
     
-
-    if (this._authservice.currentAdmin != null)
-    {
-      return true;
     }
-    else
-    {
-      return false;
-    }
-  }
-  
 }
