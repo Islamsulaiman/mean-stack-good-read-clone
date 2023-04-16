@@ -29,10 +29,11 @@ const edit = (id: any, content: string, userId: any) => Review.findOneAndUpdate(
 );
 
 // delete review by id
-const deleteRev = (id: any, userId: any) => Review.findOneAndDelete({
-  bookId: id,
-  userId,
-});
+const deleteRev = async ( id: string) =>{
+  const review = await Review.findByIdAndDelete({_id:id});
+  return review;
+}
+
 
 export {
   create,

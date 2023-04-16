@@ -69,7 +69,7 @@ const getUser = (email:string) => {
   return user;
 };
 // 6. update user
-const updateUser = (id: string, data: UpdteUserData) => User.updateOne({ _id: id }, data);
+const updateUser = (id: string, data: UpdteUserData) => User.updateOne({ _id: id }, data, {runValidators: true});
 
 // 7. Add book to user
 // eslint-disable-next-line max-len, max-len

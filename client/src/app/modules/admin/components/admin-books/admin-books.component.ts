@@ -21,8 +21,8 @@ export class AdminBooksComponent implements OnInit{
   books:Book | any;
   error  ="";
   doneReq = false
-  currentPage = 100
-  totalPages = 100
+  currentPage = 1
+  totalPages = 1
   categories:Category | any;
   authors:Author | any ;
   selectedValue:any;

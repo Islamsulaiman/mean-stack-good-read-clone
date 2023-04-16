@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment.development';
 })
 export class BooksService {
 
+
   constructor(private _HttpClient:HttpClient) { }
 
   getAllBooks(skip:number, limit:number, options:any): Observable<any>{
@@ -30,8 +31,15 @@ export class BooksService {
     return this._HttpClient.post(`http://localhost:3000/book/${bookId}/review`,data);
   }
 
+  editBookReviews(bookId:string , data:any):Observable<any>{
+    return this._HttpClient.patch(`http://localhost:3000/book/${bookId}/review/update`,data);
+  }
+   deleteBookReviews(bookId:any):Observable<any>{
+    return this._HttpClient.delete(`http://localhost:3000/book/${bookId}/review/delete`);
+   }
+
   getPopularBooks(options:any): Observable<any>{
-    return this._HttpClient.get(`http://localhost:3000/book/all/popular`, options)
+    return this._HttpClient.get(`${environment.domain}/book/all/popular`, options)
   }
 
 

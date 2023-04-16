@@ -74,9 +74,9 @@ const updateUserFunc = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   const {
-    firstName, lastName, email, userName,
+    firstName, lastName, email,
   } = req.body;
-
+  console.log(firstName, lastName, email, id)
   let { password } = req.body;
 
   if (password) {
@@ -84,7 +84,7 @@ const updateUserFunc = async (req: Request, res: Response) => {
   }
 
   const updateObject: UpdteUserData = {
-    firstName, lastName, password, email, userName,
+    firstName, lastName, password, email,
   };
 
   if (Object.keys(updateObject).length === 0) {

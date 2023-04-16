@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef, Renderer2 } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 
 type data ={
   userId?:string
@@ -34,9 +35,10 @@ export class ShelveComponent implements OnInit {
   currentPage = 1
   totalPages = 0
 
-  constructor(private _UserService:UsersService, private _cdr:ChangeDetectorRef, private _renderer: Renderer2){
 
-    this._UserService.getUserById("643890010923d775b0ea7872", this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
+  constructor(private _UserService:UsersService, private _cdr:ChangeDetectorRef, private _renderer: Renderer2, private _Auth:AuthService){
+    
+    this._UserService.getUserById(this._Auth.currentUserId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
 
       if(res.status === 200){
         this.books = this.bookDb =res.body.books
@@ -48,13 +50,11 @@ export class ShelveComponent implements OnInit {
       
     })
 
-    console.log("constructor run")
-
   }
 
 
   loadData(){
-    this._UserService.getUserById("643890010923d775b0ea7872", this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
+    this._UserService.getUserById(this._Auth.currentUserId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
 
       if(res.status === 200){
         this.books  = res.body.books
@@ -67,26 +67,21 @@ export class ShelveComponent implements OnInit {
     })
   }
 
+  bookIsAdded(){
 
+    
+  }
 
   ngOnInit(): void {
     
     this._UserService.getDataSubject().subscribe((data)=>{
       this.bookStatus=data
 
-
-      console.log("book db",this.bookDb)
-      console.log("book", this.books)
-      console.log("--------------")
       // create a function that filters book and return only what match the status
       this.books = this.bookDb.filter((book:any)=> book.book_status == this.bookStatus)
 
-      console.log("book db",this.bookDb)
-      console.log("book", this.books)
-
       //length = zero means all books 
       if(this.books.length == 0 && this.bookStatus === "allBooks"){
-        console.log("inside if")
         this.books = this.bookDb
         this.bookStatusSwitch = true;
       }else{

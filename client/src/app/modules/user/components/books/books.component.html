@@ -8,11 +8,11 @@
     </div>
 </header>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container authors">
+<div class="container books">
     <div class="row">
 
 
-        <div *ngFor="let book of books" class="col-md-3 col-sm-4 col-xs-12">
+        <div *ngFor="let book of books" class="col-md-3 col-sm-4 col-xs-12 boxes">
             <a [routerLink] = '["/singleBook", book._id ]'>
                 <div class="team-boxes">
                     <div class="team-thumb overlay-image view-overlay">
@@ -31,10 +31,9 @@
                         </div>
                     </div>
                     <div class="team-info">
-                        <h2>{{book.description}}</h2>
+                        <h2>{{book.title}}</h2>
                     </div>
-                    <div class="separator">
-                    </div>
+            
                 </div>
             </a>
         </div>

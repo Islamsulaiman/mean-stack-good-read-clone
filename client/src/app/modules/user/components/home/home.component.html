@@ -68,7 +68,6 @@
           <a class="cta text-center" [routerLink] = '["/singleBook", book._id ]'>
                 <h2 class="name">{{book.title}}</h2>
                 <img width="50" height="50" alt="" class="img-thumbnail img-responsive" [src]="book.image">
-                <p>{{book.title}}</p>
             </a>   
         </div>
     </div>
@@ -179,7 +178,6 @@
         <div *ngFor="let author of authors" class="col-md-2 col-sm-12">
           <a class="cta text-center" [routerLink] = '["/author", author._id ]'>
                 <img alt="" width="50" height="50" class="img-thumbnail img-responsive" [src]="author.image">
-                <p>{{author.fullName}}</p>
             </a>   
         </div>
     </div>

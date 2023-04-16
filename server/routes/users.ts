@@ -9,6 +9,7 @@ import {
   checkEmail, checkUserName, fullName, checkImage,
 } from '../middlewares/validateInput';
 
+import * as validation from '../middlewares/validateInput';
 import { errorHandling } from '../middlewares/errorHandling';
 import { userUpload } from '../middlewares/imagesUpload';
 
@@ -40,6 +41,13 @@ router.get('/oneUser', errorHandling(getOneUserFunc));
 router.delete('/:id', errorHandling(deleteUserFunc));
 
 // 5. update user
-router.patch('/:id', errorHandling(updateUserFunc));
+router.patch(
+  '/profile/:id',
+  validation.checkFirstName,
+  validation.checkLastName,
+  validation.checkEmail,
+  validation.validateInput,
+  errorHandling(updateUserFunc),
+);
 
 export const userRoute: Router = router;
