@@ -13,11 +13,9 @@
 
 
         <div *ngFor="let book of books" class="col-md-3 col-sm-4 col-xs-12">
-
             <a [routerLink] = '["/singleBook", book._id ]'>
                 <div class="team-boxes">
                     <div class="team-thumb overlay-image view-overlay">
-                        <!-- <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Book Image"> -->
                         <img [src]="book.image" alt="Book Image">
                         <div class="clear">
                         </div>
@@ -38,9 +36,7 @@
                     <div class="separator">
                     </div>
                 </div>
-
             </a>
-
         </div>
 
     <!-- Pagination -->

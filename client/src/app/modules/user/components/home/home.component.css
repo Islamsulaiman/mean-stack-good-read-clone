@@ -1708,6 +1708,11 @@ responsive
           transform: rotate(-10deg);
 }
 
-a:hover{
+.cta a:hover{
     text-decoration:none;    
+}
+
+.cta p{
+  color: #fa887b;
+  font-weight: bold;
 }

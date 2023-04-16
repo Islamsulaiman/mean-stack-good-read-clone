@@ -59,6 +59,34 @@ const addBooktoAuth = (id: string, Books: string) => {
 // delete author by id
 const deleteAuthor = (id: any) => Author.findByIdAndDelete(id);
 
+// Get popular author
+const getPopular = async () => Author.aggregate([
+  // Lookup to get all books for each author
+  {
+    $lookup: {
+      from: "books",
+      localField: "Books",
+      foreignField: "_id",
+      as: "books",
+    },
+  },
+  { $unwind: "$books" },
+  {
+    $group: {
+      _id: "$_id",
+      fullName: { $first: "$fullName" },
+      image: { $first: "$image"},
+      popUlarityRating: { $first: "$books.popUlarityRating"},
+    },
+  },
+  // Sort by highest rating first
+  { $sort: { popUlarityRating: -1 } },
+  // Limit the results to the top 10 authors
+  { $limit: 5 },
+]);
+
+
+
 export {
   create,
   get,
@@ -66,4 +94,5 @@ export {
   edit,
   deleteAuthor,
   addBooktoAuth,
+  getPopular
 };

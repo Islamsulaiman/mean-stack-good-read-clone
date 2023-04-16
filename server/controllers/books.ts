@@ -8,8 +8,8 @@ type NewBook = {
   author?: string,
   category?:string
   image:string,
-  popularityRating: number,
-  avarageRating: number
+  popularityRating?: number,
+  avarageRating?: number
 };
 type UpdatedBook = {
   title?:string,

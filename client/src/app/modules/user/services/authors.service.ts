@@ -23,4 +23,10 @@ export class AuthorsService {
     return this._HttpClient.get(`${this.URL}/${id}`);
 
   }
+
+  getPopularAuthors(options:any): Observable<any>{
+    return this._HttpClient.get(`${this.URL}/all/popular`, options)
+  }
+
+
 }
