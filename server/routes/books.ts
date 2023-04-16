@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {
-  createBook, getAllBooks, getOneBook, updateBook, deleteBook, bookAvarageRatingFunc, searchForBook, popularBooks
+  createBook, getAllBooks, getOneBook, updateBook, deleteBook, bookAvarageRatingFunc, searchForBook, popularBooks,
 } from '../middlewares/books';
 
 import {
@@ -15,7 +15,7 @@ import { userAuth } from '../middlewares/authuntication';
 const router = Router();
 
 // book avarage rating
-router.get('/bookAvarageRating/:id', bookAvarageRatingFunc);
+router.get('/bookAvarageRating/:id', errorHandling(bookAvarageRatingFunc));
 // 1.create Book
 router.post(
   '/',
@@ -28,7 +28,7 @@ router.post(
 // 1.create Book
 router.post('/', bookUpload.single('image'), errorHandling(createBook));
 // 2.get all books
-router.get('/', getAllBooks);
+router.get('/', errorHandling(getAllBooks));
 // 3.get one book
 router.get('/:id', errorHandling(getOneBook));
 // 4.update one book
@@ -46,9 +46,8 @@ router.delete('/:id', errorHandling(deleteBook));
 // 6.search for book
 router.post('/search', errorHandling(searchForBook));
 
-// 7. get popular 
-router.get('/all/popular', popularBooks)
-
+// 7. get popular
+router.get('/all/popular', errorHandling(popularBooks));
 
 /* Reviews routes */
 
@@ -60,13 +59,17 @@ router.post('/:id/review', errorHandling(addReview));
 router.get('/:id/review', errorHandling(getReviews));
 
 // 3. edit review
-router.patch('/:id/review/update',
-//  errorHandling(userAuth),
-  errorHandling(editReview));
+router.patch(
+  '/:id/review/update',
+  //  errorHandling(userAuth),
+  errorHandling(editReview),
+);
 
 // 4. delete review
-router.delete('/:id/review/delete/', 
-// errorHandling(userAuth),
- errorHandling(deleteReview));
+router.delete(
+  '/:id/review/delete/',
+  // errorHandling(userAuth),
+  errorHandling(deleteReview),
+);
 
 export const bookRouter : Router = router;

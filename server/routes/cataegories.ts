@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
-  createCategory, getAllCategories, getOneCategory, updateCategory, deleteCategory, addBookToCategory
+  createCategory, getAllCategories,
+  getOneCategory, updateCategory, deleteCategory, addBookToCategory,
 } from '../middlewares/cataegories';
 
 import { errorHandling } from '../middlewares/errorHandling';
@@ -16,7 +17,7 @@ router.post(
   errorHandling(createCategory),
 );
 // 2.get all categories
-router.get('/', getAllCategories);
+router.get('/', errorHandling(getAllCategories));
 // 3.get one category
 router.get('/:id', errorHandling(getOneCategory));
 // 4.update one category
