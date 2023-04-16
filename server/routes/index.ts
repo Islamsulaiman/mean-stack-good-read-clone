@@ -18,7 +18,7 @@ router.use('/category', categoryRoute);
 router.use('/book', bookRouter);
 
 // router.use('/users', errorHandling(userAuth), userRoute);
-router.use('/users', userRoute);
+router.use('/users', errorHandling(userRoute));
 
 // 2. author route
 router.use('/authors', authors);

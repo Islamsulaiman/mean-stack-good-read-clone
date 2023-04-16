@@ -49,12 +49,18 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="status"></label>
-                                            <select class="form-control" id="status" name="status" (change)="onDropdownChange(oneBook,$event)">
+                                            <select class="form-control custom-dropdown" id="status" name="status" (change)="onDropdownChange(oneBook,$event, i)">
                                                 <option value="progress" selected ><span style="font-weight:900;">Status</span ></option>
                                                 <option  value="reading" >Read </option>
                                                 <option value="to_read">To Read</option>
                                                 <option value="read">Completed</option>
                                             </select>
+                                        </div>
+                                        <div class="form-group mt-5 d-flex justify-content-center">
+                                            <p class="status-text">{{ oneBook.book_status === 'to_read' ? 'To Read' : 
+                                                oneBook.book_status === 'read'? 'Compleated':
+                                                 'Reading'
+                                            }}</p>
                                         </div>
                                         
                                     </div>
@@ -67,7 +73,7 @@
                 </div>
 
                 <!-- Pagination -->
-                <!-- <nav aria-label="Page navigation example">
+                <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                       <li class="page-item" [class.disabled]="skip === 0">
                         <a class="page-link" tabindex="-1" aria-disabled="true" (click)="previousPage()">Previous</a>
@@ -81,7 +87,7 @@
                         <a class="page-link" (click)="nextPage()">Next</a>
                       </li>
                     </ul>
-                  </nav> -->
+                  </nav>
 
     </div>
 </div>

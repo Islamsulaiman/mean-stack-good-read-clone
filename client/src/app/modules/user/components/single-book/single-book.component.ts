@@ -16,6 +16,7 @@ export class SingleBookComponent implements OnInit{
   bookReviews: any[]  = []
   skip = 0;
   limit = 5;
+  massage: "" | undefined
   addReviewForm!:FormGroup
   editReviewForm!: FormGroup;
   deleteReviewForm!: FormGroup;
@@ -37,8 +38,6 @@ export class SingleBookComponent implements OnInit{
     this.bookId = this._ActivatedRoute.snapshot.params['bookId']
 
     this._BooksService.getSingleBook(this.bookId,{observe: 'response'}).subscribe((res)=>{
-      console.log(res)
-
       if(res.status === 200){
         this.book = res.body.book
       }else{
@@ -47,21 +46,41 @@ export class SingleBookComponent implements OnInit{
     })
 
     this._BooksService.getBookReviews(this.bookId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
-      console.log(res)
       if(res.status === 200){
         this.bookReviews = res.body
-        console.log(this.bookReviews)
       }else{
         this.error = res
       }
 
     })
 
+
+
+  }
+
+
+  addBookToUserShelve(){
+    console.log("addBookToUserShelve")
+    console.log("bookId",this.bookId)
+    this._BooksService.addBookToUserShelve( "643890010923d775b0ea7872", this.bookId, {observe: 'response'}).subscribe((res)=>{
+      console.log(res)
+
+      if(res.status === 200){
+        this.massage = res.body
+        console.log(this.bookReviews)
+      }else{
+        this.error = res
+      }
+    })
+  }
+
+
+
   // this.userId = this._AuthService.currentUser
 
 
 
-  }
+  
   addReview(){
     const reviewData = {
       content: this.addReviewForm.value.content,

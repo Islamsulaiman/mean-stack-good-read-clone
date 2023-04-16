@@ -22,6 +22,10 @@ export class BooksService {
     return this._HttpClient.get(`http://localhost:3000/book/${bookId}/review?skip=${skip}&limit=${limit}/review`, options)
   }
 
+  addBookToUserShelve(userId: string, bookId: string , options:any) : Observable<any>{
+    return this._HttpClient.patch(`http://localhost:3000/users/addBook?id=${userId}&bookId=${bookId}`, options)
+  }
+
   addBookReviews(bookId:string , data:any):Observable<any>{
     return this._HttpClient.post(`http://localhost:3000/book/${bookId}/review`,data);
   }
@@ -47,7 +51,6 @@ searchForBooks(searchQuery: string): Observable<any> {
   }).pipe(
     map(data=> data.payload)
   )
-
 }
 
 }
