@@ -154,25 +154,31 @@
     box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.5);
   }
 
+  .status-text{
+    font-size: 1.2rem; /* equivalent to 24px assuming the default font size is 16px */
+    font-weight: bold;
+    color: #333;
+  }
+
   
-    @keyframes sparkling {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+  @keyframes sparkling {
+    0% {
+      transform: scale(1);
+      opacity: 1;
     }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
   
-    
-    @media (max-width: 767.98px) {
-      .card {
-        margin-right: 0;
-      }
+  @media (max-width: 767.98px) {
+    .card {
+      margin-right: 0;
     }
+  }

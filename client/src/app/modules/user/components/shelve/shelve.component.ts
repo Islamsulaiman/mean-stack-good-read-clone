@@ -36,23 +36,23 @@ export class ShelveComponent implements OnInit {
   totalPages = 0
 
   constructor(private _UserService:UsersService, private _cdr:ChangeDetectorRef, private _renderer: Renderer2){
-    this.loadData()
-    // this._UserService.getUserById("643890010923d775b0ea7872", this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
+    // this.loadData()
+    this._UserService.getUserById("643890010923d775b0ea7872", this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
 
-    //   console.log("res",res)
+      console.log("res",res)
 
-    //   console.log(res.body.books)
-    //   if(res.status === 200){
-    //     this.books = this.bookDb =res.body.books
-    //     this.userId = res.body._id
-    //     this.totalPages = res.body.numberOfPages
-    //   }else{
-    //     this.error = res
-    //   }
+      console.log(res.body.books)
+      if(res.status === 200){
+        this.books = this.bookDb =res.body.books
+        this.userId = res.body._id
+        this.totalPages = res.body.numberOfPages
+      }else{
+        this.error = res
+      }
       
-    // })
+    })
 
-    // console.log("constructor run")
+    console.log("constructor run")
 
   }
 
@@ -151,7 +151,7 @@ export class ShelveComponent implements OnInit {
   }
 
 
-  onDropdownChange(bookDbValues: any, selectedValue:any) {
+  onDropdownChange(bookDbValues: any, selectedValue:any, cardNumber: number) {
     console.log('book status:',selectedValue.target.value);
     console.log("userId",this.userId)
     console.log("bookId",bookDbValues.bookId._id)
@@ -161,25 +161,46 @@ export class ShelveComponent implements OnInit {
     this._UserService.changeBookState(bookDbValues.bookId._id, selectedValue.target.value, this.userId, {observe: 'response'}).subscribe((res)=>{
       console.log(res)
     })
+
+
+
+        // const statusText = document.querySelector(`#book-${cardNumber} .status-text`);
+        // console.log(statusText)
+        // if (statusText) {
+        //   this._renderer.removeChild(statusText.parentNode, statusText);
+        // }
+      
+        // const newStatusText = this._renderer.createElement('p');
+        // newStatusText.classList.add('status-text');
+        // newStatusText.textContent = 'New status text';
+        // const bookDetails = document.querySelector(`#book-${cardNumber} .bookDetails`);
+        // if (bookDetails) {
+        //   this._renderer.appendChild(bookDetails, newStatusText);
+        // }
+      
+        // this._cdr.detectChanges();
+
+
+
   }
 
 
-// // pagination
-//   previousPage() {
-//     if (this.currentPage > 1) {
-//       this.currentPage--;
-//       this.skip = this.skip - this.limit
-//       if(this.bookStatusSwitch) this.loadData()
-//     }
-//   }
+// pagination
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.skip = this.skip - this.limit
+      if(this.bookStatusSwitch) this.loadData()
+    }
+  }
 
-//   nextPage() {
-//     if (this.currentPage < this.totalPages) {
-//       this.currentPage++;
-//       this.skip = this.skip + this.limit
-//       if(this.bookStatusSwitch) this.loadData()
-//     }
-//   }
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.skip = this.skip + this.limit
+      if(this.bookStatusSwitch) this.loadData()
+    }
+  }
 
 
 }
