@@ -69,7 +69,7 @@ export class SingleBookComponent implements OnInit{
 
 
 
-  }
+  
   addReview(){
     const reviewData = {
       content: this.addReviewForm.value.content,

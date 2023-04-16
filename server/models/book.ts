@@ -34,13 +34,13 @@ export const bookSchema = new Schema(
       type: Number,
       maximum: 5,
       minimum: 0,
-      default: 0
+      default: 0,
     },
 
     popUlarityRating: {
       type: Number,
       minimum: 0,
-      default: 0
+      default: 0,
     },
 
     author: [{
