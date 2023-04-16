@@ -1,7 +1,12 @@
 .container-fluid{
     margin-top: 20px;
   }
-  
+  .status-text{
+    margin-top: 0;
+    border: 2px solid #E64C3C;
+    padding: 10px;
+    border-radius: 10px;
+  }
   .sidebar {
       background-color: #f8f9fa;
       padding: 20px;
@@ -62,9 +67,11 @@
       background-color: #0069d9;
       border-color: #0062cc;
     }
-  
+  .rating{
+    display: flex
+  }
     .star {
-      display: inline-block;
+      flex-basis: 100%;
       margin-right: 0.25rem;
     }
   
@@ -74,7 +81,7 @@
     }
   
     .star i {
-      font-size: 1.3rem;
+      font-size: 1.05rem;
     }
   
     .rating .star i.fas:hover {

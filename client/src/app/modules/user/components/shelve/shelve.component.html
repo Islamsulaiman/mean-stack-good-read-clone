@@ -1,30 +1,22 @@
 <div class="container-fluid">
     <div class="row">
-
-
         <!-- Bookshelf -->
                 <div class="row">
 
-                    <div *ngFor="let oneBook of books; let i = index" [attr.data-index]="i" class="col-md-2" >
+                    <div *ngFor="let oneBook of books; let i = index" [attr.data-index]="i" class="col-md-6 col-xl-3 col-sm-12" >
 
                         <div class="card" style="border-top-right-radius: 25px; border-top-left-radius: 25px;">
-                            <img class="card-img-top" [src]= oneBook.bookId.image alt="Book cover">
+                            <img class="card-img-top" [src]= oneBook.bookId.image alt="Book cover" height="10px">
 
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-6">
+
                                         <h4 class="card-title">{{oneBook.bookId.title}}</h4>
-                                        <p class="card-text">
-                                            <span style="font-weight: bold;">By: </span>
-                                            <span *ngFor="let author of oneBook.bookId.author let isLast=last"> 
-                                                {{author.fullName}} <span *ngIf="!isLast">,</span> 
-                                            </span> 
-                                        
-                                        </p>
 
 
                                         <!-- Rating section -->
-                                        <div class="rating">
+                                        <div class="rating" style="font-size: 0px; margin-top: 30px;">
                                             <span class="star" (click)="selectStar(1, i+1, oneBook)">
                                                 <i class="fas fa-star"></i>
                                             </span>
@@ -46,7 +38,7 @@
 
                                         <!-- End rating section -->
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="status"></label>
                                             <select class="form-control custom-dropdown" id="status" name="status" (change)="onDropdownChange(oneBook,$event, i)">
@@ -56,8 +48,8 @@
                                                 <option value="read">Completed</option>
                                             </select>
                                         </div>
-                                        <div class="form-group mt-5 d-flex justify-content-center">
-                                            <p class="status-text">{{ oneBook.book_status === 'to_read' ? 'To Read' : 
+                                        <div style="margin-bottom: 50px;" class="form-group mt-5 d-flex justify-content-center">
+                                            <p class="status-text ">{{ oneBook.book_status === 'to_read' ? 'To Read' : 
                                                 oneBook.book_status === 'read'? 'Compleated':
                                                  'Reading'
                                             }}</p>
