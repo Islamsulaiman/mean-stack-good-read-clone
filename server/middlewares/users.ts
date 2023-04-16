@@ -97,11 +97,17 @@ const updateUserFunc = async (req: Request, res: Response) => {
 };
 
 const addBookToUserFunc = async (req: Request, res: Response) : Promise<Response> => {
-  const { id } = req.body;
-  const { bookId } = req.params;
+  const { id, bookId } = req.query;
 
-  const book = await userCont.addBookToUser(id, bookId);
+  const book = await userCont.addBookToUser(id as string, bookId as string);
 
+  return res.status(200).json(book);
+};
+
+const removeBookFromUserFunc = async (req: Request, res: Response) : Promise<Response> => {
+  const { userId, bookId } = req.query;
+
+  const book = await userCont.removeBookFromUser(userId as string, bookId as string);
   return res.status(200).json(book);
 };
 
@@ -183,4 +189,5 @@ const updateBookStatusFunc = async (req: Request, res: Response): Promise<Respon
 export {
   createUser, getAllUsersFunc, getOneUserFunc, deleteUserFunc,
   updateUserFunc, addBookToUserFunc, adduserRatingFunc, changeImgFunc, updateBookStatusFunc,
+  removeBookFromUserFunc,
 };

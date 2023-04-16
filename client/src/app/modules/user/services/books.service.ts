@@ -19,9 +19,16 @@ export class BooksService {
   }
 
   getBookReviews(bookId:string, skip:number, limit:number, options:any): Observable<any>{
-    return this._HttpClient.get(`${environment.domain}/book/${bookId}/review?skip=${skip}&limit=${limit}`, options)
+    return this._HttpClient.get(`http://localhost:3000/book/${bookId}/review?skip=${skip}&limit=${limit}/review`, options)
   }
 
+  addBookToUserShelve(userId: string, bookId: string , options:any) : Observable<any>{
+    return this._HttpClient.patch(`http://localhost:3000/users/addBook?id=${userId}&bookId=${bookId}`, options)
+  }
+
+  addBookReviews(bookId:string , data:any):Observable<any>{
+    return this._HttpClient.post(`http://localhost:3000/book/${bookId}/review`,data);
+  }
 
   getPopularBooks(options:any): Observable<any>{
     return this._HttpClient.get(`${environment.domain}/book/all/popular`, options)
@@ -37,8 +44,7 @@ searchForBooks(searchQuery: string): Observable<any> {
   }).pipe(
     map(data=> data.payload)
   )
-
 }
 
 }
-  
+

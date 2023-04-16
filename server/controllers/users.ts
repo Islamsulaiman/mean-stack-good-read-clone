@@ -7,7 +7,7 @@ type NewUser = {
   password: String
   email: String,
   userName: String
-  image: String
+  image?: String
 };
 
 type UpdteUserData = {
@@ -71,9 +71,20 @@ const getUser = (email:string) => {
 // 6. update user
 const updateUser = (id: string, data: UpdteUserData) => User.updateOne({ _id: id }, data, {runValidators: true});
 
+// { $addToSet: { books: bookId } }
+
 // 7. Add book to user
 // eslint-disable-next-line max-len, max-len
-const addBookToUser = (id: string, bookId: string) => User.updateOne({ _id: id }, { $push: { books: { bookId } } });
+const addBookToUser = (id: string, bookId: string) => User.updateOne({ _id: id, 'books.bookId': { $ne: bookId } }, { $push: { books: { bookId } } });
+
+const removeBookFromUser = async (userId: string, bookId: string) => {
+  try {
+    const user = await User.findOneAndUpdate({ _id: userId }, { $pull: { books: { bookId } } });
+    return user;
+  } catch (error) {
+    throw new Error('wrong data');
+  }
+};
 
 // 8. update user rating
 const adduserRating = (id: string, bookId: string, rating: number) => {
@@ -100,5 +111,5 @@ const updateBookStatus = (userId: string, bookId:string, bookStatus: string) => 
 
 export {
   create, getAllUsers, getOneUser, deleteUser, updateUser, getUser,
-  addBookToUser, adduserRating, UpdteUserImg, updateBookStatus,
+  addBookToUser, adduserRating, UpdteUserImg, updateBookStatus, removeBookFromUser,
 };
