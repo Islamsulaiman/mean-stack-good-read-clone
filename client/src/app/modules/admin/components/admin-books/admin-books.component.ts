@@ -94,7 +94,7 @@ addNewBook(myForm: NgForm){
   this.formData.append('author', author);
   if(this.file) this.formData.append('image', this.file);
   console.log(myForm.value)
-  this._BooksService.addBook(myForm.value, ).subscribe(
+  this._BooksService.addBook(this.formData).subscribe(
     (response) => {
       this.doneReq =true
     },
