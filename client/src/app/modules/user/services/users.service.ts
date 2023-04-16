@@ -45,6 +45,14 @@ export class UsersService {
     return this._HttpClient.patch(`${this.URL}/rating?bookId=${bookId}&id=${userId}&rating=${rating}`, options)
   }
 
+  updateUserData(data:any, userId:any, options:any){
+    return this._HttpClient.patch(`${this.URL}/profile/${userId}`,data, options)
+  }
+
+  updateUserImage(data:any, userId:any, options:any){
+    return this._HttpClient.patch(`${this.URL}/image/${userId}`,data, options)
+  }
+
 
 
 

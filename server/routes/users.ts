@@ -3,7 +3,7 @@ import {
   createUser, getAllUsersFunc, getOneUserFunc, deleteUserFunc,
   updateUserFunc, addBookToUserFunc, adduserRatingFunc, changeImgFunc, updateBookStatusFunc,
 } from '../middlewares/users';
-
+import * as validation from '../middlewares/validateInput'
 import { errorHandling } from '../middlewares/errorHandling';
 import { userUpload } from '../middlewares/imagesUpload';
 
@@ -34,6 +34,11 @@ router.get('/oneUser', errorHandling(getOneUserFunc));
 router.delete('/:id', deleteUserFunc);
 
 // 5. update user
-router.patch('/:id', errorHandling(updateUserFunc));
+router.patch('/profile/:id', 
+validation.checkFirstName,
+validation.checkLastName,
+validation.checkEmail,
+validation.validateInput,
+errorHandling(updateUserFunc));
 
 export const userRoute: Router = router;

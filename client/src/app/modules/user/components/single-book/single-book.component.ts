@@ -32,7 +32,7 @@ export class SingleBookComponent implements OnInit{
     this._BooksService.getBookReviews(this.bookId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
       console.log(res)
       if(res.status === 200){
-        this.bookReviews = res.body
+        this.bookReviews = res.body.book
         console.log(this.bookReviews)
       }else{
         this.error = res

@@ -24,7 +24,7 @@ export class BooksService {
 
 
   getPopularBooks(options:any): Observable<any>{
-    return this._HttpClient.get(`http://localhost:3000/book/all/popular`, options)
+    return this._HttpClient.get(`${environment.domain}/book/all/popular`, options)
   }
 
 
