@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject} from 'rxjs';
 import { map } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.development';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   currentUser = new BehaviorSubject(null);
   currentUserId: any;
-  URL = 'http://localhost:3000/users';
+  URL = `${environment.domain}/users`;
 
   constructor(private _HttpClient:HttpClient,private _router: Router) {}
 
@@ -31,7 +32,7 @@ export class AuthService {
   }
 
   login(formData: any): Observable<any>{
-    return this._HttpClient.post("http://localhost:3000/login", formData).pipe(
+    return this._HttpClient.post(`${environment.domain}/login`, formData).pipe(
       map((response: any) => {
         // Store the token in local storage
         localStorage.setItem('token', response.token);
