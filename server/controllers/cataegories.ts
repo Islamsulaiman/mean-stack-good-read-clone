@@ -10,7 +10,8 @@ type NewCategory = {
 const create = (data:NewCategory) => Category.create(data);
 
 // 2.get all categories
-const getAll =  async (limit: number, page: number) => {
+const getAll = async (limit: number, page: number) => {
+  // eslint-disable-next-line no-nested-ternary, no-param-reassign, eqeqeq
   const perPage = limit > 0 && limit < 10 ? limit : limit == 0 ? limit = 100 : 5;
   const pageNumber = page || 1;
   const skip = (pageNumber - 1) * perPage;
@@ -25,13 +26,12 @@ const getAll =  async (limit: number, page: number) => {
 
   return {
     categories,
-    totalPages
-  }
+    totalPages,
+  };
 };
 
 // 3.get One Category
-const getOne = (id: any) => Category.findById(id).populate('Books');;
-
+const getOne = (id: any) => Category.findById(id).populate('Books');
 
 // 4.update
 const update = async (id: string, data:NewCategory) => {
@@ -45,11 +45,10 @@ const deleteOne = async (id:string) => {
   return category;
 };
 
-
 const addBook = (id: string, Books: string) => {
   const bookObjectId = new mongoose.Types.ObjectId(Books);
   return Category.updateOne({ _id: id }, { $push: { Books: bookObjectId } });
-}
+};
 export {
-  create, getAll, getOne, update, deleteOne, addBook
+  create, getAll, getOne, update, deleteOne, addBook,
 };

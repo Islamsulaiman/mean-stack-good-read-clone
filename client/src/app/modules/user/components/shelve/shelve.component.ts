@@ -20,7 +20,6 @@ export class ShelveComponent implements OnInit {
 
   books :any ;
   bookDb:any;
-  // allBooks:any
   filteredBooks:any;
 
   error = ""
@@ -36,14 +35,11 @@ export class ShelveComponent implements OnInit {
   currentPage = 1
   totalPages = 0
 
+
   constructor(private _UserService:UsersService, private _cdr:ChangeDetectorRef, private _renderer: Renderer2, private _Auth:AuthService){
-    // this.loadData()
     
     this._UserService.getUserById(this._Auth.currentUserId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
 
-      console.log("res",res)
-
-      console.log(res.body.books)
       if(res.status === 200){
         this.books = this.bookDb =res.body.books
         this.userId = res.body._id
@@ -60,9 +56,6 @@ export class ShelveComponent implements OnInit {
   loadData(){
     this._UserService.getUserById(this._Auth.currentUserId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
 
-      console.log("res",res)
-
-      console.log(res.body.books)
       if(res.status === 200){
         this.books  = res.body.books
         this.userId = res.body._id
@@ -78,7 +71,6 @@ export class ShelveComponent implements OnInit {
 
     
   }
-
 
   ngOnInit(): void {
     
@@ -158,13 +150,14 @@ export class ShelveComponent implements OnInit {
     const userRatingElement = document.querySelector(`#book-${cardNumber} .userRating`);
     this._renderer.removeChild(userRatingElement?.parentNode, userRatingElement);
     const newRatingElement = this._renderer.createElement('div');
+    console.log("newrating", newRatingElement)
     const ratingText = this._renderer.createText(`${book.rating}x`);
     this._renderer.appendChild(newRatingElement, ratingText);
     this._renderer.appendChild(document.querySelector(`#book-${cardNumber} .bookDetails`), newRatingElement);
 
 
     this._cdr.detectChanges()
-    
+
     return index
   }
 
@@ -181,10 +174,36 @@ export class ShelveComponent implements OnInit {
     })
 
 
+    bookDbValues.value = selectedValue.target.value === "reading" ? "Reading": selectedValue.target.value === "to_read" ? "To Read": "Completed"
+    const parent = document.getElementById(`parent-${cardNumber}`)
+    const oldElement = document.querySelector(`#parent-${cardNumber} #item-${cardNumber}`);
+    this._renderer.removeChild(oldElement?.parentNode, oldElement); //remove old element
+    const newElement = this._renderer.createElement('p');
+    this._renderer.setAttribute(newElement, 'id', `item-${cardNumber}`)
+    this._renderer.addClass(newElement, "status-text")
+    const innerText = this._renderer.createText(bookDbValues.value); //value
+    this._renderer.appendChild(newElement, innerText);
+    this._renderer.appendChild(parent, newElement)
+
+    this._cdr.detectChanges()
+
   }
 
+  deleteBook(oneBook:any){
 
+    this._UserService.deleteBookFromUser(this.userId,oneBook.bookId._id ,{observe: 'response'}).subscribe((res)=>{
+      console.log(res)
+      if(res.status === 200){
+        this.books  = res.body.books
+        this.userId = res.body._id
+        this.totalPages = res.body.numberOfPages
+      }else{
+        this.error = res
+      }
+    })
 
-
+    //slice book array to change view
+    this.books = this.books.filter((book:any) => book.bookId._id !== oneBook.bookId._id)
+  }
 
 }

@@ -165,13 +165,8 @@ const updateBookStatusFunc = async (req: Request, res: Response): Promise<Respon
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { bookId, bookStatus, userId } = req.query;
-  // const { userId } = req.body;
-
-  console.log(bookId, bookStatus, userId);
-  console.log('status', bookStatus);
 
   const states = ['reading', 'to_read', 'read'];
-  // const states = ['completed', 'to_read', 'reading'];
 
   if (!states.includes(bookStatus as string)) {
     throw new Error('invalid book state');

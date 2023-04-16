@@ -71,8 +71,6 @@ const getUser = (email:string) => {
 // 6. update user
 const updateUser = (id: string, data: UpdteUserData) => User.updateOne({ _id: id }, data, {runValidators: true});
 
-// { $addToSet: { books: bookId } }
-
 // 7. Add book to user
 // eslint-disable-next-line max-len, max-len
 const addBookToUser = (id: string, bookId: string) => User.updateOne({ _id: id, 'books.bookId': { $ne: bookId } }, { $push: { books: { bookId } } });
@@ -104,7 +102,6 @@ const updateBookStatus = (userId: string, bookId:string, bookStatus: string) => 
   console.log('contro', userId, bookId, bookStatus);
   // eslint-disable-next-line max-len
   const user = User.updateOne({ _id: userId, 'books.bookId': bookId }, { $set: { 'books.$.book_status': bookStatus } }).exec();
-  // const user = User.findOne({ _id: userId }).exec();
 
   return user;
 };

@@ -52,19 +52,17 @@ const update = async (id:string, data:UpdatedBook) => {
   return book;
 };
 
-
 // Add category to book
 const addCategory = (id: string, category: string) => {
   const categoryId = new mongoose.Types.ObjectId(category);
   return Book.updateOne({ _id: id }, { $push: { category: categoryId } });
-}
+};
 
 // Add author to book
 const addAuthor = (id: string, author: string) => {
   const authorId = new mongoose.Types.ObjectId(author);
   return Book.updateOne({ _id: id }, { $push: { author: authorId } });
-}
-
+};
 
 // 5.deleteBook
 const deleteOne = async (id:string) => {
@@ -98,8 +96,7 @@ const bookAvarageRating = async (bookId:string) => {
 
 const search = async (payload: string) => (await Book.find({ title: { $regex: new RegExp(`^${payload}.*`, 'i') } })
   .exec())
-  .slice(0,10)
-
+  .slice(0, 10);
 
 // update user avgrating and popularity rating
 const updateAvgRating = async (avgRating: number, popUlarityRating: number, bookId: string) => {
@@ -108,9 +105,9 @@ const updateAvgRating = async (avgRating: number, popUlarityRating: number, book
 };
 
 // Get popular books
-const getPopular = async () => Book.find().sort({'popUlarityRating': -1}).limit(5)
+const getPopular = async () => Book.find().sort({ popUlarityRating: -1 }).limit(5);
 
 export {
   create, getAll, getOne, update, deleteOne, updateBookRating, bookAvarageRating,
-  search, updateAvgRating, addAuthor, addCategory, getPopular
+  search, updateAvgRating, addAuthor, addCategory, getPopular,
 };

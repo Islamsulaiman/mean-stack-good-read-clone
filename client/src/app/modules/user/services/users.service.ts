@@ -45,15 +45,19 @@ export class UsersService {
     return this._HttpClient.patch(`${this.URL}/rating?bookId=${bookId}&id=${userId}&rating=${rating}`, options)
   }
 
-  updateUserData(data:any, userId:any, options:any){
-    return this._HttpClient.patch(`${this.URL}/profile/${userId}`,data, options)
+  deleteBookFromUser(userId: string, bookId: string , options:any) : Observable<any> {
+    return this._HttpClient.patch(`http://localhost:3000/users/remove?userId=${userId}&bookId=${bookId}`, options)
+
   }
 
   updateUserImage(data:any, userId:any, options:any){
     return this._HttpClient.patch(`${this.URL}/image/${userId}`,data, options)
   }
 
-
+  
+  updateUserData(data:any, userId:any, options:any){
+    return this._HttpClient.patch(`${this.URL}/profile/${userId}`,data, options)
+  }
 
 
 }
