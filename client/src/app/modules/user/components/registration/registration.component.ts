@@ -23,8 +23,7 @@ export class RegistrationComponent {
     lastName:new FormControl(null, [Validators.minLength(3), Validators.maxLength(30), Validators.required]),
     email:new FormControl(null, [Validators.email, Validators.minLength(5), Validators.maxLength(100), Validators.required]),
     userName:new FormControl(null, [Validators.minLength(5), Validators.maxLength(30), Validators.required]),
-    password:new FormControl(null, [Validators.required])
-    // Validators.pattern('^[A-Z][a-z0-9]{4,100}$')]),
+    password:new FormControl(null, [Validators.required ]),
   
   })
 

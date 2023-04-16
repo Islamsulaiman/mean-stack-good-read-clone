@@ -108,14 +108,15 @@
             "
             class="alert my-4 alert-danger"
           >
-            <p *ngIf="registerForm.get('email')?.errors?.['required']">
+
+            <p *ngIf="registerForm.get('email')?.errors?.['maxlength']">
+              30 letters maximum length
+            </p>
+            <p *ngIf="registerForm.get('email')?.errors?.['email']">
               Email is required
             </p>
             <p *ngIf="registerForm.get('email')?.errors?.['minlength']">
               3 letters minimum length
-            </p>
-            <p *ngIf="registerForm.get('email')?.errors?.['maxlength']">
-              30 letters maximum length
             </p>
           </div>
         </div>
