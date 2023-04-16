@@ -30,6 +30,13 @@ export class BooksService {
     return this._HttpClient.post(`http://localhost:3000/book/${bookId}/review`,data);
   }
 
+  editBookReviews(bookId:string , data:any):Observable<any>{
+    return this._HttpClient.patch(`http://localhost:3000/book/${bookId}/review/update`,data);
+  }
+   deleteBookReviews(bookId:any):Observable<any>{
+    return this._HttpClient.delete(`http://localhost:3000/book/${bookId}/review/delete`);
+   }
+
   getPopularBooks(options:any): Observable<any>{
     return this._HttpClient.get(`${environment.domain}/book/all/popular`, options)
   }

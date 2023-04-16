@@ -18,12 +18,23 @@ export class SingleBookComponent implements OnInit{
   limit = 5;
   massage: "" | undefined
   addReviewForm!:FormGroup
+  editReviewForm!: FormGroup;
+  deleteReviewForm!: FormGroup;
+
   userId = "643b11f461dee46ad0581e9b"
+  clicked = false
+  currentReview: any={
+    title:'',
+    content:''
+  };
+
+  formSubmitted = false;
+
 
   constructor(private _ActivatedRoute:ActivatedRoute,
      private _BooksService:BooksService,
      private _FormBuilder:FormBuilder,
-     private _AuthService:AuthService ){
+      ){
     this.bookId = this._ActivatedRoute.snapshot.params['bookId']
 
     this._BooksService.getSingleBook(this.bookId,{observe: 'response'}).subscribe((res)=>{
@@ -74,7 +85,6 @@ export class SingleBookComponent implements OnInit{
       content: this.addReviewForm.value.content,
       userId:this.userId,
     }
-    console.log(reviewData);
 
     this._BooksService.addBookReviews(this.bookId,reviewData).subscribe((res)=>{
       console.log(reviewData);
@@ -84,8 +94,50 @@ export class SingleBookComponent implements OnInit{
       console.log(err);
 
     })
+    this.formSubmitted = true;
+
   }
 
+  getReviews(){
+    this._BooksService.getBookReviews(this.bookId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
+      console.log(res)
+      if(res.status === 200){
+        this.bookReviews = res.body
+        console.log(this.bookReviews)
+      }else{
+        this.error = res
+      }
+
+    })
+  }
+
+  // editReview(){
+  //   const reviewData = {
+  //     content: this.editReviewForm.value.content,
+  //     userId:this.userId,
+  //   }
+  //   this._BooksService.editBookReviews(this.bookId,reviewData).subscribe((res)=>{
+  //       console.log(reviewData);
+  //       console.log(res);
+
+  //   },(err)=>{
+  //     console.log(err);
+
+  //   })
+  // }
+
+  // deleteReview(){
+  //   const reviewData = {
+  //     userId:this.userId
+  //   }
+  //   this._BooksService.deleteBookReviews(reviewData).subscribe((res)=>{
+  //     console.log(res);
+  //     this.getReviews()
+  //   },(err)=>{
+  //     console.log(err);
+
+  //   })
+  // }
 
 
   ngOnInit(): void {
@@ -93,8 +145,18 @@ export class SingleBookComponent implements OnInit{
       userId:[],
       content:['', [Validators.required, Validators.minLength(3)]]
     });
+
+    this.editReviewForm = this._FormBuilder.group({
+      userId:[],
+      content: ['', [Validators.required, Validators.minLength(3)]]
+    });
+    this.deleteReviewForm = this._FormBuilder.group({
+      userId:[],
+    });
+  }
+
   }
 
 
 
-}
+
