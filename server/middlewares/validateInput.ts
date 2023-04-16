@@ -46,7 +46,7 @@ const fullName = body('fullName')
   .isString()
   .exists({ checkFalsy: true })
   .withMessage('Full-name is required')
-  .isLength({ min: 3, max: 255 })
+  .isLength({ min: 3, max: 30 })
   .withMessage('Full-name: must be at least 3 chars long & maximum 30 chars');
 
 const checkDate = body('DOB')

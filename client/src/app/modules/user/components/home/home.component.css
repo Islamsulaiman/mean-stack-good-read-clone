@@ -1248,30 +1248,6 @@ Portfolio
   position: relative;
 }
 
-.our-portfolio:before {
-  content: '';
-  background-image: url(../../../../../assets/home/images/portfolio-right-dec.jpg);
-  background-repeat: no-repeat;
-  position: absolute;
-  right: 0;
-  top: 0px;
-  width: 414px;
-  height: 861px;
-  z-index: 1;
-}
-
-.our-portfolio:after {
-  content: '';
-  background-image: url(../../../../../assets/home/images/portfolio-left-dec.jpg);
-  background-repeat: no-repeat;
-  position: absolute;
-  left: 0;
-  top: 0px;
-  width: 677px;
-  height: 759px;
-  z-index: 1;
-}
-
 .our-portfolio .section-heading {
   margin-bottom: 80px;
 }
@@ -1695,4 +1671,48 @@ responsive
   form#contact {
     padding: 30px;
   }
+}
+
+
+
+/* Popular */
+
+.cta {
+  z-index: 9999;
+  display: block;
+  padding: 30px;
+  border: 3px dotted #eee;
+  border-radius: 4px;
+  margin: 0 3%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+.cta .name {
+  opacity: 0.2;
+}
+
+
+.cta img {
+  padding: 4px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px dashed #ddd;
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+    -webkit-transform: rotate(-10deg);
+     -moz-transform: rotate(-10deg);
+       -o-transform: rotate(-10deg);
+      -ms-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+}
+
+.cta a:hover{
+    text-decoration:none;    
+}
+
+.cta p{
+  color: #fa887b;
+  font-weight: bold;
 }

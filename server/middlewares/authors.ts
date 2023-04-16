@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import {
-  create, get, getById, edit, deleteAuthor, addBook,
+  create, get, getById, edit, deleteAuthor, addBooktoAuth, getPopular
 } from '../controllers/authors';
 import { cloudi } from './imagesUpload';
 // import { authors } from '../routes/authors';
@@ -88,12 +88,18 @@ const addBookToAuthor = async (req: Request, res: Response) : Promise<Response> 
   const { Books } = req.body;
   const { id } = req.params;
 
-  const book = await addBook(id, Books);
+  const book = await addBooktoAuth(id, Books);
 
   return res.status(200).json(book);
 };
 
 
+const popularAuthors = async (req:Request, res:Response) => {
+
+  const author = await getPopular();
+
+  return res.status(200).json({ message: 'Books', author });
+};
 
 export {
   createAuthor,
@@ -102,4 +108,5 @@ export {
   editAuthorById,
   deleteAuthorById,
   addBookToAuthor,
+  popularAuthors
 };

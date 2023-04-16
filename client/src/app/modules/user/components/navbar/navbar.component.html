@@ -1,5 +1,5 @@
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a href="/" class="navbar-brand">Book<b>nary</b></a>  		
 	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 		<span class="navbar-toggler-icon"></span>
@@ -12,7 +12,7 @@
 			<a *ngIf="isLogged" class="nav-item nav-link" [routerLink]="['/']">My books</a>		
 			<a class="nav-item nav-link" [routerLink]="['/authors']">Authors</a>
 			<a class="nav-item nav-link" [routerLink]="['/categories']">Categories</a>
-			<a class="nav-item nav-link" [routerLink]="['/about-us']">About us</a>
+			<a class="nav-item nav-link" [routerLink]="['/aboutus']">About us</a>
         </div>
 		<form class="navbar-form form-inline">
 			<div  class="input-group search-box">								
@@ -35,7 +35,17 @@
 	
 		<div *ngIf="isLogged" class="logedin action-buttons ml-auto">
 			<div class="proile-image">
-				<img width="50" height="50" [src]= "userImage">
+				<a data-toggle="dropdown" class="login-btn nav-item nav-link dropdown-toggle mr-3">
+				
+				</a>
+
+				<div class="dropdown">
+					<a routerLink="profile" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  <img width="50" height="50" [src]="userImage">
+					</a>
+					
+				  </div>
+				
 			</div>
 			<div (click)="logOut()" class="button logout">
 				<a href="">

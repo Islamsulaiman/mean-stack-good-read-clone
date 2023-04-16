@@ -1,13 +1,11 @@
-
 <div class="w-75 m-auto py-5">
-
-    <div *ngIf='error' class="alert alert-danger">
-       <p>{{error | json}}</p>
-    </div>
+  <div *ngIf="error" class="alert alert-danger">
+    <p>{{ error | json }}</p>
+  </div>
   <div class="modernForm" style="margin-left: 40px">
     <div class="imageSection">
       <div class="image">
-        <img src="assets/regsitercover.jpg" alt="pexels-yuri-manei-2272854"  />
+        <img src="assets/registercover.jpg" alt="pexels-yuri-manei-2272854" />
       </div>
     </div>
     <div class="contactForm col-md-6">
@@ -15,7 +13,7 @@
       <form
         [formGroup]="registerForm"
         (ngSubmit)="subbmitRegisterForm(registerForm)"
-         >
+      >
         <div class="form-group">
           <label for="firstName">First Name</label>
           <input
@@ -24,12 +22,9 @@
             type="text"
             id="firstName"
           />
-  
+
           <div
-            *ngIf="
-              registerForm.get('firstName')?.errors != null &&
-              registerForm.get('firstName')?.touched
-            "
+            *ngIf="registerForm.get('firstName')?.errors !== null && registerForm.get('firstName')?.touched"
             class="alert my-4 alert-danger"
           >
             <p *ngIf="registerForm.get('firstName')?.errors?.['required']">
@@ -51,10 +46,10 @@
             type="text"
             id="lastName"
           />
-  
+
           <div
             *ngIf="
-              registerForm.get('lastName')?.errors != null &&
+              registerForm.get('lastName')?.errors !== null &&
               registerForm.get('lastName')?.touched
             "
             class="alert my-4 alert-danger"
@@ -78,10 +73,10 @@
             type="text"
             id="userName"
           />
-  
+
           <div
             *ngIf="
-              registerForm.get('userName')?.errors != null &&
+              registerForm.get('userName')?.errors !== null &&
               registerForm.get('userName')?.touched
             "
             class="alert my-4 alert-danger"
@@ -90,7 +85,7 @@
               UserName is required
             </p>
             <p *ngIf="registerForm.get('userName')?.errors?.['minlength']">
-              3 letters minimum length
+              5 letters minimum length
             </p>
             <p *ngIf="registerForm.get('userName')?.errors?.['maxlength']">
               30 letters maximum length
@@ -105,10 +100,10 @@
             type="text"
             id="email"
           />
-  
+
           <div
             *ngIf="
-              registerForm.get('email')?.errors != null &&
+              registerForm.get('email')?.errors !== null &&
               registerForm.get('email')?.touched
             "
             class="alert my-4 alert-danger"
@@ -129,15 +124,13 @@
           <input
             class="form-control"
             formControlName="password"
-            type="text"
+            type="password"
             id="password"
           />
-  
+
           <div
             *ngIf="
-              registerForm.get('password')?.errors != null &&
-              registerForm.get('email')?.touched
-            "
+              registerForm.get('password')?.errors !== null && registerForm.get('email')?.touched"
             class="alert my-4 alert-danger"
           >
             <p *ngIf="registerForm.get('password')?.errors?.['required']">
@@ -151,8 +144,12 @@
             </p>
           </div>
         </div>
-        <input  [disabled]="registerForm['invalid']" type="submit" value="Register">
+        <input
+          [disabled]="registerForm['invalid']"
+          type="submit"
+          value="Register"
+        />
       </form>
     </div>
   </div>
-  
+</div>

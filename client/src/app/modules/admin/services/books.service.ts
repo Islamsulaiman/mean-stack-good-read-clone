@@ -2,13 +2,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BooksService {
 
-  URL = 'http://localhost:3000/book';
+  URL = `${environment.domain}/book`;
   constructor(private _HttpClient:HttpClient) { }
   limit = 10
   currPage = 1
@@ -20,7 +21,7 @@ export class BooksService {
   }
   //Get All Books
   getBooks(skip:number, limit:number, options:any): Observable<any>{
-    return this._HttpClient.get(`http://localhost:3000/book?skip=${skip}&limit=${limit}`, options)
+    return this._HttpClient.get(`${environment.domain}/book?skip=${skip}&limit=${limit}`, options)
   }
 
   //Get Book by ID

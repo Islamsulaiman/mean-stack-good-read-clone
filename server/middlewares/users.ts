@@ -56,7 +56,6 @@ const getOneUserFunc = async (req: Request, res: Response): Promise<Response> =>
     parseInt(limit as string, 10),
   );
   // oneUser.totalBooks = 10;
-  console.log(oneUser);
 
   return res.status(200).json(oneUser);
 };

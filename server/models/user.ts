@@ -39,8 +39,7 @@ const userSchema = new Schema({
   image: {
     type: String,
     required: true,
-    minLength: 5,
-    maxLength: 1024,
+
   },
   books: [
     {
