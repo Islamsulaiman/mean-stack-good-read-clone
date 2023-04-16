@@ -83,11 +83,17 @@ export class ShelveComponent implements OnInit {
       this.bookStatus=data
 
 
+      console.log("book db",this.bookDb)
+      console.log("book", this.books)
+      console.log("--------------")
       // create a function that filters book and return only what match the status
       this.books = this.bookDb.filter((book:any)=> book.book_status == this.bookStatus)
 
+      console.log("book db",this.bookDb)
+      console.log("book", this.books)
+
       //length = zero means all books 
-      if(this.books.length == 0){
+      if(this.books.length == 0 && this.bookStatus === "allBooks"){
         console.log("inside if")
         this.books = this.bookDb
         this.bookStatusSwitch = true;
@@ -97,6 +103,23 @@ export class ShelveComponent implements OnInit {
       }
     })
 
+  }
+
+  // pagination
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.skip = this.skip - this.limit
+      if(this.bookStatusSwitch) this.loadData()
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.skip = this.skip + this.limit
+      if(this.bookStatusSwitch) this.loadData()
+    }
   }
 
 
@@ -163,44 +186,10 @@ export class ShelveComponent implements OnInit {
     })
 
 
-
-        // const statusText = document.querySelector(`#book-${cardNumber} .status-text`);
-        // console.log(statusText)
-        // if (statusText) {
-        //   this._renderer.removeChild(statusText.parentNode, statusText);
-        // }
-      
-        // const newStatusText = this._renderer.createElement('p');
-        // newStatusText.classList.add('status-text');
-        // newStatusText.textContent = 'New status text';
-        // const bookDetails = document.querySelector(`#book-${cardNumber} .bookDetails`);
-        // if (bookDetails) {
-        //   this._renderer.appendChild(bookDetails, newStatusText);
-        // }
-      
-        // this._cdr.detectChanges();
-
-
-
   }
 
 
-// pagination
-  previousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.skip = this.skip - this.limit
-      if(this.bookStatusSwitch) this.loadData()
-    }
-  }
 
-  nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.skip = this.skip + this.limit
-      if(this.bookStatusSwitch) this.loadData()
-    }
-  }
 
 
 }
