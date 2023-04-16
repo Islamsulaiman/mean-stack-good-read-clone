@@ -5,9 +5,8 @@ const cloudi = cloudinary.v2;
 cloudi.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-})
-
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const randomNumber = Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
 const maxSize = 1024 * 1024 * 5;
@@ -58,5 +57,5 @@ export {
   authorUpload,
   bookUpload,
   userUpload,
-  cloudi
+  cloudi,
 };

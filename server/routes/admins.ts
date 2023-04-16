@@ -8,8 +8,8 @@ import { errorHandling } from '../middlewares/errorHandling';
 const router = Router();
 
 router.get('/', errorHandling(getAdminData));
-router.post('/add', createAdmin);
-router.post('/delete', deleteAdminfunc);
-router.post('/login', loginfunc);
+router.post('/add', errorHandling(createAdmin));
+router.post('/delete', errorHandling(deleteAdminfunc));
+router.post('/login', errorHandling(loginfunc));
 
 export const AdminRoute : Router = router;

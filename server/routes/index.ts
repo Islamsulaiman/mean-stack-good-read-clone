@@ -14,16 +14,16 @@ router.use('/login', errorHandling(userLogin));
 router.use('/admin~@~Login', adminLogin);
 
 // 1. user route
-router.use('/category', categoryRoute);
-router.use('/book', bookRouter);
+router.use('/category', errorHandling(categoryRoute));
+router.use('/book', errorHandling(bookRouter));
 
 // router.use('/users', errorHandling(userAuth), userRoute);
 router.use('/users', errorHandling(userRoute));
 
 // 2. author route
-router.use('/authors', authors);
+router.use('/authors', errorHandling(authors));
 
 // 3. Admin route
-router.use('/admin', AdminRoute);
+router.use('/admin', errorHandling(AdminRoute));
 
 export const indexRouter:Router = router;
