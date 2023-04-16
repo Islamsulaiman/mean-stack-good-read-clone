@@ -76,7 +76,9 @@
                                     formControlName="content"
                                     placeholder="Review..."
                                   />
-                                  <button class="btn btn-primary ma" data-bs-dismiss="modal">Add Review</button>
+                                  <!-- <button class="btn btn-primary ma"  data-bs-dismiss="modal">Add Review</button> -->
+                                  <button *ngIf="!formSubmitted" class="btn btn-primary ma" data-bs-dismiss="modal">Add Review</button>
+                                  <button *ngIf="formSubmitted" class="btn btn-primary ma" disabled>Review Added</button>
                                 </form>
                               </div>
 
@@ -90,6 +92,20 @@
                                             <div><a href="#" class="text-dark font-weight-600">{{bookReview.userId.userName}}</a></div>
                                             <p>{{bookReview.content}}</p>
                                         </div>
+                                        <!-- <form [formGroup]="editReviewForm" (ngSubmit)="editReview()">
+                                          <input
+                                            type="text"
+                                            class="form-control mb-2"
+                                            formControlName="content"
+                                            [(ngModel)]="currentReview.content"
+                                            placeholder="Review..."
+                                          />
+                                          <button class="btn-primary ma" data-bs-dismiss="modal">Edit</button> -->
+                                        <!-- </form> -->
+                                        <!-- <form  (ngSubmit)="deleteReview()">
+
+                                          <button class="btn btn-primary ma" data-bs-dismiss="modal">Delete</button>
+                                        </form> -->
                                     </div>
 
                                 </div>

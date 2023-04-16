@@ -60,9 +60,13 @@ router.post('/:id/review', errorHandling(addReview));
 router.get('/:id/review', errorHandling(getReviews));
 
 // 3. edit review
-router.patch('/:id/review/update', errorHandling(userAuth), errorHandling(editReview));
+router.patch('/:id/review/update',
+//  errorHandling(userAuth),
+  errorHandling(editReview));
 
 // 4. delete review
-router.delete('/:id/review/delete/', errorHandling(userAuth), errorHandling(deleteReview));
+router.delete('/:id/review/delete/', 
+// errorHandling(userAuth),
+ errorHandling(deleteReview));
 
 export const bookRouter : Router = router;
