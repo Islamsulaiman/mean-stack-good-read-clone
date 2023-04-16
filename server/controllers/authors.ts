@@ -30,17 +30,16 @@ const get = async (limit: number, page: number) => {
   const authors = await Author.find({})
     .skip(skip)
     .limit(perPage)
-    .populate('Books')
+    .populate('Books');
 
   return {
     authors,
-    totalPages
-  }
+    totalPages,
+  };
 };
 
-//Get author by id
-const getById = (id: any) => Author.findById(id).populate('Books');;
-
+// Get author by id
+const getById = (id: any) => Author.findById(id).populate('Books');
 
 // edit author by id
 const edit = (id: any, data: EditAuthor) => {
@@ -53,8 +52,7 @@ const edit = (id: any, data: EditAuthor) => {
 const addBooktoAuth = (id: string, Books: string) => {
   const bookObjectId = new mongoose.Types.ObjectId(Books);
   return Author.updateOne({ _id: id }, { $push: { Books: bookObjectId } });
-}
-
+};
 
 // delete author by id
 const deleteAuthor = (id: any) => Author.findByIdAndDelete(id);
@@ -64,19 +62,19 @@ const getPopular = async () => Author.aggregate([
   // Lookup to get all books for each author
   {
     $lookup: {
-      from: "books",
-      localField: "Books",
-      foreignField: "_id",
-      as: "books",
+      from: 'books',
+      localField: 'Books',
+      foreignField: '_id',
+      as: 'books',
     },
   },
-  { $unwind: "$books" },
+  { $unwind: '$books' },
   {
     $group: {
-      _id: "$_id",
-      fullName: { $first: "$fullName" },
-      image: { $first: "$image"},
-      popUlarityRating: { $first: "$books.popUlarityRating"},
+      _id: '$_id',
+      fullName: { $first: '$fullName' },
+      image: { $first: '$image' },
+      popUlarityRating: { $first: '$books.popUlarityRating' },
     },
   },
   // Sort by highest rating first
@@ -85,8 +83,6 @@ const getPopular = async () => Author.aggregate([
   { $limit: 5 },
 ]);
 
-
-
 export {
   create,
   get,
@@ -94,5 +90,5 @@ export {
   edit,
   deleteAuthor,
   addBooktoAuth,
-  getPopular
+  getPopular,
 };

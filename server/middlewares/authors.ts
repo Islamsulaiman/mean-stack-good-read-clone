@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import {
-  create, get, getById, edit, deleteAuthor, addBooktoAuth, getPopular
+  create, get, getById, edit, deleteAuthor, addBooktoAuth, getPopular,
 } from '../controllers/authors';
 import { cloudi } from './imagesUpload';
 // import { authors } from '../routes/authors';
@@ -42,7 +42,7 @@ const getAuthorById = async (req: Request, res: Response) => {
   const getAuthor = await getById(id);
   if (!getAuthor) throw new Error("User doens't exist");
   return res.status(200).json(getAuthor);
-}
+};
 const editAuthorById = async (req: Request, res: Response) => {
   const {
     fullName, DOB,
@@ -81,9 +81,6 @@ const deleteAuthorById = async (req: Request, res: Response) => {
   return res.status(200).json('Author has been deleted successfully');
 };
 
-
-
-
 const addBookToAuthor = async (req: Request, res: Response) : Promise<Response> => {
   const { Books } = req.body;
   const { id } = req.params;
@@ -93,9 +90,7 @@ const addBookToAuthor = async (req: Request, res: Response) : Promise<Response> 
   return res.status(200).json(book);
 };
 
-
 const popularAuthors = async (req:Request, res:Response) => {
-
   const author = await getPopular();
 
   return res.status(200).json({ message: 'Books', author });
@@ -108,5 +103,5 @@ export {
   editAuthorById,
   deleteAuthorById,
   addBookToAuthor,
-  popularAuthors
+  popularAuthors,
 };

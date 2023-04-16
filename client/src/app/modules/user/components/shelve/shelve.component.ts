@@ -179,7 +179,7 @@ export class ShelveComponent implements OnInit {
     })
 
 
-    bookDbValues.value = selectedValue.target.value === "reading" ? "Read": selectedValue.target.value === "to_read" ? "To Read": "Completed"
+    bookDbValues.value = selectedValue.target.value === "reading" ? "Reading": selectedValue.target.value === "to_read" ? "To Read": "Completed"
     const parent = document.getElementById(`parent-${cardNumber}`)
     const oldElement = document.querySelector(`#parent-${cardNumber} #item-${cardNumber}`);
     this._renderer.removeChild(oldElement?.parentNode, oldElement); //remove old element
