@@ -22,8 +22,7 @@ router.post(
 // Get authors
 router.get('/', errorHandling(getAuthors));
 router.get('/:id', errorHandling(getAuthorById));
-router.get('/all/popular', popularAuthors);
-// router.get('/:id/books', errorHandling(getAuthBooks));
+router.get('/all/popular', errorHandling(popularAuthors));
 
 // add book to author with it's bookId
 router.patch('/:id', errorHandling(addBookToAuthor));
