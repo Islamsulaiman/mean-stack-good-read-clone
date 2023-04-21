@@ -24,9 +24,6 @@ router.get('/', errorHandling(getAuthors));
 router.get('/:id', errorHandling(getAuthorById));
 router.get('/all/popular', errorHandling(popularAuthors));
 
-// add book to author with it's bookId
-router.patch('/:id', errorHandling(addBookToAuthor));
-
 // Modify author
 router.patch(
   '/:id',
@@ -36,6 +33,11 @@ router.patch(
   validation.validateInput,
   errorHandling(editAuthorById),
 );
+
+// add book to author with it's bookId
+router.patch('/:id', errorHandling(addBookToAuthor));
+
+
 
 // Delete author
 router.delete('/:id', errorHandling(deleteAuthorById));

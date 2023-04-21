@@ -16,8 +16,6 @@ import { AuthorsService } from '../../services/authors.service';
   styleUrls: ['./admin-books.component.css']
 })
 export class AdminBooksComponent implements OnInit{
-  
-
   skip = 0
   limit = 12
   books: Book[] = [];
@@ -25,10 +23,14 @@ export class AdminBooksComponent implements OnInit{
   doneReq = false
   currentPage = 1
   totalPages = 1
+
+  title = "";
+  description = ""
   categories:Category | any;
   authors:Author | any ;
-  selectedValue:any;
   currentID: any;
+
+  selectedValue:any;
   constructor(private _BooksService: BooksService,
     private _router:Router ,
     private _CategoriesService:CategoriesService,
@@ -74,11 +76,12 @@ export class AdminBooksComponent implements OnInit{
 
 }
 
-
-getCurrentId(id:any){
+getCurrentId(id:any, title:string, description:string){
  if(!id) return
 
  this.currentID = id;
+ this.title = title;
+ this.description = description;
 }
 
 
@@ -118,7 +121,7 @@ UpdateBook(myFormU:NgForm){
   if(this.file) this.formData.set('image',this.file);
   this._BooksService.updateBook(this.currentID, this.formData).subscribe((res)=>{
     alert("Book is updated")
-    // this.loadBooks();
+    this.loadBooks();
 
   },
   (err)=>{

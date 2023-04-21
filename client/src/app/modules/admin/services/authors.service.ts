@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class AuthorsService {
-  id : any ;
   currentPage = 1
   
   URL = `${environment.domain}/authors`;
@@ -23,17 +22,17 @@ export class AuthorsService {
     return this._HttpClient.get(`${this.URL}/?page=${page}&limit=${limit}`,options);
   }
   //get Author By Id
-  getAuthorById():Observable<any> {
-    return this._HttpClient.get(`${this.URL}/${this.id}`);
+  getAuthorById(id:any):Observable<any> {
+    return this._HttpClient.get(`${this.URL}/${id}`);
   }
 
   //update Author
-  updateAuthor(data:any):Observable<any>{
-    return this._HttpClient.put(`${this.URL}/${this.id}`, data);
+  updateAuthor(id:any, data:any):Observable<any>{
+    return this._HttpClient.patch(`${this.URL}/${id}`, data);
   }
 
   //delete Author
-  deleteAuthor():Observable<any> {
-    return this._HttpClient.delete(`${this.URL}/${this.id}`);
+  deleteAuthor(id:any):Observable<any> {
+    return this._HttpClient.delete(`${this.URL}/${id}`);
   }
 }

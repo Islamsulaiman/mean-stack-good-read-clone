@@ -43,8 +43,64 @@
           <td>{{author.Books.length}}</td>
 
           <td>
-            <a (click)="getCurrentId(author._id)"  href="#editAuthorModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-            <a (click)="getCurrentId(author._id)" href="#deleteAuthorModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+            <!-- Edit Modal HTML -->
+            <a (click)="getCurrentId(author._id, author.fullName, author.DOB)"  href="#editAuthorModal" class="edit" data-toggle="modal" da><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+            <div id="editAuthorModal" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form #myFormU= "ngForm">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Edit Author</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group">
+                          
+                          <label>ID:</label>
+                        </div>
+                        <div class="form-group">
+                          <label>FullName</label>
+                          <input [(ngModel)]="fullName" name="fullName"  ngModel  class="form-control" >
+                        </div>
+                        <div class="form-group">
+                          <label>DOB</label>
+                          <input [(ngModel)]="DOB" name="DOB" ngModel type="date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label>image</label>
+                          <input (change)="onFileChange($event)" ngModel name="image" type="file"  class="form-control">
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input (click)="UpdateAuthor(myFormU)" type="submit" class="btn btn-info" data-dismiss="modal" value="Save">
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            
+            <!-- Delete Modal HTML -->
+            <a (click)="getCurrentId(author._id,author.fullName, author.DOB)" href="#deleteAuthorModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+              <div id="deleteAuthorModal" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Delete Author</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to delete these Records?</p>
+                        <p class="text-warning"><small>This action cannot be undone.</small></p>
+                      </div>
+                      <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input (click)="deleteAuthor()" data-dismiss="modal" type="submit" class="btn btn-danger" value="Delete">
+                      </div>
+                  </div>
+                </div>
+              </div>
+
           </td>
         </tr>
       </tbody>
@@ -84,68 +140,12 @@
         </div>
         <div class="modal-footer">
           <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input *ngIf="!doneReq" type="submit" class="btn btn-success" value="Add">
+          <input type="submit" class="btn btn-success" value="Add">
         </div>
       </form>
     </div>
   </div>
 </div>
-<!-- Edit Modal HTML -->
-<div id="editAuthorModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form #myFormU= "ngForm" (ngSubmit)="UpdateAuthor(myFormU)">
-        <div class="modal-header">
-          <h4 class="modal-title">Edit Author</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label>ID: </label>
-          </div>
-          <div class="form-group">
-            <label>FullName</label>
-            <input name="fullName"  ngModel  class="form-control" >
-          </div>
-          <div class="form-group">
-            <label>DOB</label>
-            <input name="DOB" ngModel type="date" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>image</label>
-            <input (change)="onFileChange($event)" ngModel name="image" type="file"  class="form-control">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input *ngIf="!doneReq"  type="submit" class="btn btn-info" value="Save">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<!-- Delete Modal HTML -->
-<div id="deleteAuthorModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form (ngSubmit)="deleteAuthor()">
-        <div class="modal-header">
-          <h4 class="modal-title">Delete Author</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete these Records?</p>
-          <p class="text-warning"><small>This action cannot be undone.</small></p>
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input *ngIf="!doneReq" type="submit" class="btn btn-danger" value="Delete">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
 
 
 <script>
