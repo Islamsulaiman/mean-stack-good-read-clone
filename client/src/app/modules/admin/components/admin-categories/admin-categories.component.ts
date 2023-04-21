@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../../services/categories.service';
 import { Category } from '../../interfaces/category';
 import { NgForm } from '@angular/forms';
@@ -8,19 +8,24 @@ import { NgForm } from '@angular/forms';
   templateUrl: './admin-categories.component.html',
   styleUrls: ['./admin-categories.component.css']
 })
-export class AdminCategoriesComponent {
+export class AdminCategoriesComponent implements OnInit{
   limit = 8
   categories:Category[] = []
   error  ="";
   currentPage = 1
   totalPages = 1
+  name = "";
+  currentID: any;
   doneReq = false
   constructor(private _CategoriesService: CategoriesService){
-    this.loadCategories();
   }
 
 
+  ngOnInit(){
+    
+    this.loadCategories();
 
+  }
 
   loadCategories() {
     this._CategoriesService.getCategories(this.currentPage, this.limit, {observe: 'response'}).subscribe((data:any)=>{
@@ -30,14 +35,11 @@ export class AdminCategoriesComponent {
   }
 
 
-
-
-
-
-  getCurrentId(id:any){
+  getCurrentId(id:any, name:string){
     if(!id) return
 
-    this._CategoriesService.id = id
+    this.currentID = id;
+    this.name = name;
    }
 
    formData = new FormData();
@@ -52,10 +54,13 @@ addNewCategory(myForm: NgForm){
 
   const { name } = myForm.value;
 
-  this.formData.append('name', name);
-    this._CategoriesService.data = myForm.value;
+  this.formData.set('name', name);
+  this._CategoriesService.data = myForm.value;
   this._CategoriesService.addCategory().subscribe(
     (response) => {
+      alert("Category is added")
+      myForm.reset();
+      this.loadCategories();
       this.doneReq =true
     },
     (error) => {
@@ -64,13 +69,15 @@ addNewCategory(myForm: NgForm){
 }
 
 
-UpdateCategories(myFormU:NgForm){
+updateCategories(myFormU:NgForm){
   const { name } = myFormU.value;
 
-  this.formData.append('name',name);
+  this.formData.set('name',name);
 
-  this._CategoriesService.updateCategory(myFormU.value).subscribe((res)=>{
-    this.doneReq =true
+  this._CategoriesService.updateCategory(this.currentID, myFormU.value).subscribe((res)=>{
+    alert("Category is updated")
+    this.loadCategories();
+
 
   },
   (err)=>{
@@ -79,9 +86,11 @@ UpdateCategories(myFormU:NgForm){
 }
 
 deleteCategory() {
-  this._CategoriesService.deleteCategory().subscribe(
+  this._CategoriesService.deleteCategory(this.currentID).subscribe(
     (response) => {
-        this.doneReq =true
+      this.categories = this.categories.filter((book:any) => book._id !== this.currentID);
+      alert("Category is deleted")
+      this.doneReq =true
     },
     (error) => {
     }

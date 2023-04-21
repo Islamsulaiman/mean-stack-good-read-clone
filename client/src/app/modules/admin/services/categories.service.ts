@@ -8,7 +8,6 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class CategoriesService {
-  id : any;
   URL = `${environment.domain}/category`;
   constructor(private _HttpClient:HttpClient) { }
 
@@ -25,18 +24,18 @@ export class CategoriesService {
   }
 
   //get Category By Id
-  getCategoryById():Observable<any> {
-    return this._HttpClient.get(`${this.URL}/${this.id}`);
+  getCategoryById(id:any):Observable<any> {
+    return this._HttpClient.get(`${this.URL}/${id}`);
   }
 
   //update category
-  updateCategory(data:any):Observable<any>{
-    return this._HttpClient.patch(`${this.URL}/${this.id}`, data);
+  updateCategory(id:any,data:any):Observable<any>{
+    return this._HttpClient.patch(`${this.URL}/${id}`, data);
   }
 
   //delete category
-  deleteCategory():Observable<any> {
-    return this._HttpClient.delete(`${this.URL}/${this.id}`);
+  deleteCategory(id:any):Observable<any> {
+    return this._HttpClient.delete(`${this.URL}/${id}`);
   }
   
 }
