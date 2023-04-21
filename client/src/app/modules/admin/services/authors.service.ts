@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment.development';
 export class AuthorsService {
   id : any ;
   currentPage = 1
-
+  
   URL = `${environment.domain}/authors`;
   constructor(private _HttpClient:HttpClient) { }
 

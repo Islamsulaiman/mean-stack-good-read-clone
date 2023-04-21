@@ -6,14 +6,20 @@ import { AdminBooksComponent } from './components/admin-books/admin-books.compon
 import { AdminCategoriesComponent } from './components/admin-categories/admin-categories.component';
 import { AdminAuthorsComponent } from './components/admin-authors/admin-authors.component';
 import { IsGuardGuard } from './guards/is-guard.guard'
+import { AdminComponent } from './admin.component';
 const routes: Routes = [
 
   { path: 'login', component: AdminLoginComponent },
-  { path: 'profile', component: AdminProfileComponent, canActivate:[IsGuardGuard] },
-  { path: 'books', component: AdminBooksComponent, canActivate:[IsGuardGuard] },
-  { path: 'categories', component: AdminCategoriesComponent, canActivate:[IsGuardGuard] },
-  { path: 'authors', component: AdminAuthorsComponent, canActivate:[IsGuardGuard] },
-  { path: '**', component: AdminLoginComponent },
+  { path: '',  component: AdminComponent, canActivate:[IsGuardGuard], children: [
+    { path: 'profile', component: AdminProfileComponent, canActivate:[IsGuardGuard] },
+    { path: 'books', component: AdminBooksComponent, canActivate:[IsGuardGuard] },
+    { path: 'categories', component: AdminCategoriesComponent, canActivate:[IsGuardGuard] },
+    { path: 'authors', component: AdminAuthorsComponent, canActivate:[IsGuardGuard] },
+    { path: '**', component: AdminLoginComponent },
+
+  ]}
+
+
 
 ];
 

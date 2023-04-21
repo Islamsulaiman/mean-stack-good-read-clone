@@ -35,9 +35,6 @@ router.get('/:id', errorHandling(getOneBook));
 router.patch(
   '/:id',
   bookUpload.single('image'),
-  validation.checkTitle,
-  validation.checkDescription,
-  validation.validateInput,
   errorHandling(updateBook),
 );
 // 5.delete book

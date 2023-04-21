@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild} from '@angular/core';
 import { BooksService } from '../../services/books.service';
 import { Book } from '../../interfaces/book';
 import { NgForm } from '@angular/forms';
@@ -7,6 +7,7 @@ import { CategoriesService } from '../../services/categories.service';
 import { Category } from '../../interfaces/category';
 import { Author } from '../../interfaces/author';
 import { AuthorsService } from '../../services/authors.service';
+
 // import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
@@ -15,10 +16,11 @@ import { AuthorsService } from '../../services/authors.service';
   styleUrls: ['./admin-books.component.css']
 })
 export class AdminBooksComponent implements OnInit{
+  
+
   skip = 0
   limit = 12
-
-  books:Book | any;
+  books: Book[] = [];
   error  ="";
   doneReq = false
   currentPage = 1
@@ -26,38 +28,39 @@ export class AdminBooksComponent implements OnInit{
   categories:Category | any;
   authors:Author | any ;
   selectedValue:any;
-
+  currentID: any;
   constructor(private _BooksService: BooksService,
     private _router:Router ,
     private _CategoriesService:CategoriesService,
-    private _AuthorsService:AuthorsService){
-
-
-
-    //assume that every page have only 10 books, th 1st page from 0 to 10
-    this._BooksService.getBooks(this.skip, this.limit, {observe: 'response'}).subscribe((res)=>{
-
-
-      if(res.status === 200){
-        this.books = res.body.book.books
-        console.log(this.books);
-
-      }else{
-        this.error = res
-      }
-
-    })
-  }
+    private _AuthorsService:AuthorsService,){}
 
   changeCategory(e:any){
-    console.log(e.target.value);
     this.selectedValue = e.target.value;
 
   }
-  ngOnInit(): void {
+
+  loadBooks() {
+    this._BooksService.getBooks(this.skip, this.limit, {observe: 'response', params: {cacheBust: new Date().getTime()}}).subscribe((res)=>{
+      if(res.status === 200){
+        this.books = res.body.book.books;
+        console.log(this.books);
+        this._BooksService.booksCount = this.books.length;
+        console.log();
+        
+      }else{
+        this.error = res;
+      }
+    });
+  }
+
+
+  ngOnInit(){
+    this.loadBooks()
     this._CategoriesService.getCategories(0, 0, {observe: 'response'}).subscribe((data:any)=>{
       this.categories = data.body.category.categories;
       this.totalPages = data.body.category.totalPages;
+      this._BooksService.categoriesCount = this.categories.length
+
 
     });
 
@@ -65,14 +68,17 @@ export class AdminBooksComponent implements OnInit{
       console.log(data.body.authors);
       this.authors = data.body.authors;
       this.totalPages = data.body.totalPages;
+      this._BooksService.authorsCount = this.authors.length
+
     });
 
+}
 
-  }
+
 getCurrentId(id:any){
  if(!id) return
 
- this._BooksService.id = id;
+ this.currentID = id;
 }
 
 
@@ -88,14 +94,17 @@ addNewBook(myForm: NgForm){
 
   const { title, description, category, author } = myForm.value;
 
-  this.formData.append('title', title);
-  this.formData.append('description', description);
-  this.formData.append('category', category);
-  this.formData.append('author', author);
-  if(this.file) this.formData.append('image', this.file);
+  this.formData.set('title', title);
+  this.formData.set('description', description);
+  this.formData.set('category', category);
+  this.formData.set('author', author);
+  if(this.file) this.formData.set('image', this.file);
   console.log(myForm.value)
   this._BooksService.addBook(this.formData).subscribe(
     (response) => {
+      alert("Book is added")
+      myForm.reset();
+      this.loadBooks();
       this.doneReq =true
     },
     (error) => {
@@ -104,14 +113,12 @@ addNewBook(myForm: NgForm){
 }
 UpdateBook(myFormU:NgForm){
   const { title , description } = myFormU.value;
-
-  this.formData.append('title',title);
-  this.formData.append('description',description);
-  if(this.file) this.formData.append('image',this.file);
-
-  this._BooksService.updateBook(this.formData).subscribe((res)=>{
-    console.log('Response',res);
-    this.doneReq =true
+  this.formData.set('title',title);
+  this.formData.set('description',description);
+  if(this.file) this.formData.set('image',this.file);
+  this._BooksService.updateBook(this.currentID, this.formData).subscribe((res)=>{
+    alert("Book is updated")
+    // this.loadBooks();
 
   },
   (err)=>{
@@ -120,14 +127,18 @@ UpdateBook(myFormU:NgForm){
 }
 
 deleteBook() {
-  this._BooksService.deleteBook().subscribe(
+  this._BooksService.deleteBook(this.currentID).subscribe(
     (response) => {
+      this.books = this.books.filter((book:any) => book._id !== this.currentID);
+        alert("Book is deleted")
         this.doneReq =true
     },
     (error) => {
     }
   );
+    
 }
+
 loadCategories() {
   this._CategoriesService.getCategories(this.currentPage, this.limit, {observe: 'response'}).subscribe((data:any)=>{
     this.categories = data.body.category.categories;

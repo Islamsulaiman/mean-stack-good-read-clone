@@ -40,7 +40,7 @@ router.get('/oneUser', errorHandling(getOneUserFunc));
 // 4. delete user
 router.delete('/:id', errorHandling(deleteUserFunc));
 
-// 5. update user
+// 5. update users
 router.patch(
   '/profile/:id',
   validation.checkFirstName,

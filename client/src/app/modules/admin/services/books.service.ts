@@ -3,18 +3,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { Book } from '../interfaces/book';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BooksService {
-
   URL = `${environment.domain}/book`;
   constructor(private _HttpClient:HttpClient) { }
   limit = 10
   currPage = 1
-  id : any ;
 
+  booksCount = 16
+  categoriesCount = 9;
+  authorsCount = 6
   //Add Book
   addBook(data:any):Observable<any> {
     return this._HttpClient.post(this.URL,data);
@@ -25,18 +27,21 @@ export class BooksService {
   }
 
   //Get Book by ID
-  getBookByID():Observable<any> {
-    return this._HttpClient.get(`${this.URL}/${this.id}`);
+  getBookByID(id:any):Observable<any> {
+    return this._HttpClient.get(`${this.URL}/${id}`);
   }
   //Update Book
-  updateBook( data:any):Observable<any>{
-    return this._HttpClient.patch(`${this.URL}/${this.id}`,data);
+  updateBook(id:any ,data:any):Observable<any>{
+    return this._HttpClient.patch(`${this.URL}/${id}`,data);
   }
 
   //Delete Book
-  deleteBook(): Observable<any> {
-    return this._HttpClient.delete(`${this.URL}/${this.id}`);
+  deleteBook(id:any): Observable<any> {
+    return this._HttpClient.delete(`${this.URL}/${id}`);
   }
+
+
+  
 }
 
 

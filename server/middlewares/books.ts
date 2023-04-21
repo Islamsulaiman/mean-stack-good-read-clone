@@ -92,22 +92,31 @@ const updateBook = async (req:Request, res:Response) => {
   } = req.body;
   const book = await getOne(id);
 
-  if (!req.file) throw new Error('No Image has uploaded');
-
-  const uploadedImg = req.file.path;
-  const images = await cloudi.uploader.upload(uploadedImg, {
-    public_id: `${id}_profile`,
-    width: 500,
-    height: 500,
-    crop: 'fill',
-
-  });
-  const image = images.url;
-  console.log(image);
-  if (!book) throw new Error('Error: Book not found');
+  if (req.file) {
+    const uploadedImg = req.file.path;
+    const images = await cloudi.uploader.upload(uploadedImg, {
+      public_id: `${id}_profile`,
+      width: 500,
+      height: 500,
+      crop: 'fill',
+      
+    });
+    const image = images.url;
+    if (!book) throw new Error('Error: Book not found');
   const updatedBook = await update(id, { title, description, image });
   if (!updatedBook) throw new Error('Error: Book not updated');
   return res.status(200).json({ message: 'Book updated successfully', updatedBook });
+  }else{
+
+  if (!book) throw new Error('Error: Book not found');
+  const updatedBook = await update(id, { title, description});
+  if (!updatedBook) throw new Error('Error: Book not updated');
+  return res.status(200).json({ message: 'Book updated successfully', updatedBook });
+  }
+
+ 
+  
+
 };
 // 5.deleteBook
 const deleteBook = async (req:Request, res:Response) => {

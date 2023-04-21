@@ -48,7 +48,7 @@ const getOne = async (data:string) => {
 };
 // 4.updateBook
 const update = async (id:string, data:UpdatedBook) => {
-  const book = await Book.findByIdAndUpdate({ _id: id }, data, { new: true });
+  const book = await Book.updateOne({ _id: id }, data);
   return book;
 };
 

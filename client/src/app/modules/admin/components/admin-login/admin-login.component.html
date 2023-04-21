@@ -24,11 +24,7 @@
           <div>
             <label for="password">password</label>
             <input formControlName="password" class="form-control" type="password" id="password">
-            <div *ngIf="loginForm.get('password')?.errors !== null && loginForm.get('password')?.touched" class="alert my-2 alert-danger">
-              <p *ngIf="loginForm.get('password')?.errors?.['required']" style="color: red;" >password is required </p>
              <p *ngIf="wrongData" style="color: red;">* Check your email/password and try again</p>
-
-            </div>
           </div>
 
           <!-- Submit button -->
