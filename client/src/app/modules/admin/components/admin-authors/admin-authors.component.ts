@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 export class AdminAuthorsComponent implements OnInit{
 
   currentPage = 1
-
+  loading = false
   limit = 8
   totalPages = 1;
   authors:Author[] = []
@@ -99,6 +99,7 @@ loadAuthors() {
   this._AuthorsService.getAuthors(this.currentPage, this.limit, {observe: 'response'}).subscribe((data:any)=>{
     console.log(data.body.authors);
     this.authors = data.body.authors;
+    this.loading = true
     this.totalPages = data.body.totalPages;
   });
 }

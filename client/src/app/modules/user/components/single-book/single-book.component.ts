@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from '../../services/books.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '../../services/users.service';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-single-book',
   templateUrl: './single-book.component.html',
@@ -11,18 +12,19 @@ import { UsersService } from '../../services/users.service';
 })
 export class SingleBookComponent implements OnInit{
 
-  bookId  = ""
+  bookId:any
   book:any ;
   error = ""
   bookReviews: any[]  = []
   skip = 0;
-  limit = 5;
+  limit = 30;
   massage: "" | undefined
   addReviewForm!:FormGroup
   editReviewForm!: FormGroup;
   deleteReviewForm!: FormGroup;
   isLogged = false
-  isChecked = false
+  shelve_status = "Add to shelve"
+  isClicked = false;
   currentReview: any={
     title:'',
     content:''
@@ -35,22 +37,15 @@ export class SingleBookComponent implements OnInit{
      private _BooksService:BooksService,
      private _FormBuilder:FormBuilder,
      private _AuthService: AuthService,
-     private _UserService: UsersService
+     private _UserService: UsersService,
+     private _router: Router
       ){
-
-
        
     if(this._AuthService.currentUser.getValue()) this.isLogged = true
 
     this.bookId = this._ActivatedRoute.snapshot.params['bookId']
+    this.fetchData()
 
-    this._BooksService.getSingleBook(this.bookId,{observe: 'response'}).subscribe((res)=>{
-      if(res.status === 200){
-        this.book = res.body.book
-      }else{
-        this.error = res
-      }
-    })
 
     this._BooksService.getBookReviews(this.bookId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
       if(res.status === 200){
@@ -63,10 +58,27 @@ export class SingleBookComponent implements OnInit{
   }
 
 
+  fetchData(){
+    this._BooksService.getSingleBook(this.bookId).subscribe(
+      data => {
+
+        this.book = data.book
+        console.log(this.book);
+        
+      },
+      error => {
+        if (error instanceof HttpErrorResponse) {
+          this._router.navigate(['/not-found'])
+        }
+      }
+      )
+  }
+
   addBookToUserShelve(){
     this._BooksService.addBookToUserShelve(this._AuthService.currentUserId, this.bookId, {observe: 'response'}).subscribe((res)=>{
       console.log(res)
-
+      this.shelve_status = "Added"
+      this.isClicked = true;
       if(res.status === 200){
         this.massage = res.body
 
@@ -87,13 +99,11 @@ export class SingleBookComponent implements OnInit{
       content: this.addReviewForm.value.content,
       userId:this._AuthService.currentUserId,
     }
-
     this._BooksService.addBookReviews(this.bookId,reviewData).subscribe((res)=>{
-
+      this.getReviews()
     },(err)=>{
 
     })
-    this.formSubmitted = true;
 
   }
 
@@ -141,9 +151,10 @@ export class SingleBookComponent implements OnInit{
 
     //Check user has book
     this._UserService.getUserById(this._AuthService.currentUserId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
-      if(res.body.books.find((e:any)=> e.bookId._id === this.bookId)) this.isChecked = true
-      else
-      this.isChecked = false
+      if(res.body.books.find((e:any)=> e.bookId._id === this.bookId)) {
+        this.isClicked = true
+        this.shelve_status = "Added"
+      }
     })
     this.addReviewForm = this._FormBuilder.group({
       userId:[],

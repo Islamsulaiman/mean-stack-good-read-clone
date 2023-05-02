@@ -11,6 +11,12 @@ table{
   height: 100vh;
 
 }
+.loading{
+  position: absolute;
+  left: 50%;
+  margin-top: 2em;
+  color: #999;
+}
 .table-wrapper {
   width: 100%;
   background: #fff;

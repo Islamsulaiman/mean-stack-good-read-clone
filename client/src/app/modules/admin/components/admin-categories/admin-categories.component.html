@@ -26,6 +26,8 @@
 
 
       <tbody>
+      <h1 class="loading" *ngIf="!loading">Loading...</h1>
+
         <tr *ngFor="let category of categories">
           <td>
             <span class="custom-checkbox">

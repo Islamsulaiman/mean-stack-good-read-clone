@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
 export class AdminCategoriesComponent implements OnInit{
   limit = 8
   categories:Category[] = []
+  loading = false;
   error  ="";
   currentPage = 1
   totalPages = 1
@@ -31,6 +32,7 @@ export class AdminCategoriesComponent implements OnInit{
     this._CategoriesService.getCategories(this.currentPage, this.limit, {observe: 'response'}).subscribe((data:any)=>{
       this.categories = data.body.category.categories;
       this.totalPages = data.body.category.totalPages;
+      this.loading = true
     });
   }
 

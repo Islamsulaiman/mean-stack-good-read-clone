@@ -29,7 +29,7 @@ export class ShelveComponent implements OnInit {
 
   userId =""
   data:data={}
-
+  Avgstars = 0
   limit = 12
   skip = 0
   currentPage = 1
@@ -41,7 +41,8 @@ export class ShelveComponent implements OnInit {
     this._UserService.getUserById(this._Auth.currentUserId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
 
       if(res.status === 200){
-        this.books = this.bookDb =res.body.books
+        this.books = this.bookDb =res.body.books   
+        
         this.userId = res.body._id
         this.totalPages = res.body.numberOfPages
       }else{
@@ -57,7 +58,7 @@ export class ShelveComponent implements OnInit {
     this._UserService.getUserById(this._Auth.currentUserId, this.skip, this.limit,{observe: 'response'}).subscribe((res)=>{
 
       if(res.status === 200){
-        this.books  = res.body.books
+        this.books  = res.body.books        
         this.userId = res.body._id
         this.totalPages = res.body.numberOfPages
       }else{
@@ -170,7 +171,7 @@ export class ShelveComponent implements OnInit {
     this.data.userId = this.userId;
 
     this._UserService.changeBookState(bookDbValues.bookId._id, selectedValue.target.value, this.userId, {observe: 'response'}).subscribe((res)=>{
-      console.log(res)
+      this.loadData()
     })
 
 
@@ -190,7 +191,10 @@ export class ShelveComponent implements OnInit {
   }
 
   deleteBook(oneBook:any){
+    console.log(oneBook);
+    console.log(this.books);
 
+    
     this._UserService.deleteBookFromUser(this.userId,oneBook.bookId._id ,{observe: 'response'}).subscribe((res)=>{
       console.log(res)
       if(res.status === 200){

@@ -262,3 +262,6 @@ body{
 .starrating > input:hover ~ label
 { color: #ffca08 ;  }  */
 
+.clicked{
+    background-color: green !important;
+}

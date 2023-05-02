@@ -27,8 +27,8 @@
           <th>Author</th>
           <th>Actions</th>
         </tr>
+      <h1 class="loading" *ngIf="!loading">Loading...</h1>
       </thead>
-
 
       <tbody>
         <tr *ngFor="let book of books">

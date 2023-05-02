@@ -268,3 +268,8 @@ body{
     font-size: 2em;
     cursor: pointer;
   }
+
+
+.clicked{
+    background-color: green !important;
+}

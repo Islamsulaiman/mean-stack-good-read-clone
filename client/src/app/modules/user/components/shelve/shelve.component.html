@@ -17,19 +17,19 @@
 
                                         <!-- Rating section -->
                                         <div class="rating" style="font-size: 0px; margin-top: 30px;">
-                                            <span class="star" (click)="selectStar(1, i+1, oneBook)">
+                                            <span class="star" [class.selected]="oneBook.rating >= 1" (click)="selectStar(1, i+1, oneBook)">
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(2, i+1, oneBook)">
+                                            <span class="star" [class.selected]="oneBook.rating >= 2"  (click)="selectStar(2, i+1, oneBook)">
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(3, i+1, oneBook)">
+                                            <span class="star" [class.selected]="oneBook.rating >= 3"  (click)="selectStar(3, i+1, oneBook)">
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(4, i+1, oneBook)">
+                                            <span class="star" [class.selected]="oneBook.rating >= 4"  (click)="selectStar(4, i+1, oneBook)">
                                                 <i class="fas fa-star"></i>
                                             </span>
-                                            <span class="star" (click)="selectStar(5, i+1, oneBook)">
+                                            <span class="star" [class.selected]="oneBook.rating >= 5"  (click)="selectStar(5, i+1, oneBook)">
                                                 <i class="fas fa-star"></i>
                                             </span>
                                         </div>
@@ -47,18 +47,10 @@
                                                 <option value="to_read">To Read</option>
                                                 <option value="read">Completed</option>
                                             </select>
-                                        </div>
-
-                                        <div id="parent-{{i}}" class="form-group mt-5 d-flex justify-content-center">
-                                            <p id="item-{{i}}" class="status-text">{{ oneBook.book_status === 'to_read' ? 'To Read' : 
-                                                oneBook.book_status === 'read'? 'Compleated':
-                                                 'Reading'
-                                            }}</p>
-                                        </div>  
+                                        </div> 
                                         
                                     </div>
                                     <button style="margin-bottom: 50px;" (click)="deleteBook(oneBook)" class="remove-book">Remove Book</button>
-                                    <div class="userRating">{{oneBook.rating}}x</div>
                                 </div>
                             </div>
                         </div>

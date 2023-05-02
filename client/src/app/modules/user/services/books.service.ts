@@ -15,8 +15,8 @@ export class BooksService {
     return this._HttpClient.get(`${environment.domain}/book?skip=${skip}&limit=${limit}`, options)
   }
 
-  getSingleBook(bookId:string, options:any): Observable<any>{
-    return this._HttpClient.get(`${environment.domain}/book/${bookId}`, options)
+  getSingleBook(bookId:any): Observable<any>{
+    return this._HttpClient.get(`${environment.domain}/book/${bookId}`)
   }
 
   getBookReviews(bookId:string, skip:number, limit:number, options:any): Observable<any>{

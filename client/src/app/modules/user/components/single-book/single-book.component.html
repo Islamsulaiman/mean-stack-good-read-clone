@@ -23,12 +23,12 @@
             <div class="profile-sidebar">
 
                 <div  *ngIf="isLogged"  class="dropdown">
-                    <button  *ngIf="!isChecked" (click)="addBookToUserShelve()" class="btn first btn-primary" type="button" id="dropdownMenu2"  aria-expanded="false">
-                      Add to shelve
+                    <button [disabled]="isClicked" [class.clicked]="isClicked" (click)="addBookToUserShelve()" class="btn first btn-primary" type="button" id="dropdownMenu2"  aria-expanded="false">
+                            {{shelve_status}}
                     </button>
-                    <button *ngIf="isChecked" class="btn second btn-primary" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"  aria-expanded="false">
+                    <!-- <button *ngIf="isChecked" class="btn second btn-primary" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"  aria-expanded="false">
                         Added
-                      </button>
+                      </button> -->
                 </div>
                 <div class="starrating risingstar d-flex justify-content-end flex-row-reverse" style="margin-top: 10px;">
                     <span class="justify-content-end align-middle ml-2 text-muted" >{{book.avgRating}}</span>
@@ -63,15 +63,13 @@
 
                               <div class="modal-body" *ngIf="isLogged">
                                 <form [formGroup]="addReviewForm" (ngSubmit)="addReview()">
-                                  <input
-                                    type="text"
+                                  <textarea
                                     class="form-control mb-2"
                                     formControlName="content"
                                     placeholder="Review..."
-                                  />
+                                  ></textarea>
                                   <!-- <button class="btn btn-primary ma"  data-bs-dismiss="modal">Add Review</button> -->
-                                  <button *ngIf="!formSubmitted" class="btn btn-primary ma" data-bs-dismiss="modal">Add Review</button>
-                                  <button *ngIf="formSubmitted" class="btn btn-primary ma" disabled>Review Added</button>
+                                  <button class="btn btn-primary ma" data-bs-dismiss="modal">Add Review</button>
                                 </form>
                               </div>
 
@@ -103,9 +101,9 @@
 
                                 </div>
 
-                                <div class="text-center p-3">
+                                <!-- <div class="text-center p-3">
                                     <a href="#" class="text-dark text-decoration-none">Show more <b class="caret"></b></a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

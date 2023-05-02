@@ -19,6 +19,7 @@ export class AdminBooksComponent implements OnInit{
   skip = 0
   limit = 12
   books: Book[] = [];
+  loading = false;
   error  ="";
   doneReq = false
   currentPage = 1
@@ -34,7 +35,9 @@ export class AdminBooksComponent implements OnInit{
   constructor(private _BooksService: BooksService,
     private _router:Router ,
     private _CategoriesService:CategoriesService,
-    private _AuthorsService:AuthorsService,){}
+    private _AuthorsService:AuthorsService,){
+      
+    }
 
   changeCategory(e:any){
     this.selectedValue = e.target.value;
@@ -45,10 +48,9 @@ export class AdminBooksComponent implements OnInit{
     this._BooksService.getBooks(this.skip, this.limit, {observe: 'response', params: {cacheBust: new Date().getTime()}}).subscribe((res)=>{
       if(res.status === 200){
         this.books = res.body.book.books;
-        console.log(this.books);
+        this.loading = true
         this._BooksService.booksCount = this.books.length;
-        console.log();
-        
+
       }else{
         this.error = res;
       }
