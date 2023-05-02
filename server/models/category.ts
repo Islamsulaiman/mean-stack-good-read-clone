@@ -12,6 +12,7 @@ export const categorySchema = new Schema(
       unique: true,
       minLength: 3,
       maxLength: 255,
+      trim: true
     },
     Books: [{
       type: mongoose.Schema.Types.ObjectId,

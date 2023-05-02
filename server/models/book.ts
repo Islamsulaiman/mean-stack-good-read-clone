@@ -10,6 +10,7 @@ export const bookSchema = new Schema(
       required: true,
       minLength: 3,
       maxLength: 255,
+      trim: true
     },
     description: {
       type: String,

@@ -11,6 +11,7 @@ const authorSchema = new Schema(
       required: true,
       minLength: 3,
       maxLength: 30,
+      trim: true
     },
     DOB: {
       type: Date,

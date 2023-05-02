@@ -1,5 +1,11 @@
 @import 'https://fonts.googleapis.com/css?family=Lato:300,400';
 
+.header{
+	text-align: center;
+	margin: 1em;
+	margin-left: 6em;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -39,23 +45,7 @@ a {
 	background-color: #090909;
 }
 
-header {
-	height: 50px;
-	width: 100%;
-	background-color: #274C6B;
-	display: none;
-}
 
-header .logo {
-	opacity: 0.9;
-	font-size: 120%;
-	padding-top: 9px;
-	padding-left: 8px;
-	color: #fff;
-}
-header .logo span {
-	font-weight: 300;
-}
 
 
 

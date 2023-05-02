@@ -9,12 +9,14 @@ const userSchema = new Schema({
     required: true,
     minLength: 3,
     maxLength: 30,
+    trim: true
   },
   lastName: {
     type: String,
     required: true,
     minLength: 3,
     maxLength: 30,
+    trim: true
   },
   email: {
     type: String,
@@ -22,6 +24,7 @@ const userSchema = new Schema({
     unique: true,
     minLength: 5,
     maxLength: 100,
+    trim: true
   },
   userName: {
     type: String,
@@ -29,6 +32,7 @@ const userSchema = new Schema({
     unique: true,
     minLength: 5,
     maxLength: 30,
+    trim: true
   },
   password: {
     type: String,
