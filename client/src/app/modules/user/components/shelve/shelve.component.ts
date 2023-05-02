@@ -90,7 +90,7 @@ export class ShelveComponent implements OnInit {
         this.bookStatusSwitch = false;
       }
     })
-
+   
   }
 
   // pagination
@@ -171,7 +171,22 @@ export class ShelveComponent implements OnInit {
     this.data.userId = this.userId;
 
     this._UserService.changeBookState(bookDbValues.bookId._id, selectedValue.target.value, this.userId, {observe: 'response'}).subscribe((res)=>{
-      this.loadData()
+        
+      this._UserService.getDataSubject().subscribe((data)=>{
+        this.bookStatus=data
+        
+        // create a function that filters book and return only what match the status
+        this.books = this.bookDb.filter((book:any)=> book.book_status == this.bookStatus)
+        
+        //length = zero means all books 
+        if(this.books.length == 0 && this.bookStatus === "allBooks"){
+          this.books = this.bookDb
+          this.bookStatusSwitch = true;
+        }else{
+          console.log("else")
+          this.bookStatusSwitch = false;
+        }
+      })
     })
 
 

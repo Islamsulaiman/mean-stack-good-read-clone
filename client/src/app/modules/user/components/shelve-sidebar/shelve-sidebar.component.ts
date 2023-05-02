@@ -12,19 +12,12 @@ export class ShelveSidebarComponent {
 
   constructor(private _UserService:UsersService){}
 
-
-
-
   bookStatus(selectedValue:any) {
 
     console.log('side bar:',selectedValue);
 
     this._UserService.setData(selectedValue)
-
-
-
-
-
+    
   }
 
 }

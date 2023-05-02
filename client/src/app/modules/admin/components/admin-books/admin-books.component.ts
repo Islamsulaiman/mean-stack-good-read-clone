@@ -22,9 +22,8 @@ export class AdminBooksComponent implements OnInit{
   loading = false;
   error  ="";
   doneReq = false
+  totalPages = 0
   currentPage = 1
-  totalPages = 1
-
   title = "";
   description = ""
   categories:Category | any;
@@ -49,6 +48,7 @@ export class AdminBooksComponent implements OnInit{
       if(res.status === 200){
         this.books = res.body.book.books;
         this.loading = true
+        this.totalPages = res.body.book.noOfPages
         this._BooksService.booksCount = this.books.length;
 
       }else{
@@ -153,6 +153,26 @@ loadCategories() {
   });
 }
 
+
+
+// Pagianate 
+previousPage() {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+    this.skip = this.skip - this.limit;
+    console.log("prev")
+    this.loadBooks();
+  }
+}
+
+nextPage() {
+  if (this.currentPage < this.totalPages) {
+    console.log("nexrt")
+    this.currentPage++;
+    this.skip = this.skip + this.limit
+    this.loadBooks();
+  }
+}
 
 }
 
